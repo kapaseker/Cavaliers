@@ -1,4 +1,4 @@
-package com.bfdelivery.cavaliers;
+package com.bfdelivery.cavaliers.ui.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -13,6 +13,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.bfdelivery.cavaliers.R;
+
 public class IndexActivity extends AppCompatActivity
 		implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -22,15 +24,6 @@ public class IndexActivity extends AppCompatActivity
 		setContentView(R.layout.activity_index);
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
-
-		FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-		fab.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-						.setAction("Action", null).show();
-			}
-		});
 
 		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
