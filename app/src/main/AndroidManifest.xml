@@ -20,7 +20,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activities.UserCenterActivity" />
-        <activity android:name=".ui.activities.OrderHistoryActivity"></activity>
+        <activity android:name=".ui.activities.OrderHistoryActivity" />
+        <activity android:name=".ui.activities.OrderDetailActivity"></activity>
     </application>
 
 </manifest>
