@@ -1,18 +1,18 @@
 package com.bfdelivery.cavaliers.ui.activities;
 
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.bfdelivery.cavaliers.R;
-import com.bfdelivery.cavaliers.ui.fragments.OrderFragment;
+import com.bfdelivery.cavaliers.ui.activities.base.BasePagetActivity;
+import com.bfdelivery.cavaliers.ui.fragments.OrderListFragment;
 
-public class OrderHistoryActivity extends AppCompatActivity {
+public class OrderHistoryActivity extends BasePagetActivity {
 
     TabLayout mTabs = null;
     ViewPager mPagers = null;
@@ -27,7 +27,6 @@ public class OrderHistoryActivity extends AppCompatActivity {
     private void initView() {
 
         getSupportActionBar().setTitle(R.string.action_menu_history_order);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mTabs = (TabLayout) findViewById(R.id.sliding_tabs);
         mPagers = (ViewPager) findViewById(R.id.viewpager);
@@ -59,7 +58,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return new OrderFragment();
+            return new OrderListFragment();
         }
 
         @Override

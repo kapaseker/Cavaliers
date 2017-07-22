@@ -10,6 +10,8 @@
         <item>已完成</item>
         <item>异常订单</item>
     </string-array>
+    <string name="takeDish">取餐</string>
+    <string name="deliveryDish">配送</string>
 
     <!--    Test String Resource     -->
     <string name="tstUserName">欧阳正茂</string>

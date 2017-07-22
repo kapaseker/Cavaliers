@@ -6,4 +6,14 @@
 
     <color name="cavBlue">#0D47A1</color>
     <color name="cavBlueLight">#64B5F6</color>
+
+    <color name="colorCommonListGap">#9E9E9E</color>
+
+    <color name="colorTxtError">#d50000</color>
+    <color name="colorTxtAlert">#f44336</color>
+    <color name="colorTxtPrimary">#388E3C</color>
+    <color name="colorTxtWarning">#FF8F00</color>
+    <color name="colorTxtDisable">#7A7A7A</color>
+    <color name="colorTxtDetail">#4A4A4A</color>
+    <color name="colorTxtAble">#0E0E0E</color>
 </resources>

@@ -1,11 +1,11 @@
 package com.bfdelivery.cavaliers.ui.activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.bfdelivery.cavaliers.R;
+import com.bfdelivery.cavaliers.ui.activities.base.BasePagetActivity;
 
-public class UserCenterActivity extends AppCompatActivity {
+public class UserCenterActivity extends BasePagetActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
