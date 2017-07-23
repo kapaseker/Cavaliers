@@ -2,14 +2,13 @@ package com.bfdelivery.cavaliers.ui.activities.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 /**
  * Created by Panoo on 2017/7/22.
  */
 
-public class BasePagetActivity extends AppCompatActivity {
+public abstract class BasePageActivity extends BaseActivity {
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -22,7 +21,7 @@ public class BasePagetActivity extends AppCompatActivity {
 		switch (item.getItemId()) {
 			case android.R.id.home:
 				finish();
-				break;
+				return true;
 		}
 
 		return super.onOptionsItemSelected(item);

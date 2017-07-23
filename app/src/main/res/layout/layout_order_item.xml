@@ -4,11 +4,11 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="4dp"
-    card_view:cardCornerRadius="4dp"
-    card_view:cardElevation="1dp">
+    android:layout_margin="@dimen/txt_margin_mini"
+    card_view:cardElevation="2dp">
 
     <LinearLayout
+        android:id="@+id/content_wrapper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -17,17 +17,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/txt_margin_small">
 
 
             <TextView
                 android:id="@+id/txtOrderIndex"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/OrderIndex"
                 android:layout_marginRight="@dimen/txt_margin_small"
-                android:text="#2"
-                android:textColor="@color/colorTxtAble"
-                android:textSize="@dimen/txt_size_big"/>
+                android:text="#2"/>
 
             <TextView
                 android:id="@+id/txtOrderTitle"
@@ -86,7 +84,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="宝庆美食园(春晖店)"
-                        android:textColor="@color/colorTxtAble"
+                        android:textColor="@color/colorTxtDefault"
                         android:textSize="@dimen/txt_size_big"/>
 
                     <TextView
@@ -135,7 +133,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="雨山区慈湖河路690号附近"
-                        android:textColor="@color/colorTxtAble"
+                        android:textColor="@color/colorTxtDefault"
                         android:textSize="@dimen/txt_size_big"/>
 
                     <TextView
@@ -153,10 +151,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/txt_margin_middle"
             android:background="@drawable/btn_tip_bkg"
-            android:paddingBottom="4dp"
-            android:paddingLeft="4dp"
-            android:paddingRight="4dp"
-            android:paddingTop="4dp"
+            android:padding="@dimen/radius_default"
             android:text="500g"
             android:textColor="@android:color/white"
             android:textSize="@dimen/txt_size_small"/>

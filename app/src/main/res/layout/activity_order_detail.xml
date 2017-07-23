@@ -1,10 +1,215 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/activityBackground"
     tools:context="com.bfdelivery.cavaliers.ui.activities.OrderDetailActivity">
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/btnAction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/slct_orderdetialbottom_control"
+        android:gravity="center"
+        android:padding="@dimen/txt_margin_large"
+        android:text="完成配送"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/txt_size_big"/>
+
+    <LinearLayout
+        android:id="@+id/infoWrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/btnAction"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:padding="@dimen/txt_margin_middle">
+
+            <TextView
+                android:id="@+id/txtOrderIndex"
+                style="@style/OrderIndex"
+                android:text="#2"/>
+
+            <TextView
+                android:id="@+id/txtOderStatus"
+                style="@style/OrderDetailStatus"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/txt_margin_small"
+                android:text="配送中"/>
+        </RelativeLayout>
+
+        <include layout="@layout/layout_horizontal_gap"></include>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:orientation="vertical"
+            android:padding="@dimen/txt_margin_middle">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="@dimen/order_width_title"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/OrderDetailTitle"
+                        android:text="@string/takeDish"
+                        android:textColor="@color/colorTxtPrimary"/>
+
+                    <TextView
+                        style="@style/OrderDetailDistance"
+                        android:text="1KM"
+                        />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="宝庆美食园(春晖店)"
+                        android:textColor="@color/colorTxtDefault"
+                        android:textSize="@dimen/txt_size_default"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="雨山区印山东路696号101室"
+                        android:textColor="@color/colorTxtDefault"
+                        android:textSize="@dimen/txt_size_small"/>
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/txt_margin_middle"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="@dimen/order_width_title"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        style="@style/OrderDetailTitle"
+                        android:text="@string/deliveryDish"
+                        android:textColor="@color/colorTxtAlert"/>
+
+                    <TextView
+                        style="@style/OrderDetailDistance"
+                        android:text="4KM"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="雨山区慈湖河路690号附近"
+                        android:textColor="@color/colorTxtDefault"
+                        android:textSize="@dimen/txt_size_default"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="18798764523"
+                        android:textColor="@color/colorTxtDefault"
+                        android:textSize="@dimen/txt_size_small"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/group_margin_vertical_gap"
+            android:background="@android:color/white"
+            android:orientation="vertical">
+
+            <include layout="@layout/layout_horizontal_gap"></include>
+
+            <com.bfdelivery.cavaliers.ui.views.OrderDetailItemView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:detail="无"
+                app:tag="@string/delivery_demand"/>
+
+            <include layout="@layout/layout_horizontal_gap"></include>
+
+            <com.bfdelivery.cavaliers.ui.views.OrderDetailItemView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:detail="40分钟后取餐"
+                app:tag="@string/delivery_expect"/>
+
+            <include layout="@layout/layout_horizontal_gap"></include>
+
+            <com.bfdelivery.cavaliers.ui.views.OrderDetailItemView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:detail="接单后50分钟送达"
+                app:tag="@string/delivery_time"/>
+
+            <include layout="@layout/layout_horizontal_gap"></include>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/group_margin_vertical_gap"
+            android:background="@android:color/white"
+            android:orientation="vertical">
+
+            <include
+                layout="@layout/layout_horizontal_gap"></include>
+
+            <com.bfdelivery.cavaliers.ui.views.OrderDetailItemView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:detail="我要香菜，不要蒜蓉"
+                app:tag="@string/order_remark"/>
+
+            <include layout="@layout/layout_horizontal_gap"></include>
+
+            <com.bfdelivery.cavaliers.ui.views.OrderDetailItemView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:detail="1KG"
+                app:tag="@string/order_weight"/>
+
+            <include layout="@layout/layout_horizontal_gap"></include>
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>

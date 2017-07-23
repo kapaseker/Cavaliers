@@ -24,4 +24,7 @@
     <dimen name="txt_margin_small">6dp</dimen>
     <dimen name="txt_margin_middle">8dp</dimen>
     <dimen name="txt_margin_large">12dp</dimen>
+    <dimen name="group_margin_vertical_gap">16dp</dimen>
+
+    <dimen name="order_width_title">54dp</dimen>
 </resources>

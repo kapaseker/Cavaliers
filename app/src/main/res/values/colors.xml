@@ -4,6 +4,7 @@
     <color name="colorPrimaryLight">#445AFB</color>
     <color name="colorPrimaryDark">#3444BE</color>
     <color name="colorAccent">#EC407A</color>
+    <color name="activityBackground">#EFEFEF</color>
 
     <color name="colorCommonListGap">#9E9E9E</color>
 
@@ -15,5 +16,5 @@
     <color name="colorTxtWarning">#FF8F00</color>
     <color name="colorTxtDisable">#7A7A7A</color>
     <color name="colorTxtDetail">#4A4A4A</color>
-    <color name="colorTxtAble">#0E0E0E</color>
+    <color name="colorTxtDefault">#0E0E0E</color>
 </resources>

@@ -2,73 +2,60 @@ package com.bfdelivery.cavaliers.ui.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.MenuItem;
 
 import com.bfdelivery.cavaliers.R;
-import com.bfdelivery.cavaliers.ui.activities.base.BasePagetActivity;
-import com.bfdelivery.cavaliers.ui.fragments.OrderListFragment;
+import com.bfdelivery.cavaliers.ui.activities.base.BasePageActivity;
+import com.bfdelivery.cavaliers.ui.adapters.OrderFragmentPageAdapter;
 
-public class OrderHistoryActivity extends BasePagetActivity {
+public class OrderHistoryActivity extends BasePageActivity {
 
-    TabLayout mTabs = null;
-    ViewPager mPagers = null;
+	TabLayout mTabs = null;
+	ViewPager mPagers = null;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order_history);
-        initView();
-    }
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 
-    private void initView() {
+	}
 
-        getSupportActionBar().setTitle(R.string.action_menu_history_order);
+	@Override
+	protected void onPrepareLayout() {
+		setContentView(R.layout.activity_order_history);
+	}
 
-        mTabs = (TabLayout) findViewById(R.id.sliding_tabs);
-        mPagers = (ViewPager) findViewById(R.id.viewpager);
+	@Override
+	protected void initView() {
 
-        mPagers.setAdapter(new OrderFragmentPageAdapter(getSupportFragmentManager(), getResources().getStringArray(R.array.history_order)));
-        mTabs.setupWithViewPager(mPagers);
-    }
+		getSupportActionBar().setTitle(R.string.action_menu_history_order);
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+		mTabs = (TabLayout) findViewById(R.id.sliding_tabs);
+		mPagers = (ViewPager) findViewById(R.id.viewpager);
 
-        int id = item.getItemId();
-        if (id == android.R.id.home) {
-            finish();
-            return true;
-        }
+		mPagers.setAdapter(new OrderFragmentPageAdapter(getSupportFragmentManager(), getResources().getStringArray(R.array.history_order)));
+		mTabs.setupWithViewPager(mPagers);
+	}
 
-        return super.onOptionsItemSelected(item);
-    }
+	@Override
+	protected void handleData(Bundle data) {
 
-    private static class OrderFragmentPageAdapter extends FragmentPagerAdapter {
+	}
 
-        CharSequence[] mTitles = null;
+	@Override
+	protected void processViewAndData() {
 
-        public OrderFragmentPageAdapter(FragmentManager fm, CharSequence[] mTitles) {
-            super(fm);
-            this.mTitles = mTitles;
-        }
+	}
 
-        @Override
-        public Fragment getItem(int position) {
-            return new OrderListFragment();
-        }
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
 
-        @Override
-        public int getCount() {
-            return mTitles.length;
-        }
+		int id = item.getItemId();
+		if (id == android.R.id.home) {
+			finish();
+			return true;
+		}
 
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mTitles[position];
-        }
-    }
+		return super.onOptionsItemSelected(item);
+	}
 }

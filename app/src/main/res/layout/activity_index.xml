@@ -22,8 +22,8 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_index"
         app:menu="@menu/activity_index_drawer">
-        <include layout="@layout/nav_footer_index">
 
+        <include layout="@layout/nav_footer_index">
         </include>
     </android.support.design.widget.NavigationView>
 

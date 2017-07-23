@@ -9,9 +9,5 @@
     tools:context="com.bfdelivery.cavaliers.ui.activities.IndexActivity"
     tools:showIn="@layout/app_bar_index">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
-
+    <include layout="@layout/tab_viewpager"/>
 </RelativeLayout>

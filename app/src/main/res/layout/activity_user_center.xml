@@ -1,10 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/activityBackground"
     tools:context="com.bfdelivery.cavaliers.ui.activities.UserCenterActivity">
 
-</LinearLayout>
+    <android.support.v7.widget.CardView
+        android:id="@+id/userInfoWrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/txt_margin_middle"
+        android:background="@android:color/white"
+        app:cardCornerRadius="2dp"
+        app:cardElevation="@dimen/radius_small">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/txt_margin_large">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@mipmap/ic_launcher"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tstUserName"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tstPhone"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/userInfoWrapper"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <include layout="@layout/layout_horizontal_gap"></include>
+
+        <com.bfdelivery.cavaliers.ui.views.OrderDetailItemView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:detail="2314351113"
+            app:tag="@string/user_number"></com.bfdelivery.cavaliers.ui.views.OrderDetailItemView>
+
+        <include layout="@layout/layout_horizontal_gap"></include>
+
+        <com.bfdelivery.cavaliers.ui.views.OrderDetailItemView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:detail="初级"
+            app:tag="@string/user_grade"></com.bfdelivery.cavaliers.ui.views.OrderDetailItemView>
+
+        <include layout="@layout/layout_horizontal_gap"></include>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/ButtonUserCenterControl"
+            android:text="@string/sign_out"/>
+
+        <TextView
+            style="@style/ButtonUserCenterControl"
+            android:text="@string/switch_sign"/>
+    </LinearLayout>
+</RelativeLayout>

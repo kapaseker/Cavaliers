@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:padding="@dimen/txt_margin_middle"
+              android:orientation="horizontal">
+
+    <TextView
+        android:text="Good:"
+        android:id="@+id/tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorTxtDefault"
+        android:textSize="@dimen/txt_size_default"/>
+
+    <TextView
+        android:text="bug"
+        android:id="@+id/detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorTxtDetail"
+        android:textSize="@dimen/txt_size_default"/>
+</LinearLayout>
