@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#0D47A1</color>
-    <color name="colorPrimaryDark">#283593</color>
+    <color name="colorPrimary">#3B4ED9</color>
+    <color name="colorPrimaryLight">#445AFB</color>
+    <color name="colorPrimaryDark">#3444BE</color>
     <color name="colorAccent">#EC407A</color>
-
-    <color name="cavBlue">#0D47A1</color>
-    <color name="cavBlueLight">#1161DB</color>
 
     <color name="colorCommonListGap">#9E9E9E</color>
 
     <color name="colorTxtError">#d50000</color>
     <color name="colorTxtAlert">#f44336</color>
-    <color name="colorTip">#009688</color>
+    <color name="colorTip">#26A69A</color>
     <color name="colorTxtPrimary">#00C853</color>
     <color name="colorTxtPrimaryHover">#009C41</color>
     <color name="colorTxtWarning">#FF8F00</color>
