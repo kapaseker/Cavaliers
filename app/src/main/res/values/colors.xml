@@ -5,13 +5,15 @@
     <color name="colorAccent">#EC407A</color>
 
     <color name="cavBlue">#0D47A1</color>
-    <color name="cavBlueLight">#64B5F6</color>
+    <color name="cavBlueLight">#1161DB</color>
 
     <color name="colorCommonListGap">#9E9E9E</color>
 
     <color name="colorTxtError">#d50000</color>
     <color name="colorTxtAlert">#f44336</color>
-    <color name="colorTxtPrimary">#388E3C</color>
+    <color name="colorTip">#009688</color>
+    <color name="colorTxtPrimary">#00C853</color>
+    <color name="colorTxtPrimaryHover">#009C41</color>
     <color name="colorTxtWarning">#FF8F00</color>
     <color name="colorTxtDisable">#7A7A7A</color>
     <color name="colorTxtDetail">#4A4A4A</color>

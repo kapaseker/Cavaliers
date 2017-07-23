@@ -10,8 +10,13 @@
     <dimen name="nav_footer_setting_icon_margin">10dp</dimen>
     <dimen name="nav_footer_pdb">12dp</dimen>
 
+    <dimen name="radius_small">2dp</dimen>
+    <dimen name="radius_default">4dp</dimen>
+    <dimen name="radius_big">6dp</dimen>
+
+    <dimen name="txt_size_superBig">20sp</dimen>
     <dimen name="txt_size_big">16sp</dimen>
-    <dimen name="txt_size_middle">14sp</dimen>
+    <dimen name="txt_size_default">14sp</dimen>
     <dimen name="txt_size_small">12sp</dimen>
     <dimen name="txt_size_mini">10sp</dimen>
 

@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/nav_history"
-        android:icon="@drawable/ic_menu_send"
+        android:icon="@drawable/icon_statics"
         android:title="@string/action_menu_history_order"/>
 
 </menu>

@@ -12,6 +12,8 @@
     </string-array>
     <string name="takeDish">取餐</string>
     <string name="deliveryDish">配送</string>
+    <string name="contact">联系顾客</string>
+    <string name="served">确认送达</string>
 
     <!--    Test String Resource     -->
     <string name="tstUserName">欧阳正茂</string>
