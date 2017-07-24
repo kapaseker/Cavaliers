@@ -77,6 +77,15 @@
         <item name="android:textColor">@drawable/slct_default_txt_clr</item>
     </style>
 
+    <style name="NaviMenuItem" parent="@android:style/Widget.TextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/txt_size_default</item>
+        <item name="android:padding">@dimen/txt_margin_middle</item>
+        <item name="android:background">@drawable/slct_bkg_menuitem</item>
+        <item name="android:drawablePadding">@dimen/txt_margin_middle</item>
+    </style>
+
     <style name="Base.Widget.Design.TabLayout" parent="android:Widget">
         <item name="tabIndicatorColor">@color/colorTip</item>
         <item name="tabIndicatorHeight">2dp</item>

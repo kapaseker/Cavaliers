@@ -4,6 +4,8 @@
     <color name="colorPrimaryLight">#445AFB</color>
     <color name="colorPrimaryDark">#3444BE</color>
     <color name="colorAccent">#EC407A</color>
+    <color name="colorWhiteHover">#EEEEEE</color>
+    <color name="colorWhite">@android:color/white</color>
     <color name="activityBackground">#EFEFEF</color>
 
     <color name="colorCommonListGap">#9E9E9E</color>

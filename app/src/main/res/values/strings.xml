@@ -6,6 +6,7 @@
 
     <string name="action_settings">设置</string>
     <string name="action_menu_history_order">工作汇总</string>
+    <string name="action_menu_daily_settle">每日结算</string>
     <string name="user_center">个人中心</string>
     <string name="user_number">员工编号：</string>
     <string name="user_grade">员工等级：</string>

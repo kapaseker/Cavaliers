@@ -6,10 +6,6 @@
     <dimen name="nav_header_height">160dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
-    <dimen name="nav_footer_setting_txt">14sp</dimen>
-    <dimen name="nav_footer_setting_icon_margin">10dp</dimen>
-    <dimen name="nav_footer_pdb">12dp</dimen>
-
     <dimen name="radius_small">2dp</dimen>
     <dimen name="radius_default">4dp</dimen>
     <dimen name="radius_big">6dp</dimen>
