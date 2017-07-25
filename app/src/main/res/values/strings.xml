@@ -12,6 +12,7 @@
     <string name="user_grade">员工等级：</string>
     <string name="sign_out">退出登陆</string>
     <string name="switch_sign">切换登陆</string>
+    <string name="detail_list">明细</string>
 
     <string name="sign_in">登陆</string>
     <string name="sign_up">注册</string>
