@@ -13,6 +13,11 @@
         <attr name="tag" format="string|reference"></attr>
     </declare-styleable>
 
+    <declare-styleable name="CircleImage">
+        <attr name="rimWidth" format="reference|dimension"></attr>
+        <attr name="rimColor" format="reference|color"></attr>
+    </declare-styleable>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -33,6 +38,40 @@
         <item name="android:paddingTop">10dp</item>
         <item name="android:paddingBottom">10dp</item>
     </style>
+
+    <style name="NavHeadPotrait">
+        <item name="android:layout_width">@dimen/head_portrait_default</item>
+        <item name="android:layout_height">@dimen/head_portrait_default</item>
+        <item name="rimColor">@color/white</item>
+        <item name="rimWidth">@dimen/head_portrait_border_default</item>
+    </style>
+
+    <style name="NavHeadTitle" parent="@android:style/Widget.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorTxtWhite</item>
+        <item name="android:textSize">@dimen/txt_size_default</item>
+    </style>
+
+    <style name="NavHeadDetail" parent="NavHeadTitle">
+        <item name="android:textColor">@color/colorTxtWhiteDetail</item>
+        <item name="android:textSize">@dimen/txt_size_small</item>
+    </style>
+
+    <style name="DailySettleDetailTitle" parent="@android:style/Widget.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorTxtAlertLight</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="DailySettleDetail" parent="@android:style/Widget.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorTxtAlert</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
 
     <style name="OrderDetailTitle" parent="@android:style/Widget.TextView">
         <item name="android:layout_width">wrap_content</item>

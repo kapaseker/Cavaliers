@@ -24,16 +24,17 @@
             android:orientation="horizontal"
             android:padding="@dimen/txt_margin_large">
 
-            <ImageView
+            <com.bfdelivery.cavaliers.ui.views.CircleImageView
                 android:id="@+id/imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@mipmap/ic_launcher"/>
+                android:layout_width="@dimen/head_portrait_small"
+                android:layout_height="@dimen/head_portrait_small"
+                android:src="@drawable/def_potriat"
+                app:rimWidth="0px"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
+                android:layout_marginLeft="@dimen/txt_margin_large"
                 android:orientation="vertical">
 
                 <TextView

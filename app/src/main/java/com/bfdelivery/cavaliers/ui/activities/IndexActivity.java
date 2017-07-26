@@ -25,12 +25,6 @@ public class IndexActivity extends BaseActivity
 	DrawerLayout mDrawer = null;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		startActivity(new Intent(this, LoginActivity.class));
-	}
-
-	@Override
 	protected void onPrepareLayout() {
 		setContentView(R.layout.activity_index);
 	}

@@ -1,10 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/activityBackground"
-    tools:context="com.bfdelivery.cavaliers.ui.activities.DailySettleActivity">
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/activityBackground"
+                tools:context="com.bfdelivery.cavaliers.ui.activities.DailySettleActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryLight"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/txt_margin_large"
+        android:paddingTop="@dimen/txt_margin_large">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <com.bfdelivery.cavaliers.ui.views.CircleImageView
+                style="@style/NavHeadPotrait"
+                android:layout_marginBottom="@dimen/txt_margin_large"
+                android:src="@drawable/def_potriat"/>
+
+            <TextView
+                style="@style/NavHeadTitle"
+                android:layout_marginBottom="@dimen/txt_margin_mini"
+                android:text="@string/tstUserName"/>
+
+            <TextView
+                style="@style/NavHeadDetail"
+                android:text="@string/tstPhone"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/DailySettleDetailTitle"
+                    android:text="@string/daily_income"/>
+
+                <TextView
+                    style="@style/DailySettleDetail"
+                    android:text="@string/tstIncome"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="2px"
+                android:layout_height="match_parent"
+                android:background="@color/white"/>
+
+            <LinearLayout
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/DailySettleDetailTitle"
+                    android:text="@string/daily_distance"/>
+
+                <TextView
+                    style="@style/DailySettleDetail"
+                    android:text="@string/tstDistance"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>

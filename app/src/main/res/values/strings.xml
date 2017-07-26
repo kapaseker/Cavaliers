@@ -16,6 +16,9 @@
     <string name="switch_sign">切换登陆</string>
     <string name="detail_list">明细</string>
 
+    <string name="daily_distance">里程</string>
+    <string name="daily_income">金额</string>
+
     <string name="sign_in">登陆</string>
     <string name="sign_up">注册</string>
     <string-array name="history_order">
@@ -44,4 +47,6 @@
     <!--    Test String Resource     -->
     <string name="tstUserName">欧阳正茂</string>
     <string name="tstPhone">135****9837</string>
+    <string name="tstDistance">24.67KM</string>
+    <string name="tstIncome">￥200</string>
 </resources>

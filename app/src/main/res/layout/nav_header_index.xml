@@ -16,26 +16,23 @@
 
         <com.bfdelivery.cavaliers.ui.views.CircleImageView
             android:id="@+id/imageView"
-            android:layout_width="@dimen/nav_head_portrait"
-            android:layout_height="@dimen/nav_head_portrait"
+            style="@style/NavHeadPotrait"
             android:src="@drawable/def_potriat"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="12dp"
+            android:layout_marginLeft="@dimen/txt_margin_large"
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/tstUserName"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+                style="@style/NavHeadTitle"
+                android:layout_marginBottom="@dimen/txt_margin_mini"
+                android:text="@string/tstUserName"/>
 
             <TextView
                 android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/NavHeadDetail"
                 android:text="@string/tstPhone"/>
         </LinearLayout>
 
