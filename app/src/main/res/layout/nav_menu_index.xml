@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/txt_margin_large">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="@dimen/txt_margin_large">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:clickable="true"
-        android:drawableLeft="@drawable/ic_menu_manage"
+        android:drawableLeft="@drawable/icon_setting"
         android:drawablePadding="@dimen/txt_margin_middle"
         android:gravity="center"
         android:text="@string/action_settings"
-        android:textSize="@dimen/txt_size_default" />
+        android:textSize="@dimen/txt_size_default"/>
 
 </RelativeLayout>
