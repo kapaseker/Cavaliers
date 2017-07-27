@@ -133,7 +133,7 @@ public class IndexActivity extends BaseActivity
 	public void onClick(View v) {
 		switch (v.getId()) {
 			case R.id.userCenter:
-				ActivityCompat.startActivity(this, new Intent(this, UserCenterActivity.class), createUserCenterShareOption().toBundle());
+				startActivity(new Intent(this, UserCenterActivity.class));
 				mDrawer.closeDrawer(GravityCompat.START);
 				break;
 		}

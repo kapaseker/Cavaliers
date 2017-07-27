@@ -20,7 +20,7 @@ public abstract class BasePageActivity extends BaseActivity {
 
 		switch (item.getItemId()) {
 			case android.R.id.home:
-				finish();
+				supportFinishAfterTransition();
 				return true;
 		}
 
