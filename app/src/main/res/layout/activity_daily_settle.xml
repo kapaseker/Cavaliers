@@ -25,16 +25,19 @@
             <com.bfdelivery.cavaliers.ui.views.CircleImageView
                 style="@style/NavHeadPotrait"
                 android:layout_marginBottom="@dimen/txt_margin_large"
-                android:src="@drawable/def_potriat"/>
+                android:src="@drawable/def_potriat"
+                android:transitionName="@string/transition_head"/>
 
             <TextView
                 style="@style/NavHeadTitle"
                 android:layout_marginBottom="@dimen/txt_margin_mini"
-                android:text="@string/tstUserName"/>
+                android:text="@string/tstUserName"
+                android:transitionName="@string/transition_title"/>
 
             <TextView
                 style="@style/NavHeadDetail"
-                android:text="@string/tstPhone"/>
+                android:text="@string/tstPhone"
+                android:transitionName="@string/transition_desc"/>
 
         </LinearLayout>
 

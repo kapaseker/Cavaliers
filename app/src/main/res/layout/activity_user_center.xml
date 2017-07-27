@@ -29,6 +29,7 @@
                 android:layout_width="@dimen/head_portrait_small"
                 android:layout_height="@dimen/head_portrait_small"
                 android:src="@drawable/def_potriat"
+                android:transitionName="@string/transition_head"
                 app:rimWidth="0px"/>
 
             <LinearLayout
@@ -41,13 +42,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/tstUserName"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:transitionName="@string/transition_title"/>
 
                 <TextView
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/tstPhone"/>
+                    android:text="@string/tstPhone"
+                    android:transitionName="@string/transition_desc"/>
             </LinearLayout>
 
 

@@ -4,6 +4,10 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <string name="transition_head">head</string>
+    <string name="transition_title">title</string>
+    <string name="transition_desc">desc</string>
+
     <string name="action_settings">设置</string>
     <string name="action_msg">消息</string>
 

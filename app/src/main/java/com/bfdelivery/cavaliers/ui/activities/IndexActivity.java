@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -23,6 +26,10 @@ public class IndexActivity extends BaseActivity
 	TabLayout mTabs = null;
 	ViewPager mPagers = null;
 	DrawerLayout mDrawer = null;
+
+	View mPortraitView = null;
+	View mNameView = null;
+	View mDescriptionVew = null;
 
 	@Override
 	protected void onPrepareLayout() {
@@ -46,7 +53,13 @@ public class IndexActivity extends BaseActivity
 		mTabs = (TabLayout) findViewById(R.id.sliding_tabs);
 		mPagers = (ViewPager) findViewById(R.id.viewpager);
 
-		navigationView.getHeaderView(0).findViewById(R.id.userCenter).setOnClickListener(this);
+		View headView = navigationView.getHeaderView(0);
+
+		mPortraitView = headView.findViewById(R.id.imgHeadPortrait);
+		mNameView = headView.findViewById(R.id.usrName);
+		mDescriptionVew = headView.findViewById(R.id.usrDescription);
+
+		headView.setOnClickListener(this);
 	}
 
 	@Override
@@ -100,19 +113,28 @@ public class IndexActivity extends BaseActivity
 		if (id == R.id.nav_history) {
 			startActivity(new Intent(this, OrderHistoryActivity.class));
 		} else if (id == R.id.nav_dailysettle) {
-			startActivity(new Intent(this, DailySettleActivity.class));
+			ActivityCompat.startActivity(this, new Intent(this, DailySettleActivity.class), createUserCenterShareOption().toBundle());
 		}
 
 		mDrawer.closeDrawer(GravityCompat.START);
 		return true;
 	}
 
+	private ActivityOptionsCompat createUserCenterShareOption() {
+
+		Pair<View, String> headPair = Pair.create(mPortraitView, getString(R.string.transition_head));
+		Pair<View, String> namePair = Pair.create(mNameView, getString(R.string.transition_title));
+		Pair<View, String> descPair = Pair.create(mDescriptionVew, getString(R.string.transition_desc));
+
+		return ActivityOptionsCompat.makeSceneTransitionAnimation(this, headPair, namePair, descPair);
+	}
+
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 			case R.id.userCenter:
+				ActivityCompat.startActivity(this, new Intent(this, UserCenterActivity.class), createUserCenterShareOption().toBundle());
 				mDrawer.closeDrawer(GravityCompat.START);
-				startActivity(new Intent(this, UserCenterActivity.class));
 				break;
 		}
 	}
