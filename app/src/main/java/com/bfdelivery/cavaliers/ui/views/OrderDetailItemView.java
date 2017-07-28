@@ -53,9 +53,11 @@ public class OrderDetailItemView extends LinearLayout {
 			try {
 				String strDetail = styleAttr.getString(R.styleable.OrderDetailView_detail);
 				String strTag = styleAttr.getString(R.styleable.OrderDetailView_tag);
+				int detailColor = styleAttr.getColor(R.styleable.OrderDetailView_detailColor, context.getResources().getColor(R.color.colorTxtDetail));
 
 				mTxtTag.setText(strTag);
 				mTxtDetail.setText(strDetail);
+				mTxtDetail.setTextColor(detailColor);
 			} finally {
 				styleAttr.recycle();
 			}

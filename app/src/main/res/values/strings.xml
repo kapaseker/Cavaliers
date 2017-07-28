@@ -16,12 +16,16 @@
     <string name="user_center">个人中心</string>
     <string name="user_number">员工编号：</string>
     <string name="user_grade">员工等级：</string>
+    <string name="merchant_phone">商家电话：</string>
+    <string name="client_phone">顾客电话：</string>
     <string name="sign_out">退出登陆</string>
     <string name="switch_sign">切换登陆</string>
-    <string name="detail_list">明细</string>
+    <string name="order">订单</string>
 
+    <string name="detail_list">明细</string>
     <string name="daily_distance">里程</string>
     <string name="daily_income">金额</string>
+    <string name="daily_order_count">订单</string>
 
     <string name="sign_in">登陆</string>
     <string name="sign_up">注册</string>
@@ -38,8 +42,10 @@
 
     <string name="takeDish">取餐：</string>
     <string name="deliveryDish">配送：</string>
-    <string name="contact">联系顾客</string>
+    <string name="contact_client">联系顾客</string>
+    <string name="contact_merchant">联系商家</string>
     <string name="served">确认送达</string>
+    <string name="ready_delivery">准备配送</string>
 
     <string name="delivery_demand">配送要求：</string>
     <string name="delivery_expect">期望到达：</string>
@@ -53,4 +59,5 @@
     <string name="tstPhone">135****9837</string>
     <string name="tstDistance">24.67KM</string>
     <string name="tstIncome">￥200</string>
+    <string name="tstOrderCount">38单</string>
 </resources>

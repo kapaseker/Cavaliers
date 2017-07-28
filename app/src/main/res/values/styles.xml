@@ -8,16 +8,6 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <declare-styleable name="OrderDetailView">
-        <attr name="detail" format="string|reference"></attr>
-        <attr name="tag" format="string|reference"></attr>
-    </declare-styleable>
-
-    <declare-styleable name="CircleImage">
-        <attr name="rimWidth" format="reference|dimension"></attr>
-        <attr name="rimColor" format="reference|color"></attr>
-    </declare-styleable>
-
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -26,6 +16,59 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <style name="TipTitle" parent="@android:style/Widget.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorTxtDetail</item>
+        <item name="android:textSize">@dimen/txt_size_small</item>
+    </style>
+
+    <style name="OrderItemName" parent="@android:style/Widget.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">@dimen/txt_size_big</item>
+        <item name="android:textColor">@color/colorTxtDefault</item>
+    </style>
+
+    <style name="OrderItemDetail" parent="@style/OrderItemName">
+        <item name="android:textSize">@dimen/txt_size_small</item>
+        <item name="android:textColor">@color/colorTxtDetail</item>
+    </style>
+
+    <style name="OrderDetailItemName" parent="OrderItemName">
+        <item name="android:textSize">@dimen/txt_size_default</item>
+    </style>
+
+    <style name="OrderDetailItemDetail" parent="OrderItemDetail">
+        <item name="android:textColor">@color/colorTxtDefault</item>
+    </style>
+
+    <style name="TipPrimary" parent="@android:style/Widget.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/btn_tip_bkg</item>
+        <item name="android:padding">@dimen/radius_default</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/txt_size_small</item>
+    </style>
+
+    <style name="TipButtonPrimary" parent="@style/TipPrimary">
+        <item name="android:background">@drawable/slct_btn_primary_bkg</item>
+    </style>
+
+    <style name="OrderItemDistance" parent="@android:style/Widget.TextView">
+        <item name="android:textColor">@color/colorTxtPrimary</item>
+        <item name="android:textSize">@dimen/txt_size_big</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="OrderItemStatus" parent="@style/OrderItemDistance">
+        <item name="android:textColor">@color/colorTxtDetail</item>
+        <item name="android:textSize">@dimen/txt_size_small</item>
+    </style>
 
     <style name="ButtonOrderItem" parent="@android:style/Widget.TextView">
         <item name="android:layout_weight">1</item>
@@ -132,4 +175,16 @@
         <item name="tabTextAppearance">@style/TextAppearance.Design.Tab</item>
         <item name="tabSelectedTextColor">@color/colorTxtPrimary</item>
     </style>
+
+
+    <declare-styleable name="OrderDetailView">
+        <attr name="detail" format="string|reference"></attr>
+        <attr name="tag" format="string|reference"></attr>
+        <attr name="detailColor" format="color|reference"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="CircleImage">
+        <attr name="rimWidth" format="reference|dimension"></attr>
+        <attr name="rimColor" format="reference|color"></attr>
+    </declare-styleable>
 </resources>

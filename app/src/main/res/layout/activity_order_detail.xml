@@ -86,18 +86,32 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="宝庆美食园(春晖店)"
-                        android:textColor="@color/colorTxtDefault"
-                        android:textSize="@dimen/txt_size_default"/>
+                        style="@style/OrderDetailItemName"
+                        android:text="宝庆美食园(春晖店)"/>
 
                     <TextView
+                        style="@style/OrderDetailItemDetail"
+                        android:text="雨山区印山东路696号101室"/>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="雨山区印山东路696号101室"
-                        android:textColor="@color/colorTxtDefault"
-                        android:textSize="@dimen/txt_size_small"/>
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/TipTitle"
+                            android:text="@string/merchant_phone"/>
+
+                        <TextView
+                            style="@style/TipPrimary"
+                            android:text="15309392838"/>
+
+                        <TextView
+                            style="@style/TipButtonPrimary"
+                            android:layout_marginLeft="@dimen/txt_margin_middle"
+                            android:text="@string/contact_merchant"/>
+                    </LinearLayout>
                 </LinearLayout>
 
 
@@ -106,7 +120,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/txt_margin_middle"
+                android:layout_marginTop="@dimen/txt_margin_large"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -132,18 +146,32 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="雨山区慈湖河路690号附近"
-                        android:textColor="@color/colorTxtDefault"
-                        android:textSize="@dimen/txt_size_default"/>
+                        style="@style/OrderDetailItemName"
+                        android:text="雨山区慈湖河路690号附近"/>
 
                     <TextView
+                        style="@style/OrderDetailItemDetail"
+                        android:text="王先生"/>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="18798764523"
-                        android:textColor="@color/colorTxtDefault"
-                        android:textSize="@dimen/txt_size_small"/>
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/TipTitle"
+                            android:text="@string/client_phone"/>
+
+                        <TextView
+                            style="@style/TipPrimary"
+                            android:text="15309392838"/>
+
+                        <TextView
+                            style="@style/TipButtonPrimary"
+                            android:layout_marginLeft="@dimen/txt_margin_middle"
+                            android:text="@string/contact_client"/>
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -198,6 +226,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:detail="我要香菜，不要蒜蓉"
+                app:detailColor="@color/colorTxtAlert"
                 app:tag="@string/order_remark"/>
 
             <include layout="@layout/layout_horizontal_gap"></include>

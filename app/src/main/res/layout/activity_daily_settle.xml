@@ -57,6 +57,27 @@
 
                 <TextView
                     style="@style/DailySettleDetailTitle"
+                    android:text="@string/daily_order_count"/>
+
+                <TextView
+                    style="@style/DailySettleDetail"
+                    android:text="@string/tstOrderCount"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="2px"
+                android:layout_height="match_parent"
+                android:background="@color/white"/>
+
+            <LinearLayout
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/DailySettleDetailTitle"
                     android:text="@string/daily_income"/>
 
                 <TextView

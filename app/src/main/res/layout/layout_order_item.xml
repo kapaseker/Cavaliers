@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/txt_margin_mini"
+    android:background="@drawable/slct_bkg_menuitem"
     card_view:cardElevation="2dp">
 
     <LinearLayout
@@ -59,18 +60,12 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="2KM"
-                        android:textColor="@color/colorTxtPrimary"
-                        android:textSize="@dimen/txt_size_big"/>
+                        style="@style/OrderItemDistance"
+                        android:text="2KM"/>
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/takeDish"
-                        android:textColor="@color/colorTxtDetail"
-                        android:textSize="@dimen/txt_size_small"/>
+                        style="@style/OrderItemStatus"
+                        android:text="@string/takeDish"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -81,18 +76,12 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="宝庆美食园(春晖店)"
-                        android:textColor="@color/colorTxtDefault"
-                        android:textSize="@dimen/txt_size_big"/>
+                        style="@style/OrderItemName"
+                        android:text="宝庆美食园(春晖店)"/>
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="雨山区印山东路696号101室"
-                        android:textColor="@color/colorTxtDetail"
-                        android:textSize="@dimen/txt_size_small"/>
+                        style="@style/OrderItemDetail"
+                        android:text="雨山区印山东路696号101室"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -109,18 +98,13 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        style="@style/OrderItemDistance"
                         android:text="4KM"
-                        android:textColor="@color/colorTxtPrimary"
-                        android:textSize="@dimen/txt_size_big"/>
+                        />
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/deliveryDish"
-                        android:textColor="@color/colorTxtDetail"
-                        android:textSize="@dimen/txt_size_small"/>
+                        style="@style/OrderItemStatus"
+                        android:text="@string/deliveryDish"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -130,31 +114,33 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        style="@style/OrderItemName"
                         android:text="雨山区慈湖河路690号附近"
-                        android:textColor="@color/colorTxtDefault"
-                        android:textSize="@dimen/txt_size_big"/>
+                        />
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="李女士"
-                        android:textColor="@color/colorTxtDetail"
-                        android:textSize="@dimen/txt_size_small"/>
+                        style="@style/OrderItemDetail"
+                        android:text="李女士"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/txt_margin_middle"
-            android:background="@drawable/btn_tip_bkg"
-            android:padding="@dimen/radius_default"
-            android:text="500g"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/txt_size_small"/>
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TipTitle"
+                android:text="@string/merchant_phone"/>
+
+            <TextView
+                style="@style/TipPrimary"
+                android:text="15309392838"/>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -165,13 +151,13 @@
             <TextView
                 style="@style/ButtonOrderItem"
                 android:background="@drawable/slct_btn_default_bkg"
-                android:text="@string/contact"
+                android:text="@string/contact_client"
                 android:textColor="@drawable/slct_default_txt_clr"/>
 
             <TextView
                 style="@style/ButtonOrderItem"
                 android:background="@drawable/slct_btn_primary_bkg"
-                android:text="@string/served"
+                android:text="@string/ready_delivery"
                 android:textColor="@android:color/white"/>
         </LinearLayout>
     </LinearLayout>
