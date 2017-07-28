@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="@dimen/txt_margin_middle">
+        android:padding="@dimen/txt_margin_default">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -45,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="@dimen/txt_margin_middle">
+            android:padding="@dimen/txt_margin_default">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -99,8 +99,7 @@
 
                     <TextView
                         style="@style/OrderItemDistance"
-                        android:text="4KM"
-                        />
+                        android:text="4KM"/>
 
                     <TextView
                         style="@style/OrderItemStatus"
@@ -128,7 +127,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/txt_margin_middle"
+            android:layout_marginLeft="@dimen/txt_margin_default"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -145,7 +144,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/txt_margin_middle"
+            android:layout_marginTop="@dimen/txt_margin_default"
             android:orientation="horizontal">
 
             <TextView

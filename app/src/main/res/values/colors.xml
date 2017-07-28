@@ -8,7 +8,8 @@
     <color name="white">@android:color/white</color>
     <color name="activityBackground">#EFEFEF</color>
 
-    <color name="colorCommonListGap">#9E9E9E</color>
+    <color name="colorCommonListGap">#BABABA</color>
+    <color name="colorCommonListGapLite">#DEDEDE</color>
 
     <color name="colorTxtWhite">@color/white</color>
     <color name="colorTxtWhiteDetail">@color/colorWhiteHover</color>

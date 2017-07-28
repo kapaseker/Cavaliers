@@ -17,9 +17,16 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
-    <style name="TipTitle" parent="@android:style/Widget.TextView">
+    <style name="DefaultText" parent="@android:style/Widget.TextView">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorTxtDefault</item>
+        <item name="android:textSize">@dimen/txt_size_default</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="TipTitle" parent="@style/DefaultText">
         <item name="android:textColor">@color/colorTxtDetail</item>
         <item name="android:textSize">@dimen/txt_size_small</item>
     </style>
@@ -76,8 +83,8 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/txt_size_default</item>
         <item name="android:gravity">center</item>
-        <item name="android:layout_marginLeft">@dimen/txt_margin_middle</item>
-        <item name="android:layout_marginRight">@dimen/txt_margin_middle</item>
+        <item name="android:layout_marginLeft">@dimen/txt_margin_default</item>
+        <item name="android:layout_marginRight">@dimen/txt_margin_default</item>
         <item name="android:paddingTop">10dp</item>
         <item name="android:paddingBottom">10dp</item>
     </style>
@@ -154,8 +161,8 @@
         <item name="android:layout_weight">1</item>
         <item name="android:background">@drawable/slct_btn_default_bkg</item>
         <item name="android:gravity">center</item>
-        <item name="android:paddingBottom">@dimen/txt_margin_middle</item>
-        <item name="android:paddingTop">@dimen/txt_margin_middle</item>
+        <item name="android:paddingBottom">@dimen/txt_margin_default</item>
+        <item name="android:paddingTop">@dimen/txt_margin_default</item>
         <item name="android:textColor">@drawable/slct_default_txt_clr</item>
     </style>
 
@@ -163,9 +170,9 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/txt_size_default</item>
-        <item name="android:padding">@dimen/txt_margin_middle</item>
+        <item name="android:padding">@dimen/txt_margin_default</item>
         <item name="android:background">@drawable/slct_bkg_menuitem</item>
-        <item name="android:drawablePadding">@dimen/txt_margin_middle</item>
+        <item name="android:drawablePadding">@dimen/txt_margin_default</item>
     </style>
 
     <style name="Base.Widget.Design.TabLayout" parent="android:Widget">

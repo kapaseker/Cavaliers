@@ -12,7 +12,7 @@
         android:id="@+id/userInfoWrapper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/txt_margin_middle"
+        android:layout_margin="@dimen/txt_margin_default"
         android:background="@android:color/white"
         app:cardCornerRadius="2dp"
         app:cardElevation="@dimen/radius_small">

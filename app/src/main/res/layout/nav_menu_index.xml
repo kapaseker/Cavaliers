@@ -11,7 +11,7 @@
         android:layout_centerHorizontal="true"
         android:clickable="true"
         android:drawableLeft="@drawable/icon_setting"
-        android:drawablePadding="@dimen/txt_margin_middle"
+        android:drawablePadding="@dimen/txt_margin_default"
         android:gravity="center"
         android:textColor="@color/colorTxtDefault"
         android:text="@string/action_settings"

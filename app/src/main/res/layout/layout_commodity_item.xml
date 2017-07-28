@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center_vertical"
+              android:orientation="horizontal"
+              android:paddingBottom="@dimen/txt_margin_default"
+              android:paddingTop="@dimen/txt_margin_default">
+
+    <TextView
+        style="@style/DefaultText"
+        android:layout_width="0px"
+        android:layout_weight="3"
+        android:text="鸡肉焖土豆套餐"/>
+
+    <TextView
+        style="@style/DefaultText"
+        android:layout_width="0px"
+        android:layout_weight="1"
+        android:gravity="right"
+        android:text="×2"/>
+
+    <TextView
+        style="@style/DefaultText"
+        android:layout_width="0px"
+        android:layout_weight="1"
+        android:gravity="right"
+        android:text="￥14"/>
+
+</LinearLayout>
