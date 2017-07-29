@@ -24,18 +24,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/btnAction"
-        android:paddingBottom="@dimen/txt_margin_large">
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
 
         <LinearLayout
             android:id="@+id/infoWrapper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
             android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@android:color/white"
                 android:padding="@dimen/txt_margin_default">
 
                 <TextView
@@ -219,6 +221,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/txt_margin_large"
                 android:layout_marginTop="@dimen/group_margin_vertical_gap"
                 android:background="@android:color/white"
                 android:orientation="vertical">
@@ -236,18 +239,21 @@
                 <include layout="@layout/layout_horizontal_gap"></include>
 
                 <com.bfdelivery.cavaliers.ui.views.OrderDetailItemView
+                    android:id="@+id/itemCommodity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:tag="@string/commodity_detail"/>
 
                 <LinearLayout
+                    android:id="@+id/wrapperCommodity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:paddingBottom="@dimen/txt_margin_mini"
                     android:paddingLeft="@dimen/txt_margin_large"
                     android:paddingRight="@dimen/txt_margin_large"
-                    android:paddingTop="@dimen/txt_margin_mini">
+                    android:paddingTop="@dimen/txt_margin_mini"
+                    android:visibility="gone">
 
                     <com.bfdelivery.cavaliers.ui.views.NoScrollListView
                         android:id="@+id/lstCommodities"
@@ -256,6 +262,8 @@
                         android:divider="@drawable/divider_commodity"
                         android:dividerHeight="3px"
                         android:layerType="software"/>
+
+                    <include layout="@layout/layout_horizontal_dot_gap"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -302,12 +310,12 @@
                         <TextView
                             style="@style/DefaultText"
                             android:text="￥47"
-                            android:textColor="@color/colorTxtPrimary"/>
+                            android:textColor="@color/colorTxtPrimary"
+                            android:textSize="@dimen/txt_size_big"/>
 
                     </LinearLayout>
 
                 </LinearLayout>
-
 
                 <include layout="@layout/layout_horizontal_gap"></include>
             </LinearLayout>

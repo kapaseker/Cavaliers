@@ -9,10 +9,13 @@ import android.widget.ListView;
 
 import com.bfdelivery.cavaliers.R;
 import com.bfdelivery.cavaliers.ui.activities.base.BasePageActivity;
+import com.bfdelivery.cavaliers.ui.views.OrderDetailItemView;
 
 public class OrderDetailActivity extends BasePageActivity {
 
 	ListView mListCommodity = null;
+	OrderDetailItemView mCommodityItem = null;
+	View mWrapperCommodity = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,8 @@ public class OrderDetailActivity extends BasePageActivity {
 	@Override
 	protected void initView() {
 		mListCommodity = (ListView) findViewById(R.id.lstCommodities);
+		mCommodityItem = (OrderDetailItemView) findViewById(R.id.itemCommodity);
+		mWrapperCommodity = findViewById(R.id.wrapperCommodity);
 	}
 
 	@Override
@@ -37,6 +42,14 @@ public class OrderDetailActivity extends BasePageActivity {
 	@Override
 	protected void processViewAndData() {
 		mListCommodity.setAdapter(new CommodityAdapter());
+
+		mCommodityItem.setOnItemCheckListener(new OrderDetailItemView.OnItemCheckChangeListener() {
+
+			@Override
+			public void onCheckedChanged(OrderDetailItemView itemView, boolean checked) {
+				mWrapperCommodity.setVisibility(checked ? View.VISIBLE : View.GONE);
+			}
+		});
 	}
 
 	private static class CommodityAdapter extends BaseAdapter {

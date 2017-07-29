@@ -1,23 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:padding="@dimen/txt_margin_default"
-              android:orientation="horizontal">
+              android:layout_height="wrap_content"
+              android:gravity="center_vertical"
+              android:orientation="horizontal"
+              android:paddingBottom="@dimen/txt_margin_small"
+              android:paddingLeft="@dimen/txt_margin_default"
+              android:paddingRight="@dimen/txt_margin_default"
+              android:paddingTop="@dimen/txt_margin_small">
 
     <TextView
-        android:text="Good:"
         android:id="@+id/tag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Good:"
         android:textColor="@color/colorTxtDefault"
         android:textSize="@dimen/txt_size_default"/>
 
     <TextView
-        android:text="bug"
         android:id="@+id/detail"
-        android:layout_width="wrap_content"
+        android:layout_width="0px"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="bug"
         android:textColor="@color/colorTxtDetail"
         android:textSize="@dimen/txt_size_default"/>
+
+    <CheckedTextView
+        android:id="@+id/ckbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_arrow_down"
+        android:checked="false"
+        android:visibility="invisible"/>
 </LinearLayout>
