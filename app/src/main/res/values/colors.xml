@@ -24,4 +24,9 @@
     <color name="colorTxtDisable">#7A7A7A</color>
     <color name="colorTxtDetail">#4A4A4A</color>
     <color name="colorTxtDefault">#0E0E0E</color>
+
+    <color name="colorWeixin">#09b83e</color>
+    <color name="colorAlipay">#00AAEE</color>
+    <color name="colorCash">#F7630C</color>
+    <color name="colorChinaums">#0076CA</color>
 </resources>

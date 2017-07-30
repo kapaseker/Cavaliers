@@ -71,7 +71,7 @@ public class OrderDetailItemView extends LinearLayout implements View.OnClickLis
 			}
 		}
 
-		mCheckBox.setOnClickListener(this);
+		this.setOnClickListener(this);
 	}
 
 	public void setOnItemCheckListener(OnItemCheckChangeListener listener) {

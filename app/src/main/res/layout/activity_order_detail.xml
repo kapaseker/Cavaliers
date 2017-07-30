@@ -239,6 +239,15 @@
                 <include layout="@layout/layout_horizontal_gap"></include>
 
                 <com.bfdelivery.cavaliers.ui.views.OrderDetailItemView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:detail="@string/wechat_pay"
+                    app:detailColor="@color/colorWeixin"
+                    app:tag="@string/payment_mode"/>
+
+                <include layout="@layout/layout_horizontal_gap"></include>
+
+                <com.bfdelivery.cavaliers.ui.views.OrderDetailItemView
                     android:id="@+id/itemCommodity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -277,7 +286,7 @@
                             style="@style/DefaultText"
                             android:layout_width="0px"
                             android:layout_weight="3"
-                            android:text="优惠"/>
+                            android:text="@string/discount"/>
 
                         <View
                             android:layout_width="0px"

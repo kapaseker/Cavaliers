@@ -4,10 +4,7 @@
               android:layout_height="wrap_content"
               android:gravity="center_vertical"
               android:orientation="horizontal"
-              android:paddingBottom="@dimen/txt_margin_small"
-              android:paddingLeft="@dimen/txt_margin_default"
-              android:paddingRight="@dimen/txt_margin_default"
-              android:paddingTop="@dimen/txt_margin_small">
+              android:padding="@dimen/txt_margin_default">
 
     <TextView
         android:id="@+id/tag"
