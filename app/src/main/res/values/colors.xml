@@ -6,6 +6,7 @@
     <color name="colorAccent">#EC407A</color>
     <color name="colorWhiteHover">#EEEEEE</color>
     <color name="white">@android:color/white</color>
+    <color name="whiteLightDark">#FAFAFA</color>
     <color name="activityBackground">#EFEFEF</color>
 
     <color name="colorCommonListGap">#BABABA</color>
