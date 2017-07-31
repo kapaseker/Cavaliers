@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/activityBackground"
+    android:layerType="software"
     tools:context="com.bfdelivery.cavaliers.ui.activities.OrderDetailActivity">
 
     <TextView
@@ -34,70 +35,121 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/white"
-                android:padding="@dimen/txt_margin_default">
-
-                <TextView
-                    android:id="@+id/txtOrderIndex"
-                    style="@style/OrderIndex"
-                    android:text="#2"/>
-
-                <TextView
-                    android:id="@+id/txtOderStatus"
-                    style="@style/OrderDetailStatus"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/txt_margin_small"
-                    android:text="配送中"/>
-            </RelativeLayout>
-
-            <include layout="@layout/layout_horizontal_gap"></include>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/white"
-                android:orientation="vertical"
-                android:padding="@dimen/txt_margin_default">
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/txt_margin_default">
+
+                    <TextView
+                        android:id="@+id/txtOrderIndex"
+                        style="@style/OrderIndex"
+                        android:text="#2"/>
+
+                    <TextView
+                        android:id="@+id/txtOderStatus"
+                        style="@style/OrderDetailStatus"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/txt_margin_small"
+                        android:text="配送中"/>
+                </RelativeLayout>
+
+                <include layout="@layout/layout_horizontal_dot_gap"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="@dimen/order_width_title"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            style="@style/OrderDetailTitle"
-                            android:text="@string/takeDish"
-                            android:textColor="@color/colorTxtPrimary"/>
-
-                        <TextView
-                            style="@style/OrderDetailDistance"
-                            android:text="1KM"
-                            />
-                    </LinearLayout>
-
+                    android:orientation="vertical"
+                    android:padding="@dimen/txt_margin_default">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="@dimen/order_width_title"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                style="@style/OrderDetailTitle"
+                                android:text="@string/takeDish"
+                                android:textColor="@color/colorTxtPrimary"/>
+
+                            <TextView
+                                style="@style/OrderDetailDistance"
+                                android:text="1KM"
+                                />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="vertical">
+
+                            <TextView
+                                style="@style/OrderDetailItemName"
+                                android:text="宝庆美食园(春晖店)"/>
+
+                            <TextView
+                                style="@style/OrderDetailItemDetail"
+                                android:text="雨山区印山东路696号101室"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    style="@style/TipTitle"
+                                    android:text="@string/merchant_phone"/>
+
+                                <TextView
+                                    style="@style/TipPrimary"
+                                    android:text="15309392838"/>
+
+                                <TextView
+                                    style="@style/TipButtonPrimary"
+                                    android:layout_marginLeft="@dimen/txt_margin_default"
+                                    android:text="@string/contact_merchant"/>
+                            </LinearLayout>
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/txt_margin_large"
                         android:gravity="center_vertical"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
-                        <TextView
-                            style="@style/OrderDetailItemName"
-                            android:text="宝庆美食园(春晖店)"/>
+                        <LinearLayout
+                            android:layout_width="@dimen/order_width_title"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
 
-                        <TextView
-                            style="@style/OrderDetailItemDetail"
-                            android:text="雨山区印山东路696号101室"/>
+                            <TextView
+                                android:id="@+id/textView2"
+                                style="@style/OrderDetailTitle"
+                                android:text="@string/deliveryDish"
+                                android:textColor="@color/colorTxtAlert"/>
+
+                            <TextView
+                                style="@style/OrderDetailDistance"
+                                android:text="4KM"/>
+                        </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -105,83 +157,78 @@
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
 
-                            <TextView
-                                style="@style/TipTitle"
-                                android:text="@string/merchant_phone"/>
+                            <LinearLayout
+                                android:layout_width="0px"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
 
-                            <TextView
-                                style="@style/TipPrimary"
-                                android:text="15309392838"/>
+                                <TextView
+                                    style="@style/OrderDetailItemName"
+                                    android:text="雨山区慈湖河路690号附近"/>
 
-                            <TextView
-                                style="@style/TipButtonPrimary"
-                                android:layout_marginLeft="@dimen/txt_margin_default"
-                                android:text="@string/contact_merchant"/>
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        style="@style/OrderDetailItemDetail"
+                                        android:text="王先生"/>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        style="@style/TipTitle"
+                                        android:text="@string/client_phone"/>
+
+                                    <TextView
+                                        style="@style/TipPrimary"
+                                        android:text="15309392838"/>
+
+                                    <TextView
+                                        style="@style/TipButtonPrimary"
+                                        android:layout_marginLeft="@dimen/txt_margin_default"
+                                        android:text="@string/contact_client"/>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        style="@style/TipTitle"
+                                        android:text="@string/makeorder_pre"/>
+
+                                    <TextView
+                                        style="@style/TipTitle"
+                                        android:text="1"
+                                        android:textColor="@color/colorTxtAlert"
+                                        android:textSize="@dimen/txt_size_big"/>
+
+                                    <TextView
+                                        style="@style/TipTitle"
+                                        android:text="@string/makeorder_after"/>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
                         </LinearLayout>
+
                     </LinearLayout>
-
-
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/txt_margin_large"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="@dimen/order_width_title"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/textView2"
-                            style="@style/OrderDetailTitle"
-                            android:text="@string/deliveryDish"
-                            android:textColor="@color/colorTxtAlert"/>
-
-                        <TextView
-                            style="@style/OrderDetailDistance"
-                            android:text="4KM"/>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            style="@style/OrderDetailItemName"
-                            android:text="雨山区慈湖河路690号附近"/>
-
-                        <TextView
-                            style="@style/OrderDetailItemDetail"
-                            android:text="王先生"/>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                style="@style/TipTitle"
-                                android:text="@string/client_phone"/>
-
-                            <TextView
-                                style="@style/TipPrimary"
-                                android:text="15309392838"/>
-
-                            <TextView
-                                style="@style/TipButtonPrimary"
-                                android:layout_marginLeft="@dimen/txt_margin_default"
-                                android:text="@string/contact_client"/>
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
             </LinearLayout>
 
+            <include layout="@layout/layout_horizontal_gap"/>
 
             <LinearLayout
                 android:layout_width="match_parent"

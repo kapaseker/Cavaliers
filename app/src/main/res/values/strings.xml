@@ -52,6 +52,9 @@
     <string name="delivery_expect">期望到达：</string>
     <string name="delivery_time">配送时效：</string>
 
+    <string name="makeorder_pre">该用户第\u0020</string>
+    <string name="makeorder_after">\u0020次下单</string>
+
     <string name="order_remark">订单备注：</string>
     <string name="commodity_detail">商品详情：</string>
     <string name="payment_mode">支付方式：</string>
