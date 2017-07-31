@@ -317,7 +317,8 @@
                         android:layout_height="wrap_content"
                         android:divider="@drawable/divider_commodity"
                         android:dividerHeight="3px"
-                        android:layerType="software"/>
+                        android:layerType="software"
+                        android:listSelector="@android:color/transparent"/>
 
                     <include layout="@layout/layout_horizontal_dot_gap"/>
 

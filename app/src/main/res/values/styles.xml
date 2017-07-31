@@ -17,9 +17,19 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
-    <style name="DefaultText" parent="@android:style/Widget.TextView">
+    <style name="WrapperText" parent="@android:style/Widget.TextView">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="DailyOrderText" parent="@style/WrapperText">
+        <item name="android:gravity">center</item>
+        <item name="android:drawablePadding">@dimen/txt_margin_mini</item>
+        <item name="android:textSize">@dimen/txt_size_default</item>
+        <item name="android:textColor">@color/colorTxtDetail</item>
+    </style>
+
+    <style name="DefaultText" parent="@style/WrapperText">
         <item name="android:textColor">@color/colorTxtDefault</item>
         <item name="android:textSize">@dimen/txt_size_default</item>
         <item name="android:maxLines">1</item>
@@ -31,9 +41,7 @@
         <item name="android:textSize">@dimen/txt_size_small</item>
     </style>
 
-    <style name="OrderItemName" parent="@android:style/Widget.TextView">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="OrderItemName" parent="@style/WrapperText">
         <item name="android:maxLines">1</item>
         <item name="android:textSize">@dimen/txt_size_big</item>
         <item name="android:textColor">@color/colorTxtDefault</item>
@@ -52,9 +60,7 @@
         <item name="android:textColor">@color/colorTxtDefault</item>
     </style>
 
-    <style name="TipPrimary" parent="@android:style/Widget.TextView">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="TipPrimary" parent="WrapperText">
         <item name="android:background">@drawable/btn_tip_bkg</item>
         <item name="android:padding">@dimen/radius_default</item>
         <item name="android:textColor">@android:color/white</item>
@@ -96,9 +102,7 @@
         <item name="rimWidth">@dimen/head_portrait_border_default</item>
     </style>
 
-    <style name="NavHeadTitle" parent="@android:style/Widget.TextView">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="NavHeadTitle" parent="@style/WrapperText">
         <item name="android:textColor">@color/colorTxtWhite</item>
         <item name="android:textSize">@dimen/txt_size_default</item>
     </style>
@@ -115,39 +119,29 @@
         <item name="android:textSize">16sp</item>
     </style>
 
-    <style name="DailySettleDetail" parent="@android:style/Widget.TextView">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="DailySettleDetail" parent="WrapperText">
         <item name="android:textColor">@color/colorTxtAlert</item>
         <item name="android:textSize">20sp</item>
     </style>
 
 
-    <style name="OrderDetailTitle" parent="@android:style/Widget.TextView">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="OrderDetailTitle" parent="WrapperText">
         <item name="android:textSize">@dimen/txt_size_default</item>
         <item name="android:gravity">left</item>
     </style>
 
-    <style name="OrderDetailDistance" parent="@android:style/Widget.TextView">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="OrderDetailDistance" parent="WrapperText">
         <item name="android:textColor">@color/colorTxtWarning</item>
         <item name="android:textSize">@dimen/txt_size_small</item>
         <item name="android:background">@drawable/bkg_orderdetail_distance</item>
     </style>
 
-    <style name="OrderIndex" parent="@android:style/Widget.TextView">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="OrderIndex" parent="WrapperText">
         <item name="android:textColor">@color/colorTxtDefault</item>
         <item name="android:textSize">@dimen/txt_size_big</item>
     </style>
 
-    <style name="OrderDetailStatus" parent="@android:style/Widget.TextView">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="OrderDetailStatus" parent="WrapperText">
         <item name="android:textColor">@color/colorTxtPrimary</item>
         <item name="android:textSize">@dimen/txt_size_mini</item>
         <item name="android:background">@drawable/bkg_order_status</item>

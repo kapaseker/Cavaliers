@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/txt_margin_mini"
+    android:foreground="?android:attr/selectableItemBackground"
+    card_view:cardCornerRadius="2px"
+    card_view:cardElevation="2px">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/txt_margin_small">
+
+        <TextView
+            style="@style/WrapperText"
+            android:background="@drawable/ic_order_item"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/txt_margin_large"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/DailyOrderText"
+                    android:drawableLeft="@drawable/ic_time"
+                    android:gravity="center"
+                    android:text="11:37~12:23"/>
+
+                <TextView
+                    style="@style/DailyOrderText"
+                    android:layout_marginLeft="@dimen/txt_margin_large"
+                    android:drawableLeft="@drawable/ic_delivery"
+                    android:text="荷香餐馆"/>
+
+                <TextView
+                    style="@style/DailyOrderText"
+                    android:layout_marginLeft="@dimen/txt_margin_mini"
+                    android:drawableLeft="@drawable/ic_delivery_to"
+                    android:drawablePadding="@dimen/txt_margin_mini"
+                    android:text="李先生"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/txt_margin_default"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/DailyOrderText"
+                    android:drawableLeft="@drawable/ic_distance"
+                    android:text="2.5KM"/>
+
+                <TextView
+                    style="@style/DailyOrderText"
+                    android:layout_marginLeft="@dimen/txt_margin_large"
+                    android:drawableLeft="@drawable/ic_fee"
+                    android:text="25.6元"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
+

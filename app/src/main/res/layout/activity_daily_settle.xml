@@ -8,6 +8,7 @@
                 tools:context="com.bfdelivery.cavaliers.ui.activities.DailySettleActivity">
 
     <LinearLayout
+        android:id="@+id/userInfoWrapper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimaryLight"
@@ -108,4 +109,14 @@
 
         </LinearLayout>
     </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/lst_daily"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/userInfoWrapper"
+        android:layout_marginBottom="@dimen/txt_margin_default"
+        android:layout_marginTop="@dimen/txt_margin_default">
+
+    </android.support.v7.widget.RecyclerView>
 </RelativeLayout>

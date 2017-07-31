@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/txt_margin_mini"
-    android:background="@drawable/slct_bkg_menuitem"
+    android:foreground="?android:attr/selectableItemBackground"
     card_view:cardElevation="2dp">
 
     <LinearLayout
