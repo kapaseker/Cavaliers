@@ -49,7 +49,9 @@
                 <EditText
                     style="@style/LoginEdt"
                     android:drawableLeft="@drawable/ic_username"
-                    android:hint="@string/hint_username"/>
+                    android:hint="@string/hint_username"
+                    android:imeOptions="actionNext"
+                    android:inputType="textNoSuggestions"/>
 
                 <include layout="@layout/layout_horizontal_dot_gap"></include>
 
@@ -57,6 +59,7 @@
                     style="@style/LoginEdt"
                     android:drawableLeft="@drawable/ic_password"
                     android:hint="@string/hint_password"
+                    android:imeOptions="actionDone"
                     android:inputType="textPassword"/>
             </LinearLayout>
 
