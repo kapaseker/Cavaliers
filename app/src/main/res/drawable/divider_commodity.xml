@@ -5,6 +5,6 @@
         android:width="2px"
         android:color="@color/colorCommonListGapLite"
         android:dashGap="6px"
-        android:dashWidth="2px"/>
+        android:dashWidth="4px"/>
 
 </shape>

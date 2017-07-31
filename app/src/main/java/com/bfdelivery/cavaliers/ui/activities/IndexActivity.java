@@ -2,6 +2,7 @@ package com.bfdelivery.cavaliers.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
@@ -30,6 +31,12 @@ public class IndexActivity extends BaseActivity
 	View mPortraitView = null;
 	View mNameView = null;
 	View mDescriptionVew = null;
+
+	@Override
+	protected void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		startActivity(new Intent(this, LoginActivity.class));
+	}
 
 	@Override
 	protected void onPrepareLayout() {

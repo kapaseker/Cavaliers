@@ -15,7 +15,7 @@ public class LoginActivity extends BasePageActivity {
 	@Override
 	protected void onPrepareLayout() {
 		setContentView(R.layout.activity_login);
-		getSupportActionBar().hide();
+		getSupportActionBar().setTitle(R.string.sign_in);
 	}
 
 	@Override

@@ -11,6 +11,9 @@
     <string name="action_settings">设置</string>
     <string name="action_msg">消息</string>
 
+    <string name="hint_username">请输入用户名</string>e
+    <string name="hint_password">请输入密码</string>
+
     <string name="action_menu_history_order">工作汇总</string>
     <string name="action_menu_daily_settle">每日结算</string>
     <string name="user_center">个人中心</string>
@@ -27,8 +30,9 @@
     <string name="daily_distance">里程</string>
     <string name="daily_income">金额</string>
     <string name="daily_order_count">订单</string>
+    <string name="need_help">需要帮助？</string>
 
-    <string name="sign_in">登陆</string>
+    <string name="sign_in">登录</string>
     <string name="sign_up">注册</string>
     <string-array name="history_order">
         <item>已完成</item>

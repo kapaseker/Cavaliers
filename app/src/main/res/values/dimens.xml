@@ -28,4 +28,8 @@
     <dimen name="group_margin_vertical_gap">16dp</dimen>
 
     <dimen name="order_width_title">54dp</dimen>
+
+    <dimen name="login_edt_wrapper_pdlr">24dp</dimen>
+    <dimen name="login_edt_pdlr">18dp</dimen>
+    <dimen name="login_edt_pdtp">14dp</dimen>
 </resources>
