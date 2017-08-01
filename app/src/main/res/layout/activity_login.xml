@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     android:background="@color/colorPrimaryLight"
     android:gravity="center_horizontal"
     tools:context="com.bfdelivery.cavaliers.ui.activities.LoginActivity">
@@ -47,35 +48,43 @@
                 android:paddingRight="@dimen/login_edt_pdlr">
 
                 <EditText
+                    android:id="@+id/edtUsrName"
                     style="@style/LoginEdt"
                     android:drawableLeft="@drawable/ic_username"
                     android:hint="@string/hint_username"
                     android:imeOptions="actionNext"
                     android:inputType="textNoSuggestions"/>
 
-                <include layout="@layout/layout_horizontal_dot_gap"></include>
+                <include
+                    android:id="@+id/gapLine"
+                    layout="@layout/layout_horizontal_dot_gap"
+                    android:visibility="gone"></include>
 
                 <EditText
+                    android:id="@+id/edtPasswd"
                     style="@style/LoginEdt"
                     android:drawableLeft="@drawable/ic_password"
                     android:hint="@string/hint_password"
                     android:imeOptions="actionDone"
-                    android:inputType="textPassword"/>
+                    android:inputType="textPassword"
+                    android:visibility="gone"/>
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
 
         <TextView
+            android:id="@+id/btnLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/edtWrapper"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="@dimen/login_edt_pdlr"
             android:background="@drawable/slct_btn_primary_bkg"
             android:gravity="center"
             android:padding="@dimen/txt_margin_large"
             android:text="@string/sign_in"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/txt_size_big"/>
+            android:textSize="@dimen/txt_size_big"
+            android:visibility="gone"/>
 
         <TextView
             android:layout_width="wrap_content"
