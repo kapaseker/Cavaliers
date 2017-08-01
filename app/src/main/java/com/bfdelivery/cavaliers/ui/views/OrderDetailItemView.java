@@ -8,7 +8,8 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.CheckedTextView;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,11 +19,11 @@ import com.bfdelivery.cavaliers.R;
  * Created by Panoo on 2017/7/23.
  */
 
-public class OrderDetailItemView extends LinearLayout implements View.OnClickListener {
+public class OrderDetailItemView extends LinearLayout implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
 	TextView mTxtTag = null;
 	TextView mTxtDetail = null;
-	CheckedTextView mCheckBox = null;
+	CheckBox mCheckBox = null;
 	OnItemCheckChangeListener mItemCheckChangeListener = null;
 
 	public static interface OnItemCheckChangeListener {
@@ -54,7 +55,7 @@ public class OrderDetailItemView extends LinearLayout implements View.OnClickLis
 		View itemView = LayoutInflater.from(context).inflate(R.layout.layout_orderdetail, this);
 		mTxtTag = (TextView) itemView.findViewById(R.id.tag);
 		mTxtDetail = (TextView) itemView.findViewById(R.id.detail);
-		mCheckBox = (CheckedTextView) itemView.findViewById(R.id.ckbox);
+		mCheckBox = (CheckBox) itemView.findViewById(R.id.ckbox);
 
 		if (attrs != null) {
 			TypedArray styleAttr = context.obtainStyledAttributes(attrs, R.styleable.OrderDetailView);
@@ -72,6 +73,7 @@ public class OrderDetailItemView extends LinearLayout implements View.OnClickLis
 		}
 
 		this.setOnClickListener(this);
+		mCheckBox.setOnCheckedChangeListener(this);
 	}
 
 	public void setOnItemCheckListener(OnItemCheckChangeListener listener) {
@@ -79,15 +81,14 @@ public class OrderDetailItemView extends LinearLayout implements View.OnClickLis
 		mItemCheckChangeListener = listener;
 	}
 
-	public void setItemChecked(boolean isChecked) {
-		mCheckBox.setChecked(isChecked);
-		mCheckBox.setBackgroundResource(isChecked ? R.drawable.ic_arrow_up : R.drawable.ic_arrow_down);
-	}
-
 	@Override
 	public void onClick(View v) {
 		boolean isChecked = !mCheckBox.isChecked();
-		setItemChecked(isChecked);
+		mCheckBox.setChecked(isChecked);
+	}
+
+	@Override
+	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 		if (mItemCheckChangeListener != null) {
 			mItemCheckChangeListener.onCheckedChanged(this, isChecked);
 		}

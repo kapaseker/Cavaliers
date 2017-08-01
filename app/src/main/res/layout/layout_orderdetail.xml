@@ -23,11 +23,11 @@
         android:textColor="@color/colorTxtDetail"
         android:textSize="@dimen/txt_size_default"/>
 
-    <CheckedTextView
+    <CheckBox
         android:id="@+id/ckbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/ic_arrow_down"
-        android:checked="false"
+        android:background="@android:color/transparent"
+        android:button="@drawable/slct_up_down_check"
         android:visibility="invisible"/>
 </LinearLayout>
