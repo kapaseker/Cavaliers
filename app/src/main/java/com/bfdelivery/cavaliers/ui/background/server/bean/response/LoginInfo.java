@@ -1,0 +1,52 @@
+package com.bfdelivery.cavaliers.ui.background.server.bean.response;
+
+/**
+ * Created by Panoo on 2017/8/6.
+ */
+
+public class LoginInfo {
+
+	/**
+	 * token_type : Bearer
+	 * expires_in : 31536000
+	 * access_token : eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImY2YTY3ZjRlNzM1OWU0MGY5NGM3MDIyMWRmODc0ODBiNjFiMzU3MjRjMjg1ZDdjYmE5MGMyYzJiZWY5ZjdhOGUyZTgzODg2NTRiNWRmNzE2In0.eyJhdWQiOiIzIiwianRpIjoiZjZhNjdmNGU3MzU5ZTQwZjk0YzcwMjIxZGY4NzQ4MGI2MWIzNTcyNGMyODVkN2NiYTkwYzJjMmJlZjlmN2E4ZTJlODM4ODY1NGI1ZGY3MTYiLCJpYXQiOjE1MDA2MjI4NTIsIm5iZiI6MTUwMDYyMjg1MiwiZXhwIjoxNTMyMTU4ODUyLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.PBNgiqhFwZCfZS32b-okX9aj8rpjykXNvVAI6h4TXwh3VM7ZIb06AWU_7_whs2u7TjqHiKSDxO0lv0xQmEAS_IYF6CsugMRugQl3OvRWl8T2Tr_ynrC1kcfz4U3ONbw4WVGw25tz_YM1ry8lD-AZKOB-cAVGkCg4WI8w63SzWTB47RdKIKzFHUaHjI2WLdgu4tNkFW44FirXmOf7_PKB5LcatL1mD1RuzYHbQ6I3lAqfYrxWIi5rTeDQTyXl-M7mjMsdA8TWO44971zWC1JlMdpM9Shz5t-tgWXq7lJiA48BBMaBIDHfjly2s7-2IqniqjPeW5joNgDrJqjBkc2nPhOyv7cYHUhXlF8dCukmAPm396wuX7Tba3knSCEsuBS3lodM_rtIlwX7od9NmrlD8mdzYex99YR5QyESFqgMu1ghgx0bTZ4sAoDpy_QUEucLT45-eqjVPCH4mwPZBL0nCxnwq2krPwy5kb0OOpqjs_1ryZBMx7ndTSObY0vLBrcySX_EKod6hu33vnDxluF5B69X4DjpjoX-qJoQ6LlSlgKEd-KpzgV9LfvfVubJv_a6xE2m3TO-hYYMGo4ldZ9-Ewv_8Eq53G55x0UAH3h6eC3FJCpAW0pa-YDqql95yHRyQdHNKXkBcARryDf0gf_0vR6h1h-t_GUM4_NsQcLaG_w
+	 * refresh_token : def50200d5b31e4d674ca25d118235d2c1b326dfda784d0c379f683bfa121780b526b59fafd8026fd6e767d3d91d6cda368bccf37ce5b23d7687b32157c10981687eefdebaae4ce89bb09a051f959d56248af31c858a28704c4ee663da90b9a16278c061c74ce3bd9386785de2844894b8e7e376723158055a4bdabf4e6dabdb8cc422b38d8e52f11907a1f38335c04467a552a8c4704eec39c1a7c7afd11137471840e68029f6e087e3a8c33f006944c1e8a09ba564bd254d6d8dfd724417f7ab8ca897806b6bc6d46efc4dc1ce6e700c8900fa3a8c90af8ba2066a621140f5ce550b79213409f7a11e0006996dec6de7acfc725d399f2d6ef46002b509a8b07da979ad584d16122b6097fd6913a3f8634f077ef9b45e44e348a76b8d09ae461ccd03af3a988b6991d680231ef8a80ae1a33839216891c03b6a15d5588b9a9425e4cff3d1987bcd2fcce6455cd187f151e8294496
+	 */
+
+	private String token_type;
+	private int expires_in;
+	private String access_token;
+	private String refresh_token;
+
+	public String getToken_type() {
+		return token_type;
+	}
+
+	public void setToken_type(String token_type) {
+		this.token_type = token_type;
+	}
+
+	public int getExpires_in() {
+		return expires_in;
+	}
+
+	public void setExpires_in(int expires_in) {
+		this.expires_in = expires_in;
+	}
+
+	public String getAccess_token() {
+		return access_token;
+	}
+
+	public void setAccess_token(String access_token) {
+		this.access_token = access_token;
+	}
+
+	public String getRefresh_token() {
+		return refresh_token;
+	}
+
+	public void setRefresh_token(String refresh_token) {
+		this.refresh_token = refresh_token;
+	}
+}
