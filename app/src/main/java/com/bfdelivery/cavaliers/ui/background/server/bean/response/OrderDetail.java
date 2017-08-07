@@ -44,7 +44,6 @@ public class OrderDetail {
 	private int distribute_status;
 	private int distributer_id;
 	private String distributer_name;
-	private int attribute_id;
 	private List<TracesBean> traces;
 	private List<SkusBean> skus;
 
@@ -166,14 +165,6 @@ public class OrderDetail {
 
 	public void setDistributer_name(String distributer_name) {
 		this.distributer_name = distributer_name;
-	}
-
-	public int getAttribute_id() {
-		return attribute_id;
-	}
-
-	public void setAttribute_id(int attribute_id) {
-		this.attribute_id = attribute_id;
 	}
 
 	public List<TracesBean> getTraces() {
