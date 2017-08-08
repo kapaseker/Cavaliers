@@ -29,6 +29,8 @@
     <string name="detail_list">明细</string>
     <string name="daily_distance">里程</string>
     <string name="daily_income">金额</string>
+    <string name="income_online">在线支付</string>
+    <string name="income_cash">现金支付</string>
     <string name="daily_order_count">订单</string>
     <string name="need_help">需要帮助？</string>
 

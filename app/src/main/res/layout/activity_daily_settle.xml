@@ -1,24 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/activityBackground"
-                tools:context="com.bfdelivery.cavaliers.ui.activities.DailySettleActivity">
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                               xmlns:app="http://schemas.android.com/apk/res-auto"
+                                               xmlns:tools="http://schemas.android.com/tools"
+                                               android:layout_width="match_parent"
+                                               android:layout_height="match_parent"
+                                               android:background="@color/colorPrimary"
+                                               android:paddingBottom="@dimen/txt_margin_large"
+                                               android:paddingTop="@dimen/txt_margin_large"
+                                               tools:context="com.bfdelivery.cavaliers.ui.activities.DailySettleActivity">
 
-    <LinearLayout
+    <android.support.v4.widget.Space
+        android:id="@+id/spaceWrapper"
+        android:layout_width="match_parent"
+        app:layout_heightPercent="10%"/>
+
+    <RelativeLayout
         android:id="@+id/userInfoWrapper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryLight"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/txt_margin_large"
-        android:paddingTop="@dimen/txt_margin_large">
+        android:layout_below="@id/spaceWrapper"
+        android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/usrInfoWrapper"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
             android:gravity="center_horizontal"
             android:orientation="vertical">
@@ -46,12 +53,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_below="@id/usrInfoWrapper"
+            android:layout_marginTop="@dimen/daily_settle_detail_mgt"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
@@ -73,50 +82,59 @@
             <LinearLayout
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
+                android:layout_weight="2"
                 android:orientation="vertical">
 
                 <TextView
                     style="@style/DailySettleDetailTitle"
+                    android:layout_gravity="center"
                     android:text="@string/daily_income"/>
 
-                <TextView
-                    style="@style/DailySettleDetail"
-                    android:text="@string/tstIncome"/>
-            </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/txt_margin_large"
+                    android:orientation="horizontal">
 
-            <View
-                android:layout_width="2px"
-                android:layout_height="match_parent"
-                android:background="@color/white"/>
+                    <LinearLayout
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="0px"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
+                        <TextView
+                            style="@style/DailySettleDetailTitle"
+                            android:text="@string/income_online"/>
 
-                <TextView
-                    style="@style/DailySettleDetailTitle"
-                    android:text="@string/daily_distance"/>
+                        <TextView
+                            style="@style/DailySettleDetail"
+                            android:text="@string/tstIncome"/>
+                    </LinearLayout>
 
-                <TextView
-                    style="@style/DailySettleDetail"
-                    android:text="@string/tstDistance"/>
+                    <View
+                        android:layout_width="2px"
+                        android:layout_height="match_parent"
+                        android:background="@color/white"/>
+
+                    <LinearLayout
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/DailySettleDetailTitle"
+                            android:text="@string/income_cash"/>
+
+                        <TextView
+                            style="@style/DailySettleDetail"
+                            android:text="@string/tstIncome"/>
+                    </LinearLayout>
+                </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>
-    </LinearLayout>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/lst_daily"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/userInfoWrapper"
-        android:layout_marginBottom="@dimen/txt_margin_default"
-        android:layout_marginTop="@dimen/txt_margin_default">
-
-    </android.support.v7.widget.RecyclerView>
-</RelativeLayout>
+    </RelativeLayout>
+</android.support.percent.PercentRelativeLayout>

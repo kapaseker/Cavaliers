@@ -142,13 +142,12 @@
     <style name="DailySettleDetailTitle" parent="@android:style/Widget.TextView">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/colorTxtAlertLight</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorTxtWhite</item>
+        <item name="android:textSize">@dimen/txt_size_big</item>
     </style>
 
-    <style name="DailySettleDetail" parent="WrapperText">
-        <item name="android:textColor">@color/colorTxtAlert</item>
-        <item name="android:textSize">20sp</item>
+    <style name="DailySettleDetail" parent="@style/DailySettleDetailTitle">
+        <item name="android:textSize">@dimen/txt_size_superBig</item>
     </style>
 
 

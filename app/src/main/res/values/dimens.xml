@@ -27,6 +27,8 @@
     <dimen name="txt_margin_large">12dp</dimen>
     <dimen name="group_margin_vertical_gap">16dp</dimen>
 
+    <dimen name="daily_settle_detail_mgt">20dp</dimen>
+
     <dimen name="order_width_title">54dp</dimen>
 
     <dimen name="login_edt_wrapper_pdlr">24dp</dimen>
