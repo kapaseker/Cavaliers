@@ -178,28 +178,6 @@
 
                                 </LinearLayout>
 
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center_vertical"
-                                    android:orientation="horizontal">
-
-                                    <TextView
-                                        style="@style/TipTitle"
-                                        android:text="@string/makeorder_pre"/>
-
-                                    <TextView
-                                        style="@style/TipTitle"
-                                        android:text="1"
-                                        android:textColor="@color/colorTxtAlert"
-                                        android:textSize="@dimen/txt_size_big"/>
-
-                                    <TextView
-                                        style="@style/TipTitle"
-                                        android:text="@string/makeorder_after"/>
-
-                                </LinearLayout>
-
                             </LinearLayout>
                         </LinearLayout>
 
@@ -214,41 +192,6 @@
             </LinearLayout>
 
             <include layout="@layout/layout_horizontal_gap"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/group_margin_vertical_gap"
-                android:background="@android:color/white"
-                android:orientation="vertical">
-
-                <include layout="@layout/layout_horizontal_gap"></include>
-
-                <com.bfdelivery.cavaliers.ui.views.OrderDetailItemView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:detail="无"
-                    app:tag="@string/delivery_demand"/>
-
-                <include layout="@layout/layout_horizontal_gap"></include>
-
-                <com.bfdelivery.cavaliers.ui.views.OrderDetailItemView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:detail="40分钟后取餐"
-                    app:tag="@string/delivery_expect"/>
-
-                <include layout="@layout/layout_horizontal_gap"></include>
-
-                <com.bfdelivery.cavaliers.ui.views.OrderDetailItemView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:detail="接单后50分钟送达"
-                    app:tag="@string/delivery_time"/>
-
-                <include layout="@layout/layout_horizontal_gap"></include>
-
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -270,12 +213,44 @@
 
                 <include layout="@layout/layout_horizontal_gap"></include>
 
-                <com.bfdelivery.cavaliers.ui.views.OrderDetailItemView
+                <LinearLayout
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:detail="@string/wechat_pay"
-                    app:detailColor="@color/colorWeixin"
-                    app:tag="@string/payment_mode"/>
+                    android:orientation="horizontal"
+                    android:paddingRight="@dimen/txt_margin_default">
+
+                    <com.bfdelivery.cavaliers.ui.views.OrderDetailItemView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:detail="@string/wechat_pay"
+                        app:detailColor="@color/colorWeixin"
+                        app:tag="@string/payment_mode"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|right"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/TipTitle"
+                            android:text="@string/makeorder_pre"/>
+
+                        <TextView
+                            style="@style/TipTitle"
+                            android:text="1"
+                            android:textColor="@color/colorTxtAlert"
+                            android:textSize="@dimen/txt_size_big"/>
+
+                        <TextView
+                            style="@style/TipTitle"
+                            android:text="@string/makeorder_after"/>
+
+                    </LinearLayout>
+                </LinearLayout>
 
                 <include layout="@layout/layout_horizontal_gap"></include>
 

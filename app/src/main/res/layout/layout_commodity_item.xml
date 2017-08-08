@@ -18,7 +18,8 @@
         android:layout_width="0px"
         android:layout_weight="1"
         android:gravity="right"
-        android:text="×2"/>
+        android:text="×2"
+        android:textColor="@color/colorTxtAlert"/>
 
     <TextView
         style="@style/DefaultText"
