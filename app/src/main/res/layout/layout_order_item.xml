@@ -28,13 +28,6 @@
                 android:layout_marginRight="@dimen/txt_margin_small"
                 android:text="#2"/>
 
-            <TextView
-                android:id="@+id/txtOrderTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="还剩35分钟"
-                android:textColor="@color/colorTxtAlert"
-                android:textSize="@dimen/txt_size_small"/>
         </LinearLayout>
 
 
@@ -52,26 +45,16 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
+                <TextView
+                    style="@style/WrapperText"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="@dimen/txt_margin_large"
+                    android:background="@drawable/ic_fetch_dish"/>
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:gravity="left"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/OrderItemDistance"
-                        android:text="2KM"/>
-
-                    <TextView
-                        style="@style/OrderItemStatus"
-                        android:text="@string/takeDish"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="4"
                     android:gravity="left"
                     android:orientation="vertical">
 
@@ -83,6 +66,11 @@
                         style="@style/OrderItemDetail"
                         android:text="雨山区印山东路696号101室"/>
                 </LinearLayout>
+
+                <TextView
+                    style="@style/DefaultText"
+                    android:layout_gravity="center_vertical"
+                    android:text="2KM"/>
             </LinearLayout>
 
             <LinearLayout
@@ -91,25 +79,16 @@
                 android:layout_marginTop="20dp"
                 android:orientation="horizontal">
 
+                <TextView
+                    style="@style/WrapperText"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="@dimen/txt_margin_large"
+                    android:background="@drawable/ic_delivery_dish"/>
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/OrderItemDistance"
-                        android:text="4KM"/>
-
-                    <TextView
-                        style="@style/OrderItemStatus"
-                        android:text="@string/deliveryDish"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="4"
                     android:orientation="vertical">
 
                     <TextView
@@ -120,25 +99,18 @@
                     <TextView
                         style="@style/OrderItemDetail"
                         android:text="李女士"/>
+
+                    <TextView
+                        style="@style/OrderItemDial"
+                        android:text="15309392838"
+                        />
                 </LinearLayout>
+
+                <TextView
+                    style="@style/DefaultText"
+                    android:layout_gravity="center_vertical"
+                    android:text="6KM"/>
             </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/txt_margin_default"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                style="@style/TipTitle"
-                android:text="@string/merchant_phone"/>
-
-            <TextView
-                style="@style/TipPrimary"
-                android:text="15309392838"/>
-
         </LinearLayout>
 
         <LinearLayout
@@ -149,15 +121,12 @@
 
             <TextView
                 style="@style/ButtonOrderItem"
-                android:background="@drawable/slct_btn_default_bkg"
-                android:text="@string/contact_client"
-                android:textColor="@drawable/slct_default_txt_clr"/>
+                android:text="@string/receive_order"/>
 
             <TextView
                 style="@style/ButtonOrderItem"
-                android:background="@drawable/slct_btn_primary_bkg"
                 android:text="@string/ready_delivery"
-                android:textColor="@android:color/white"/>
+                android:visibility="gone"/>
         </LinearLayout>
     </LinearLayout>
 

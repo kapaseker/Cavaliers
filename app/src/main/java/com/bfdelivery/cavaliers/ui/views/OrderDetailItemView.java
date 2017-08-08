@@ -81,6 +81,15 @@ public class OrderDetailItemView extends LinearLayout implements View.OnClickLis
 		mItemCheckChangeListener = listener;
 	}
 
+	/**
+	 * 设置尾项是否勾选
+	 *
+	 * @param isChecked
+	 */
+	public void setChecked(boolean isChecked) {
+		mCheckBox.setChecked(isChecked);
+	}
+
 	@Override
 	public void onClick(View v) {
 		boolean isChecked = !mCheckBox.isChecked();

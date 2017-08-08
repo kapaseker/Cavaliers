@@ -41,7 +41,9 @@ public class OrderDetailActivity extends BasePageActivity {
 
 	@Override
 	protected void processViewAndData() {
+
 		mListCommodity.setAdapter(new CommodityAdapter());
+		mCommodityItem.setChecked(true);
 
 		mCommodityItem.setOnItemCheckListener(new OrderDetailItemView.OnItemCheckChangeListener() {
 
@@ -50,6 +52,7 @@ public class OrderDetailActivity extends BasePageActivity {
 				mWrapperCommodity.setVisibility(checked ? View.VISIBLE : View.GONE);
 			}
 		});
+
 	}
 
 	private static class CommodityAdapter extends BaseAdapter {

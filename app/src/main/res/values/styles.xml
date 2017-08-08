@@ -53,6 +53,14 @@
         <item name="android:ellipsize">end</item>
     </style>
 
+    <style name="OrderItemDial" parent="@style/DefaultText">
+        <item name="android:drawablePadding">@dimen/txt_margin_small</item>
+        <item name="android:drawableRight">@drawable/ic_dial</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/txt_size_default</item>
+        <item name="android:textColor">@color/colorTxtDetail</item>
+    </style>
+
     <style name="TipTitle" parent="@style/DefaultText">
         <item name="android:textColor">@color/colorTxtDetail</item>
         <item name="android:textSize">@dimen/txt_size_small</item>
@@ -110,6 +118,8 @@
         <item name="android:layout_marginRight">@dimen/txt_margin_default</item>
         <item name="android:paddingTop">10dp</item>
         <item name="android:paddingBottom">10dp</item>
+        <item name="android:background">@drawable/slct_btn_primary_bkg</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="NavHeadPotrait">

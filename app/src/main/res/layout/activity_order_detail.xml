@@ -73,26 +73,17 @@
                         android:gravity="center"
                         android:orientation="horizontal">
 
-                        <LinearLayout
-                            android:layout_width="@dimen/order_width_title"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                style="@style/OrderDetailTitle"
-                                android:text="@string/takeDish"
-                                android:textColor="@color/colorTxtPrimary"/>
-
-                            <TextView
-                                style="@style/OrderDetailDistance"
-                                android:text="1KM"
-                                />
-                        </LinearLayout>
+                        <TextView
+                            style="@style/WrapperText"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="@dimen/txt_margin_large"
+                            android:background="@drawable/ic_fetch_dish"/>
 
 
                         <LinearLayout
-                            android:layout_width="match_parent"
+                            android:layout_width="0px"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:gravity="center_vertical"
                             android:orientation="vertical">
 
@@ -115,16 +106,17 @@
                                     android:text="@string/merchant_phone"/>
 
                                 <TextView
-                                    style="@style/TipPrimary"
-                                    android:text="15309392838"/>
+                                    style="@style/OrderItemDial"
+                                    android:text="15309392838"
+                                    />
 
-                                <TextView
-                                    style="@style/TipButtonPrimary"
-                                    android:layout_marginLeft="@dimen/txt_margin_default"
-                                    android:text="@string/contact_merchant"/>
                             </LinearLayout>
                         </LinearLayout>
 
+                        <TextView
+                            style="@style/DefaultText"
+                            android:layout_gravity="center_vertical"
+                            android:text="6KM"/>
 
                     </LinearLayout>
 
@@ -135,25 +127,16 @@
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
 
-                        <LinearLayout
-                            android:layout_width="@dimen/order_width_title"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/textView2"
-                                style="@style/OrderDetailTitle"
-                                android:text="@string/deliveryDish"
-                                android:textColor="@color/colorTxtAlert"/>
-
-                            <TextView
-                                style="@style/OrderDetailDistance"
-                                android:text="4KM"/>
-                        </LinearLayout>
+                        <TextView
+                            style="@style/WrapperText"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="@dimen/txt_margin_large"
+                            android:background="@drawable/ic_delivery_dish"/>
 
                         <LinearLayout
-                            android:layout_width="match_parent"
+                            android:layout_width="0px"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
 
@@ -189,13 +172,10 @@
                                         android:text="@string/client_phone"/>
 
                                     <TextView
-                                        style="@style/TipPrimary"
-                                        android:text="15309392838"/>
+                                        style="@style/OrderItemDial"
+                                        android:text="15309392838"
+                                        />
 
-                                    <TextView
-                                        style="@style/TipButtonPrimary"
-                                        android:layout_marginLeft="@dimen/txt_margin_default"
-                                        android:text="@string/contact_client"/>
                                 </LinearLayout>
 
                                 <LinearLayout
@@ -222,6 +202,11 @@
 
                             </LinearLayout>
                         </LinearLayout>
+
+                        <TextView
+                            style="@style/DefaultText"
+                            android:layout_gravity="center_vertical"
+                            android:text="6KM"/>
 
                     </LinearLayout>
                 </LinearLayout>
@@ -309,7 +294,7 @@
                     android:paddingLeft="@dimen/txt_margin_large"
                     android:paddingRight="@dimen/txt_margin_large"
                     android:paddingTop="@dimen/txt_margin_mini"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                     <com.bfdelivery.cavaliers.ui.views.NoScrollListView
                         android:id="@+id/lstCommodities"

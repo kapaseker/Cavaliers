@@ -50,6 +50,7 @@
     <string name="contact_client">联系顾客</string>
     <string name="contact_merchant">联系商家</string>
     <string name="served">确认送达</string>
+    <string name="receive_order">接单</string>
     <string name="ready_delivery">准备配送</string>
 
     <string name="delivery_demand">配送要求：</string>
