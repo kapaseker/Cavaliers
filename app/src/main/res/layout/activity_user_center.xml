@@ -70,7 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:detail="2314351113"
-            app:tag="@string/user_number"></com.bfdelivery.cavaliers.ui.views.OrderDetailItemView>
+            app:tag="@string/cav_number"></com.bfdelivery.cavaliers.ui.views.OrderDetailItemView>
 
         <include layout="@layout/layout_horizontal_gap"></include>
 
@@ -78,7 +78,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:detail="初级"
-            app:tag="@string/user_grade"></com.bfdelivery.cavaliers.ui.views.OrderDetailItemView>
+            app:tag="@string/cav_grade"></com.bfdelivery.cavaliers.ui.views.OrderDetailItemView>
+
+        <include layout="@layout/layout_horizontal_gap"></include>
+
+        <com.bfdelivery.cavaliers.ui.views.OrderDetailItemView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:detail="257单"
+            app:tag="@string/complete_orders"/>
 
         <include layout="@layout/layout_horizontal_gap"></include>
     </LinearLayout>

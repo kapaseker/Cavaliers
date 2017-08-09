@@ -208,6 +208,7 @@
         <attr name="detail" format="string|reference"></attr>
         <attr name="tag" format="string|reference"></attr>
         <attr name="detailColor" format="color|reference"></attr>
+        <attr name="tagColor" format="color|reference"></attr>
     </declare-styleable>
 
     <declare-styleable name="CircleImage">

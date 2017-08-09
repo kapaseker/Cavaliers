@@ -63,9 +63,12 @@ public class OrderDetailItemView extends LinearLayout implements View.OnClickLis
 				String strDetail = styleAttr.getString(R.styleable.OrderDetailView_detail);
 				String strTag = styleAttr.getString(R.styleable.OrderDetailView_tag);
 				int detailColor = styleAttr.getColor(R.styleable.OrderDetailView_detailColor, context.getResources().getColor(R.color.colorTxtDetail));
+				int tagColor = styleAttr.getColor(R.styleable.OrderDetailView_tagColor, context.getResources().getColor(R.color.colorTxtDefault));
 
 				mTxtTag.setText(strTag);
 				mTxtDetail.setText(strDetail);
+
+				mTxtTag.setText(tagColor);
 				mTxtDetail.setTextColor(detailColor);
 			} finally {
 				styleAttr.recycle();

@@ -17,8 +17,9 @@
     <string name="action_menu_history_order">工作汇总</string>
     <string name="action_menu_daily_settle">每日结算</string>
     <string name="user_center">个人中心</string>
-    <string name="user_number">员工编号：</string>
-    <string name="user_grade">员工等级：</string>
+    <string name="cav_number">骑手编号：</string>
+    <string name="cav_grade">骑手等级：</string>
+    <string name="complete_orders">完成订单数：</string>
     <string name="merchant_phone">商家电话：</string>
     <string name="client_phone">顾客电话：</string>
     <string name="sign_out">退出登陆</string>
