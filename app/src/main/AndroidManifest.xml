@@ -6,19 +6,18 @@
         android:name="com.bfdelivery.cavaliers.permission.JPUSH_MESSAGE"
         android:protectionLevel="signature"/>
 
-    <!--允许程序打开网络套接字-->
+    <!-- 允许程序打开网络套接字 -->
     <uses-permission android:name="android.permission.INTERNET"/>
-    <!--允许程序设置内置sd卡的写权限-->
+    <!-- 允许程序设置内置sd卡的写权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <!--允许程序获取网络状态-->
+    <!-- 允许程序获取网络状态 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <!--允许程序访问WiFi网络信息-->
+    <!-- 允许程序访问WiFi网络信息 -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <!--允许程序读写手机状态和身份-->
+    <!-- 允许程序读写手机状态和身份 -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <!--允许程序访问CellID或WiFi热点来获取粗略的位置-->
+    <!-- 允许程序访问CellID或WiFi热点来获取粗略的位置 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT"/>
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
     <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
@@ -29,7 +28,7 @@
     <uses-permission android:name="com.bfdelivery.cavaliers.permission.JPUSH_MESSAGE"/>
 
     <application
-        android:name=".ui.config.CavApplication"
+        android:name=".config.CavApplication"
         android:allowBackup="false"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
@@ -37,7 +36,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="da6a0b1a1ffa6c7dd2d5b86dc9eb2203">
@@ -67,7 +65,6 @@
             android:exported="false"
             android:theme="@style/MyDialogStyle">
         </activity>
-
         <activity
             android:name="cn.jpush.android.ui.PushActivity"
             android:configChanges="orientation|keyboardHidden"
@@ -92,13 +89,13 @@
                 <action android:name="cn.jpush.android.intent.PUSH_TIME"/>
             </intent-filter>
         </service>
-
         <service
             android:name="cn.jpush.android.service.DaemonService"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.DaemonService"/>
+
                 <category android:name="com.bfdelivery.cavaliers"/>
             </intent-filter>
         </service>
@@ -108,7 +105,7 @@
             android:enabled="true"
             android:exported="false">
             <intent-filter android:priority="1000">
-                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY"/>   <!--Required  显示通知栏 -->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY"/> <!-- Required  显示通知栏 -->
                 <category android:name="com.bfdelivery.cavaliers"/>
             </intent-filter>
             <intent-filter>
@@ -123,7 +120,6 @@
                 <data android:scheme="package"/>
             </intent-filter>
         </receiver>
-
         <receiver
             android:name="cn.jpush.android.service.AlarmReceiver"
             android:exported="false"/>
@@ -133,8 +129,23 @@
             android:value="developer-default"/>
         <meta-data
             android:name="JPUSH_APPKEY"
-            android:value="7d37b134719c4ca5bc032105"/> <!--  </>值来自开发者平台取得的AppKey-->
+            android:value="7d37b134719c4ca5bc032105"/> <!-- </>值来自开发者平台取得的AppKey -->
 
+        <receiver
+            android:name=".background.receiver.JpushMsgReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTRATION"/>
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED"/>
+                <action android:name="cn.jpush.android.intent.CONNECTION"/>
+
+                <category android:name="com.bfdelivery.cavaliers"/>
+            </intent-filter>
+        </receiver>
+        <!-- 以上为jpush的内容 -->
+        <activity android:name=".ui.activities.NewOrderTipActivity">
+        </activity>
     </application>
 
 </manifest>

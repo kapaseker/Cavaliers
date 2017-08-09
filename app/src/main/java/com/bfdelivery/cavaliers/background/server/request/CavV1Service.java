@@ -1,6 +1,6 @@
-package com.bfdelivery.cavaliers.ui.background.server.request;
+package com.bfdelivery.cavaliers.background.server.request;
 
-import com.bfdelivery.cavaliers.ui.background.server.config.RequestConfig;
+import com.bfdelivery.cavaliers.background.server.config.RequestConfig;
 
 import java.io.IOException;
 

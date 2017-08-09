@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryLight"
+    tools:context="com.bfdelivery.cavaliers.ui.activities.NewOrderTipActivity">
+
+    <android.support.v4.widget.Space
+        android:id="@+id/space"
+        android:layout_width="match_parent"
+        app:layout_heightPercent="10%"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/space"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/WrapperText"
+            android:text="您有新的订单啦！"
+            android:textColor="@color/white"
+            android:textSize="@dimen/txt_size_superBig"
+            />
+
+        <RelativeLayout
+            android:id="@+id/destWrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/txt_margin_large"
+            android:background="@color/white">
+
+            <include
+                layout="@layout/layout_orderlistitem_dest"/>
+        </RelativeLayout>
+
+        <TextView
+            style="@style/ButtonNewOrderTipReceive"
+            android:layout_marginTop="@dimen/txt_margin_default"
+            android:text="点击查看详情"/>
+    </LinearLayout>
+
+</android.support.percent.PercentRelativeLayout>

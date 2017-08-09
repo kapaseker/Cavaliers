@@ -1,4 +1,4 @@
-package com.bfdelivery.cavaliers.ui.background.server.config;
+package com.bfdelivery.cavaliers.background.server.config;
 
 /**
  * Created by Panoo on 2017/8/6.

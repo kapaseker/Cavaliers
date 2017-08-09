@@ -1,4 +1,4 @@
-package com.bfdelivery.cavaliers.ui.background.server.bean.response;
+package com.bfdelivery.cavaliers.background.server.bean.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

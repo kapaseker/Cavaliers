@@ -122,6 +122,13 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
+    <style name="ButtonNewOrderTipReceive" parent="@style/ButtonOrderItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@drawable/slct_txt_white</item>
+        <item name="android:background">@drawable/slct_bkg_white_round</item>
+    </style>
+
     <style name="NavHeadPotrait">
         <item name="android:layout_width">@dimen/head_portrait_default</item>
         <item name="android:layout_height">@dimen/head_portrait_default</item>

@@ -1,4 +1,4 @@
-package com.bfdelivery.cavaliers.ui.background.server.bean.response;
+package com.bfdelivery.cavaliers.background.server.bean.response;
 
 /**
  * Created by Panoo on 2017/8/6.

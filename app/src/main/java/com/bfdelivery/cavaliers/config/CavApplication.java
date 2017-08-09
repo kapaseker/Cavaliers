@@ -1,4 +1,4 @@
-package com.bfdelivery.cavaliers.ui.config;
+package com.bfdelivery.cavaliers.config;
 
 import android.app.Application;
 

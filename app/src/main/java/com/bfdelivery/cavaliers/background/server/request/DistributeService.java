@@ -1,9 +1,9 @@
-package com.bfdelivery.cavaliers.ui.background.server.request;
+package com.bfdelivery.cavaliers.background.server.request;
 
-import com.bfdelivery.cavaliers.ui.background.server.bean.request.JPushParam;
-import com.bfdelivery.cavaliers.ui.background.server.bean.request.Number;
-import com.bfdelivery.cavaliers.ui.background.server.bean.response.OrderDetail;
-import com.bfdelivery.cavaliers.ui.background.server.bean.response.OrderList;
+import com.bfdelivery.cavaliers.background.server.bean.request.JPushParam;
+import com.bfdelivery.cavaliers.background.server.bean.request.Number;
+import com.bfdelivery.cavaliers.background.server.bean.response.OrderDetail;
+import com.bfdelivery.cavaliers.background.server.bean.response.OrderList;
 
 import retrofit2.Call;
 import retrofit2.http.Body;

@@ -1,7 +1,7 @@
-package com.bfdelivery.cavaliers.ui.background.server.request;
+package com.bfdelivery.cavaliers.background.server.request;
 
 
-import com.bfdelivery.cavaliers.ui.background.server.bean.response.LoginInfo;
+import com.bfdelivery.cavaliers.background.server.bean.response.LoginInfo;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
