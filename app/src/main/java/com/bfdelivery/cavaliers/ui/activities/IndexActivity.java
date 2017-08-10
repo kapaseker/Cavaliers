@@ -35,7 +35,11 @@ public class IndexActivity extends BaseActivity
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		startActivity(new Intent(this, LoginActivity.class));
+	}
+
+	@Override
+	protected void onNewIntent(Intent intent) {
+		super.onNewIntent(intent);
 	}
 
 	@Override
@@ -127,15 +131,6 @@ public class IndexActivity extends BaseActivity
 		return true;
 	}
 
-	private ActivityOptionsCompat createUserCenterShareOption() {
-
-		Pair<View, String> headPair = Pair.create(mPortraitView, getString(R.string.transition_head));
-		Pair<View, String> namePair = Pair.create(mNameView, getString(R.string.transition_title));
-		Pair<View, String> descPair = Pair.create(mDescriptionVew, getString(R.string.transition_desc));
-
-		return ActivityOptionsCompat.makeSceneTransitionAnimation(this, headPair, namePair, descPair);
-	}
-
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -144,5 +139,14 @@ public class IndexActivity extends BaseActivity
 				mDrawer.closeDrawer(GravityCompat.START);
 				break;
 		}
+	}
+
+	private ActivityOptionsCompat createUserCenterShareOption() {
+
+		Pair<View, String> headPair = Pair.create(mPortraitView, getString(R.string.transition_head));
+		Pair<View, String> namePair = Pair.create(mNameView, getString(R.string.transition_title));
+		Pair<View, String> descPair = Pair.create(mDescriptionVew, getString(R.string.transition_desc));
+
+		return ActivityOptionsCompat.makeSceneTransitionAnimation(this, headPair, namePair, descPair);
 	}
 }

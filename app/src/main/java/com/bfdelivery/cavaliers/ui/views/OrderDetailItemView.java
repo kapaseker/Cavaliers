@@ -68,7 +68,7 @@ public class OrderDetailItemView extends LinearLayout implements View.OnClickLis
 				mTxtTag.setText(strTag);
 				mTxtDetail.setText(strDetail);
 
-				mTxtTag.setText(tagColor);
+				mTxtTag.setTextColor(tagColor);
 				mTxtDetail.setTextColor(detailColor);
 			} finally {
 				styleAttr.recycle();

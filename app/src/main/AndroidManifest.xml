@@ -144,7 +144,11 @@
             </intent-filter>
         </receiver>
         <!-- 以上为jpush的内容 -->
-        <activity android:name=".ui.activities.NewOrderTipActivity">
+        <activity
+            android:name=".ui.activities.NewOrderTipActivity"
+            android:launchMode="singleTask"
+            android:taskAffinity=":NewOrderTip"
+            >
         </activity>
     </application>
 

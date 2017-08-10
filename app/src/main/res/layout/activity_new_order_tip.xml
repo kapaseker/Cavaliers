@@ -40,9 +40,10 @@
         </RelativeLayout>
 
         <TextView
+            android:id="@+id/btnCheck"
             style="@style/ButtonNewOrderTipReceive"
             android:layout_marginTop="@dimen/txt_margin_default"
-            android:text="点击查看详情"/>
+            android:text="@string/click_to_check"/>
     </LinearLayout>
 
 </android.support.percent.PercentRelativeLayout>

@@ -25,7 +25,9 @@
     <string name="sign_out">退出登陆</string>
     <string name="switch_sign">切换登陆</string>
     <string name="order">订单</string>
+    <string name="new_order">新订单</string>
     <string name="discount">优惠</string>
+    <string name="click_to_check">点击查看</string>
 
     <string name="detail_list">明细</string>
     <string name="daily_distance">里程</string>
