@@ -8,6 +8,12 @@
     <dimen name="head_portrait_default">68dp</dimen>
     <dimen name="head_portrait_small">48dp</dimen>
 
+    <dimen name="ctrl_default">24dp</dimen>
+    <dimen name="ctrl_small">18dp</dimen>
+    <dimen name="ctrl_mini">12dp</dimen>
+    <dimen name="ctrl_large">30dp</dimen>
+    <dimen name="ctrl_huge">36dp</dimen>
+
     <dimen name="head_portrait_border_default">2dp</dimen>
     <dimen name="head_portrait_border_small">2px</dimen>
 

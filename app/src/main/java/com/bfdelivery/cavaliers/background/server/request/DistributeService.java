@@ -18,7 +18,7 @@ import retrofit2.http.Query;
 public interface DistributeService {
 
 	@GET("orders")
-	Call<OrderList> listOrders(@Query("pager") int pager);
+	Call<OrderList> listOrders(@Query("pager") int pager,@Query("status") int status);
 
 	@GET("order")
 	Call<OrderDetail> orderDetail(@Query("number") String number);
