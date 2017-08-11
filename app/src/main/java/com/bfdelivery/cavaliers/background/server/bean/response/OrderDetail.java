@@ -1,11 +1,13 @@
 package com.bfdelivery.cavaliers.background.server.bean.response;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
 
 /**
  * Created by Panoo on 2017/8/6.
  */
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class OrderDetail {
 
 

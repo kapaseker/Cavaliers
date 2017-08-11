@@ -13,15 +13,17 @@ import com.bfdelivery.cavaliers.ui.fragments.OrderListFragment;
 public class OrderFragmentPageAdapter extends FragmentPagerAdapter {
 
 	CharSequence[] mTitles = null;
+	int[] mOrderTypes = null;
 
-	public OrderFragmentPageAdapter(FragmentManager fm, CharSequence[] mTitles) {
+	public OrderFragmentPageAdapter(FragmentManager fm, CharSequence[] titles, int[] orderType) {
 		super(fm);
 		this.mTitles = mTitles;
+		this.mOrderTypes = orderType;
 	}
 
 	@Override
 	public Fragment getItem(int position) {
-		return new OrderListFragment();
+		return OrderListFragment.newIntance(mOrderTypes[position]);
 	}
 
 	@Override
