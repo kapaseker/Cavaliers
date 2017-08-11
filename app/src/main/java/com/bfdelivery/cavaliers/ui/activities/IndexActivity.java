@@ -1,5 +1,6 @@
 package com.bfdelivery.cavaliers.ui.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.bfdelivery.cavaliers.R;
+import com.bfdelivery.cavaliers.background.database.PreferenceRecorder;
 import com.bfdelivery.cavaliers.ui.activities.base.BaseActivity;
 import com.bfdelivery.cavaliers.ui.adapters.OrderFragmentPageAdapter;
 
@@ -32,9 +34,16 @@ public class IndexActivity extends BaseActivity
 	View mNameView = null;
 	View mDescriptionVew = null;
 
+	private static final int REQUEST_LOGIN = 1;
+
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		if (PreferenceRecorder.isLogin()) {
+			// login
+			startActivityForResult(new Intent(this, LoginActivity.class), REQUEST_LOGIN);
+		}
 	}
 
 	@Override
@@ -139,6 +148,26 @@ public class IndexActivity extends BaseActivity
 				mDrawer.closeDrawer(GravityCompat.START);
 				break;
 		}
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+		switch (requestCode) {
+			case REQUEST_LOGIN:
+
+				if (resultCode == Activity.RESULT_OK) {
+
+				} else {
+					finish();
+				}
+
+				return;
+
+		}
+
+
+		super.onActivityResult(requestCode, resultCode, data);
 	}
 
 	private ActivityOptionsCompat createUserCenterShareOption() {

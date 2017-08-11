@@ -1,18 +1,30 @@
 package com.bfdelivery.cavaliers.config;
 
-import android.app.Application;
+import android.content.Context;
+import android.support.multidex.MultiDex;
+import android.support.multidex.MultiDexApplication;
+
+import com.bfdelivery.cavaliers.background.database.PreferenceRecorder;
 
 import cn.jpush.android.api.JPushInterface;
 
 /**
- * Created by Panoo on 2017/8/4.
+ * 主Application
  */
 
-public class CavApplication extends Application {
+public class CavApplication extends MultiDexApplication {
+
+	@Override
+	protected void attachBaseContext(Context base) {
+		super.attachBaseContext(base);
+		MultiDex.install(base);
+	}
+
 	@Override
 	public void onCreate() {
 		super.onCreate();
 		JPushInterface.setDebugMode(true);
 		JPushInterface.init(this);
+		PreferenceRecorder.init(this);
 	}
 }

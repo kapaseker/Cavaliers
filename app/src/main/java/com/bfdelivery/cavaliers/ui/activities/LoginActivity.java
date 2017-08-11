@@ -1,13 +1,26 @@
 package com.bfdelivery.cavaliers.ui.activities;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.bfdelivery.cavaliers.R;
+import com.bfdelivery.cavaliers.background.callbacks.BaseCallback;
+import com.bfdelivery.cavaliers.background.database.PreferenceRecorder;
+import com.bfdelivery.cavaliers.background.server.bean.request.OauthParam;
+import com.bfdelivery.cavaliers.background.server.bean.response.LoginInfo;
+import com.bfdelivery.cavaliers.background.server.config.HttpStatus;
+import com.bfdelivery.cavaliers.background.server.request.CavV1Service;
+import com.bfdelivery.cavaliers.background.server.request.OauthService;
 import com.bfdelivery.cavaliers.ui.activities.base.BasePageActivity;
+
+import retrofit2.Call;
+import retrofit2.Response;
 
 public class LoginActivity extends BasePageActivity implements View.OnClickListener {
 
@@ -18,6 +31,8 @@ public class LoginActivity extends BasePageActivity implements View.OnClickListe
 
 	CharSequence mUsrnameSequence = null;
 	CharSequence mPasswdSequence = null;
+
+	ProgressDialog mWaittingDialog = null;
 
 	private static final long DEF_ANIMATE_INTERVAL = 680L;
 
@@ -100,7 +115,46 @@ public class LoginActivity extends BasePageActivity implements View.OnClickListe
 	}
 
 	private void login() {
-		finish();
+
+		OauthService service = CavV1Service.createOauthService();
+		Call<LoginInfo> request = service.login(new OauthParam(mUsrnameSequence.toString(), mPasswdSequence.toString()));
+		mWaittingDialog = ProgressDialog.show(this, null, getString(R.string.sign_in_ing), true);
+		request.enqueue(new BaseCallback<LoginInfo>() {
+
+			@Override
+			public void onResponse(Call<LoginInfo> call, Response<LoginInfo> response) {
+				super.onResponse(call, response);
+
+				if (response.code() == HttpStatus.SC_OK) {
+
+					LoginInfo result = response.body();
+					PreferenceRecorder.saveAccessToken(result.getAccess_token());
+					setResult(Activity.RESULT_OK);
+					finish();
+
+				} else if (response.code() == HttpStatus.SC_UNAUTHORIZED) {
+					onError(R.string.sign_in_wrong_user);
+					mEditPasswd.setText("");
+				} else {
+					onError(R.string.sign_in_fail);
+				}
+			}
+
+			@Override
+			public void onFailure(Call<LoginInfo> call, Throwable t) {
+				super.onFailure(call, t);
+				onError(R.string.sign_in_fail);
+			}
+
+			public void onError(int resID) {
+				Toast.makeText(LoginActivity.this, resID, Toast.LENGTH_SHORT).show();
+			}
+
+			@Override
+			public void onComplete() {
+				mWaittingDialog.dismiss();
+			}
+		});
 	}
 
 	private boolean isEnablePasswordInput() {

@@ -122,6 +122,16 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
+    <style name="ButtonLogin" parent="@style/WrapperText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginTop">@dimen/login_edt_pdlr</item>
+        <item name="android:padding">@dimen/txt_margin_large</item>
+        <item name="android:background">@drawable/slct_btn_round_white_default_light_bkg</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/txt_size_big</item>
+    </style>
+
     <style name="ButtonNewOrderTipReceive" parent="@style/ButtonOrderItem">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>

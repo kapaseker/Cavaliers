@@ -5,8 +5,8 @@ package com.bfdelivery.cavaliers.background.server.config;
  */
 
 public class RequestConfig {
-	public static final String HOST_V1 = "http://bf.laowaishuosha.com/v1";
+	public static final String HOST_V1 = "http://bf.laowaishuosha.com/v1/";
 
-	public static final String DISTRIBUTER_HOST = HOST_V1 + "/distributer";
-	public static final String OAUTH_HOST = HOST_V1 + "/oauth";
+	public static final String DISTRIBUTER_HOST = HOST_V1 + "distributer/";
+	public static final String OAUTH_HOST = HOST_V1 + "oauth/";
 }

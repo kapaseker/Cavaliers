@@ -1,23 +1,25 @@
 package com.bfdelivery.cavaliers.background.server.request;
 
 
+import com.bfdelivery.cavaliers.background.server.bean.request.OauthParam;
 import com.bfdelivery.cavaliers.background.server.bean.response.LoginInfo;
 
 import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.Query;
+import retrofit2.http.Body;
+import retrofit2.http.POST;
 
 /**
- * Created by Panoo on 2017/8/6.
+ * 鉴权服务
  */
 
 public interface OauthService {
 
-	@GET("token?grant_type=password")
-	Call<LoginInfo> login(@Query("grant_type") String grantType
-			, @Query("client_id") String clientId
-			, @Query("client_secret") String secret
-			, @Query("username") String usr
-			, @Query("password") String pswd
-	);
+	/**
+	 * 登陆接口
+	 *
+	 * @param param
+	 * @return
+	 */
+	@POST("token")
+	Call<LoginInfo> login(@Body OauthParam param);
 }

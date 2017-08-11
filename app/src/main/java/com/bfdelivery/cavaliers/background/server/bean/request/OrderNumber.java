@@ -4,10 +4,10 @@ package com.bfdelivery.cavaliers.background.server.bean.request;
  * Created by Panoo on 2017/8/6.
  */
 
-public class Number {
+public class OrderNumber {
 	private String number;
 
-	public Number(String number) {
+	public OrderNumber(String number) {
 		this.number = number;
 	}
 

@@ -1,7 +1,7 @@
 package com.bfdelivery.cavaliers.background.server.request;
 
 import com.bfdelivery.cavaliers.background.server.bean.request.JPushParam;
-import com.bfdelivery.cavaliers.background.server.bean.request.Number;
+import com.bfdelivery.cavaliers.background.server.bean.request.OrderNumber;
 import com.bfdelivery.cavaliers.background.server.bean.response.OrderDetail;
 import com.bfdelivery.cavaliers.background.server.bean.response.OrderList;
 
@@ -24,13 +24,13 @@ public interface DistributeService {
 	Call<OrderDetail> orderDetail(@Query("number") String number);
 
 	@POST("accepted-orders")
-	Call<Void> acceptOrder(@Body Number number);
+	Call<Void> acceptOrder(@Body OrderNumber number);
 
 	@POST("sending-orders")
-	Call<Void> sendOrder(@Body Number number);
+	Call<Void> sendOrder(@Body OrderNumber number);
 
 	@POST("finished-orders")
-	Call<Void> completeOrder(@Body Number number);
+	Call<Void> completeOrder(@Body OrderNumber number);
 
 	@POST("jpushs")
 	Call<Void> jpushToken(@Body JPushParam param);

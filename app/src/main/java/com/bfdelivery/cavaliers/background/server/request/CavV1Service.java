@@ -1,5 +1,6 @@
 package com.bfdelivery.cavaliers.background.server.request;
 
+import com.bfdelivery.cavaliers.background.database.PreferenceRecorder;
 import com.bfdelivery.cavaliers.background.server.config.RequestConfig;
 
 import java.io.IOException;
@@ -30,7 +31,9 @@ public class CavV1Service {
 
 			}
 
-			requestBuilder.header("Accept", "application/json").build();
+			requestBuilder.header("Accept", "application/json")
+					.header("Authorization", "Bearer " + PreferenceRecorder.getToken())
+					.build();
 
 			return chain.proceed(requestBuilder.build());
 		}

@@ -74,16 +74,9 @@
 
         <TextView
             android:id="@+id/btnLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/ButtonLogin"
             android:layout_below="@id/edtWrapper"
-            android:layout_marginTop="@dimen/login_edt_pdlr"
-            android:background="@drawable/slct_btn_primary_bkg"
-            android:gravity="center"
-            android:padding="@dimen/txt_margin_large"
             android:text="@string/sign_in"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/txt_size_big"
             android:visibility="gone"/>
 
         <TextView
