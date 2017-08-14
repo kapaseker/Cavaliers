@@ -78,6 +78,8 @@
     <string name="wechat_pay">微信支付</string>
     <string name="cash_pay">货到付款</string>
     <string name="chinaums_pay">银联支付</string>
+    <string name="complete_delivery">完成配送</string>
+    <string name="loading_detail">正在加载详情数据</string>
 
 
     <!--    Test String Resource     -->

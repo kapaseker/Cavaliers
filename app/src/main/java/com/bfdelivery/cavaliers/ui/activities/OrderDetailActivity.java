@@ -8,9 +8,17 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 import com.bfdelivery.cavaliers.R;
+import com.bfdelivery.cavaliers.background.callbacks.BaseCallback;
+import com.bfdelivery.cavaliers.background.server.bean.response.OrderDetail;
+import com.bfdelivery.cavaliers.background.server.config.HttpStatus;
+import com.bfdelivery.cavaliers.background.server.request.CavV1Service;
+import com.bfdelivery.cavaliers.background.server.request.DistributeService;
 import com.bfdelivery.cavaliers.dataset.ListOutlineData;
 import com.bfdelivery.cavaliers.ui.activities.base.BasePageActivity;
 import com.bfdelivery.cavaliers.ui.views.OrderDetailItemView;
+
+import retrofit2.Call;
+import retrofit2.Response;
 
 public class OrderDetailActivity extends BasePageActivity {
 
@@ -21,12 +29,21 @@ public class OrderDetailActivity extends BasePageActivity {
 	OrderDetailItemView mCommodityItem = null;
 	View mWrapperCommodity = null;
 
+	View mWrapperWating = null;
+	View mWrapperDeatilInfo = null;
+
+	DistributeService mDistributeService = null;
+
 	private int mIndex = 0;
 	private ListOutlineData mOutlineData = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		mDistributeService = CavV1Service.createDistributeService();
+
+		requestOrderDetial();
 	}
 
 	@Override
@@ -39,6 +56,8 @@ public class OrderDetailActivity extends BasePageActivity {
 		mListCommodity = (ListView) findViewById(R.id.lstCommodities);
 		mCommodityItem = (OrderDetailItemView) findViewById(R.id.itemCommodity);
 		mWrapperCommodity = findViewById(R.id.wrapperCommodity);
+		mWrapperWating = findViewById(R.id.wrapper_waiting);
+		mWrapperDeatilInfo = findViewById(R.id.wrapper_detail);
 	}
 
 	@Override
@@ -61,6 +80,30 @@ public class OrderDetailActivity extends BasePageActivity {
 			}
 		});
 
+	}
+
+	private void requestOrderDetial() {
+		
+		Call<OrderDetail> detail = mDistributeService.orderDetail(mOutlineData.getOrderId());
+		detail.enqueue(new BaseCallback<OrderDetail>() {
+
+			@Override
+			public void onResponse(Call<OrderDetail> call, Response<OrderDetail> response) {
+				super.onResponse(call, response);
+
+				if (response.code() == HttpStatus.SC_OK) {
+
+				} else {
+
+				}
+			}
+
+			@Override
+			public void onComplete() {
+				mWrapperWating.setVisibility(View.GONE);
+				mWrapperDeatilInfo.setVisibility(View.VISIBLE);
+			}
+		});
 	}
 
 	private static class CommodityAdapter extends BaseAdapter {

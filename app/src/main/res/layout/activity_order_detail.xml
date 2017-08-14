@@ -17,14 +17,13 @@
         android:background="@drawable/slct_orderdetialbottom_control"
         android:gravity="center"
         android:padding="@dimen/txt_margin_large"
-        android:text="完成配送"
+        android:text="@string/complete_delivery"
         android:textColor="@android:color/white"
         android:textSize="@dimen/txt_size_big"/>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/btnAction"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true">
@@ -195,12 +194,37 @@
             <include layout="@layout/layout_horizontal_gap"/>
 
             <LinearLayout
+                android:id="@+id/wrapper_waiting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/group_margin_vertical_gap"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <android.support.v4.widget.ContentLoadingProgressBar
+                    android:id="@+id/waitingbar"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="@dimen/ctrl_large"
+                    android:layout_height="@dimen/ctrl_large"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/txt_margin_default"
+                    android:text="@string/loading_detail"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/wrapper_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/txt_margin_large"
                 android:layout_marginTop="@dimen/group_margin_vertical_gap"
                 android:background="@android:color/white"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <include
                     layout="@layout/layout_horizontal_gap"></include>
