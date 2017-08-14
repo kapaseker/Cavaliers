@@ -106,6 +106,7 @@
                                     android:text="@string/merchant_phone"/>
 
                                 <TextView
+                                    android:id="@+id/txtRstPhone"
                                     style="@style/OrderItemDial"
                                     android:text="15309392838"
                                     />
@@ -335,6 +336,23 @@
                 </LinearLayout>
 
                 <include layout="@layout/layout_horizontal_gap"></include>
+
+                <com.bfdelivery.cavaliers.ui.views.OrderDetailItemView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:detail="2017-08-08 20:53:39"
+                    app:tag="@string/mkorder_time"/>
+
+                <include layout="@layout/layout_horizontal_gap"></include>
+
+                <com.bfdelivery.cavaliers.ui.views.OrderDetailItemView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:detail="000100000002"
+                    app:tag="@string/order_number"/>
+
+                <include layout="@layout/layout_horizontal_gap"></include>
+
             </LinearLayout>
 
         </LinearLayout>

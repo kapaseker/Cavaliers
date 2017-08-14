@@ -8,14 +8,21 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 import com.bfdelivery.cavaliers.R;
+import com.bfdelivery.cavaliers.dataset.ListOutlineData;
 import com.bfdelivery.cavaliers.ui.activities.base.BasePageActivity;
 import com.bfdelivery.cavaliers.ui.views.OrderDetailItemView;
 
 public class OrderDetailActivity extends BasePageActivity {
 
+	public static final String BUNDLE_KEY_POSTION = "OrderDetailActivity.index";
+	public static final String BUNDLE_KEY_LISTDATA = "OrderDetailActivity.listData";
+
 	ListView mListCommodity = null;
 	OrderDetailItemView mCommodityItem = null;
 	View mWrapperCommodity = null;
+
+	private int mIndex = 0;
+	private ListOutlineData mOutlineData = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +43,8 @@ public class OrderDetailActivity extends BasePageActivity {
 
 	@Override
 	protected void handleData(Bundle data) {
-
+		mIndex = data.getInt(BUNDLE_KEY_POSTION);
+		mOutlineData = data.getParcelable(BUNDLE_KEY_LISTDATA);
 	}
 
 	@Override

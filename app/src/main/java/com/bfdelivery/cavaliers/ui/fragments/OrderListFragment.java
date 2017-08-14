@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.bfdelivery.cavaliers.R;
 import com.bfdelivery.cavaliers.background.callbacks.BaseCallback;
@@ -18,6 +19,7 @@ import com.bfdelivery.cavaliers.background.server.config.HttpStatus;
 import com.bfdelivery.cavaliers.background.server.request.CavV1Service;
 import com.bfdelivery.cavaliers.background.server.request.DistributeService;
 import com.bfdelivery.cavaliers.config.OrderDataEntry;
+import com.bfdelivery.cavaliers.dataset.ListOutlineData;
 import com.bfdelivery.cavaliers.ui.activities.OrderDetailActivity;
 
 import java.util.ArrayList;
@@ -92,9 +94,10 @@ public class OrderListFragment extends Fragment {
 
 			@Override
 			public void onComplete() {
-
+				mWaitingBar.setVisibility(View.GONE);
 			}
 		});
+		mWaitingBar.setVisibility(View.VISIBLE);
 	}
 
 	private void initView(View view) {
@@ -108,9 +111,20 @@ public class OrderListFragment extends Fragment {
 		mListOrder.setAdapter(mOrderAdapter);
 	}
 
-	private static final class OrderViewHolder extends RecyclerView.ViewHolder {
+	private static final class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 		OrderList.DataBean mData;
+		int mIndex = 0;
+
+		TextView mTxtIndex;
+
+		TextView mTxtRstAddr;
+		TextView mTxtRstName;
+		TextView mTxtRstDis;
+
+		TextView mTxtUsrAddr;
+		TextView mTxtUsrName;
+		TextView mTxtUsrDis;
 
 		public OrderViewHolder(View itemView) {
 			super(itemView);
@@ -118,17 +132,39 @@ public class OrderListFragment extends Fragment {
 		}
 
 		private void initViewHolder(View itemView) {
+			mTxtIndex = (TextView) itemView.findViewById(R.id.txtOrderIndex);
 
+			mTxtRstName = (TextView) itemView.findViewById(R.id.txtRstrtName);
+			mTxtRstAddr = (TextView) itemView.findViewById(R.id.txtRstrtAddr);
+			mTxtRstDis = (TextView) itemView.findViewById(R.id.txtRstrtDis);
+
+			mTxtUsrAddr = (TextView) itemView.findViewById(R.id.txtUsrAddress);
+			mTxtUsrName = (TextView) itemView.findViewById(R.id.txtUsrName);
+			mTxtUsrDis = (TextView) itemView.findViewById(R.id.txtUsrDis);
+
+			itemView.setOnClickListener(this);
 		}
 
 		private void bindData(int position, OrderList.DataBean data) {
+			mIndex = position;
 			mData = data;
-			itemView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					itemView.getContext().startActivity(new Intent(itemView.getContext(), OrderDetailActivity.class));
-				}
-			});
+
+			mTxtIndex.setText("#" + (position + 1));
+			mTxtUsrAddr.setText(data.getAddress().getDetail());
+			mTxtUsrName.setText(data.getAddress().getName());
+		}
+
+		@Override
+		public void onClick(View v) {
+			if (v == itemView) {
+				ListOutlineData outlineData = new ListOutlineData();
+//				DataBridge.dataBeanToListOutLine(mData, outlineData);
+
+				Intent intent = new Intent(itemView.getContext(), OrderDetailActivity.class);
+				intent.putExtra(OrderDetailActivity.BUNDLE_KEY_POSTION, mIndex);
+				intent.putExtra(OrderDetailActivity.BUNDLE_KEY_LISTDATA, outlineData);
+				itemView.getContext().startActivity(intent);
+			}
 		}
 	}
 
@@ -164,12 +200,13 @@ public class OrderListFragment extends Fragment {
 
 		@Override
 		public void onBindViewHolder(OrderViewHolder holder, int position) {
-			holder.bindData(position, mOrderList.get(position));
+//			holder.bindData(position, mOrderList.get(position));
 		}
 
 		@Override
 		public int getItemCount() {
-			return mOrderList.size();
+//			return mOrderList.size();
+			return 5;
 		}
 	}
 }

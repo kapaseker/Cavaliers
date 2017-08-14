@@ -26,15 +26,18 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/txtRstrtName"
                 style="@style/OrderItemName"
-                android:text="宝庆美食园(春晖店)"/>
+                android:text=""/>
 
             <TextView
+                android:id="@+id/txtRstrtAddr"
                 style="@style/OrderItemDetail"
-                android:text="雨山区印山东路696号101室"/>
+                android:text=""/>
         </LinearLayout>
 
         <TextView
+            android:id="@+id/txtRstrtDis"
             style="@style/DefaultText"
             android:layout_gravity="center_vertical"
             android:text="2KM"/>
@@ -59,11 +62,13 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/txtUsrAddress"
                 style="@style/OrderItemName"
                 android:text="雨山区慈湖河路690号附近"
                 />
 
             <TextView
+                android:id="@+id/txtUsrName"
                 style="@style/OrderItemDetail"
                 android:text="李女士"/>
 
@@ -76,6 +81,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/txtUsrDis"
             style="@style/DefaultText"
             android:layout_gravity="center_vertical"
             android:text="6KM"/>

@@ -16,6 +16,11 @@ public final class PreferenceRecorder {
 	 */
 	private static final String ACCESS_TOKEN = "access_token";
 
+	/**
+	 * JPUSH应用的注册ID
+	 */
+	private static final String JPUSH_ID = "jpush_id";
+
 	private static SharedPreferences mRecorder = null;
 
 	public static enum INNERTYPE {
@@ -36,6 +41,14 @@ public final class PreferenceRecorder {
 
 	public static String getToken() {
 		return (String) readData(ACCESS_TOKEN, "", INNERTYPE.STRING);
+	}
+
+	public static void saveJpushId(String id) {
+		saveData(JPUSH_ID, id);
+	}
+
+	public static String getJpushId() {
+		return (String) readData(JPUSH_ID, "", INNERTYPE.STRING);
 	}
 
 	private static Object readData(String key, Object defVal, INNERTYPE typeCls) {
