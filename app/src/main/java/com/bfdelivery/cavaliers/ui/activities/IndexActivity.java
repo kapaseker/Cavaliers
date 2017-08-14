@@ -20,9 +20,16 @@ import android.view.View;
 
 import com.bfdelivery.cavaliers.R;
 import com.bfdelivery.cavaliers.background.database.PreferenceRecorder;
+import com.bfdelivery.cavaliers.background.server.bean.request.JPushParam;
+import com.bfdelivery.cavaliers.background.server.request.CavV1Service;
+import com.bfdelivery.cavaliers.background.server.request.DistributeService;
 import com.bfdelivery.cavaliers.config.OrderDataEntry;
 import com.bfdelivery.cavaliers.ui.activities.base.BaseActivity;
 import com.bfdelivery.cavaliers.ui.adapters.OrderFragmentPageAdapter;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class IndexActivity extends BaseActivity
 		implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
@@ -35,6 +42,8 @@ public class IndexActivity extends BaseActivity
 	View mNameView = null;
 	View mDescriptionVew = null;
 
+	DistributeService mDistributeService = null;
+
 	private static final int REQUEST_LOGIN = 1;
 
 	@Override
@@ -45,6 +54,8 @@ public class IndexActivity extends BaseActivity
 			// login
 			startActivityForResult(new Intent(this, LoginActivity.class), REQUEST_LOGIN);
 		}
+
+		mDistributeService = CavV1Service.createDistributeService();
 	}
 
 	@Override
@@ -91,7 +102,7 @@ public class IndexActivity extends BaseActivity
 	@Override
 	protected void processViewAndData() {
 		mPagers.setAdapter(new OrderFragmentPageAdapter(getSupportFragmentManager(),
-						getResources().getStringArray(R.array.index_order_list),new int[]{OrderDataEntry.NEW_RECEIVED, OrderDataEntry.WAITING_TAKE, OrderDataEntry.DEIVERING}));
+				getResources().getStringArray(R.array.index_order_list), new int[]{OrderDataEntry.NEW_RECEIVED, OrderDataEntry.WAITING_TAKE, OrderDataEntry.DEIVERING}));
 		mTabs.setupWithViewPager(mPagers);
 	}
 
@@ -159,6 +170,18 @@ public class IndexActivity extends BaseActivity
 			case REQUEST_LOGIN:
 
 				if (resultCode == Activity.RESULT_OK) {
+
+					mDistributeService.jpushToken(new JPushParam(PreferenceRecorder.getJpushId())).enqueue(new Callback<Void>() {
+						@Override
+						public void onResponse(Call<Void> call, Response<Void> response) {
+
+						}
+
+						@Override
+						public void onFailure(Call<Void> call, Throwable t) {
+
+						}
+					});
 
 				} else {
 					finish();
