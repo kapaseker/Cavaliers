@@ -35,7 +35,7 @@ public final class PreferenceRecorder {
 		saveData(ACCESS_TOKEN, token);
 	}
 
-	public static boolean isLogin() {
+	public static boolean needLogin() {
 		return TextUtils.isEmpty(getToken());
 	}
 
