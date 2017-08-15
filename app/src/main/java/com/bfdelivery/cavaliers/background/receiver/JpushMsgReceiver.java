@@ -23,6 +23,7 @@ public class JpushMsgReceiver extends BroadcastReceiver {
 			if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
 				processMsg(context, bundle);
 			} else if (JPushInterface.ACTION_CONNECTION_CHANGE.equals(intent.getAction())) {
+
 			}
 		}
 	}

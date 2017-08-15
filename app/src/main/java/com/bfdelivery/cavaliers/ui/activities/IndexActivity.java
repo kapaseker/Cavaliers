@@ -66,21 +66,22 @@ public class IndexActivity extends BaseActivity
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		mDistributeService = CavV1Service.createDistributeService();
+		mLocationClient = LocationClientFactory.createLocationClient(this);
+		mLocationClient.setLocationListener(this);
+
 		if (PreferenceRecorder.needLogin()) {
 			// login
 			startActivityForResult(new Intent(this, LoginActivity.class), REQUEST_LOGIN);
 		} else {
 			afterLogin();
 		}
-
-		mDistributeService = CavV1Service.createDistributeService();
-		mLocationClient = LocationClientFactory.createLocationClient(this);
 	}
 
 	@Override
 	protected void onStart() {
 		super.onStart();
-		if (mLocationClient.isStarted()
+		if (!mLocationClient.isStarted()
 				&&
 				PackageManager.PERMISSION_GRANTED == PermissionChecker.checkSelfPermission(this, NecessaryPermission.FINE_LOCATIION)) {
 			mLocationClient.startLocation();
@@ -293,7 +294,6 @@ public class IndexActivity extends BaseActivity
 	}
 
 	private void afterPermissionGranted() {
-		mLocationClient.setLocationListener(this);
 		mLocationClient.startLocation();
 	}
 
