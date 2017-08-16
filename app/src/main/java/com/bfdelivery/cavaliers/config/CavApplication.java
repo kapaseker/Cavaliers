@@ -5,6 +5,7 @@ import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 
 import com.bfdelivery.cavaliers.background.database.PreferenceRecorder;
+import com.bfdelivery.cavaliers.database.location.LocationDataService;
 
 import cn.jpush.android.api.JPushInterface;
 
@@ -26,5 +27,7 @@ public class CavApplication extends MultiDexApplication {
 		JPushInterface.setDebugMode(true);
 		JPushInterface.init(this);
 		PreferenceRecorder.init(this);
+
+		LocationDataService.init(this);
 	}
 }

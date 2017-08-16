@@ -31,6 +31,7 @@ import com.bfdelivery.cavaliers.background.database.PreferenceRecorder;
 import com.bfdelivery.cavaliers.background.server.bean.request.JPushParam;
 import com.bfdelivery.cavaliers.background.server.request.CavV1Service;
 import com.bfdelivery.cavaliers.background.server.request.DistributeService;
+import com.bfdelivery.cavaliers.config.LocationErrorCode;
 import com.bfdelivery.cavaliers.config.NecessaryPermission;
 import com.bfdelivery.cavaliers.config.OrderDataEntry;
 import com.bfdelivery.cavaliers.ui.activities.base.BaseActivity;
@@ -261,6 +262,13 @@ public class IndexActivity extends BaseActivity
 
 	@Override
 	public void onLocationChanged(AMapLocation aMapLocation) {
+
+		if (aMapLocation.getErrorCode() == LocationErrorCode.OK) {
+
+		} else {
+
+		}
+
 		Log.d("AMAPPOS", aMapLocation.getLatitude() + "," + aMapLocation.getLongitude());
 	}
 
