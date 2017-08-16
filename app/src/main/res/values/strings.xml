@@ -81,7 +81,7 @@
     <string name="complete_delivery">完成配送</string>
     <string name="loading_detail">正在加载详情数据</string>
     <string name="title_permission_request">权限申请</string>
-    <string name="permission_necessary_tip">为了帮助您，更好的使用本产品，希望您给予本产品申请的相关权限。</string>
+    <string name="permission_necessary_tip">为了帮助您更好的使用本产品，希望您给予本产品申请的相关权限。</string>
     <string name="i_know">我知道了</string>
 
     <!--    Test String Resource     -->

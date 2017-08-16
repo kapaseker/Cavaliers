@@ -21,78 +21,139 @@
         android:textColor="@android:color/white"
         android:textSize="@dimen/txt_size_big"/>
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true">
+        android:layout_above="@id/btnAction"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/infoWrapper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             android:orientation="vertical">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:orientation="vertical">
+                android:padding="@dimen/txt_margin_default">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/txt_margin_default">
+                <TextView
+                    android:id="@+id/txtOrderIndex"
+                    style="@style/OrderIndex"
+                    android:text="#2"/>
 
-                    <TextView
-                        android:id="@+id/txtOrderIndex"
-                        style="@style/OrderIndex"
-                        android:text="#2"/>
+                <TextView
+                    android:id="@+id/txtOderStatus"
+                    style="@style/OrderDetailStatus"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/txt_margin_small"
+                    android:text="配送中"/>
+            </RelativeLayout>
 
-                    <TextView
-                        android:id="@+id/txtOderStatus"
-                        style="@style/OrderDetailStatus"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/txt_margin_small"
-                        android:text="配送中"/>
-                </RelativeLayout>
+            <include layout="@layout/layout_horizontal_dot_gap"/>
 
-                <include layout="@layout/layout_horizontal_dot_gap"/>
+            <LinearLayout
+                android:id="@+id/wrapper_heading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/txt_margin_default">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/txt_margin_default">
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/WrapperText"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="@dimen/txt_margin_large"
+                        android:background="@drawable/ic_fetch_dish"/>
+
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="0px"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="horizontal">
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">
 
                         <TextView
-                            style="@style/WrapperText"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginRight="@dimen/txt_margin_large"
-                            android:background="@drawable/ic_fetch_dish"/>
+                            style="@style/OrderDetailItemName"
+                            android:text="宝庆美食园(春晖店)"/>
 
+                        <TextView
+                            style="@style/OrderDetailItemDetail"
+                            android:text="雨山区印山东路696号101室"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/TipTitle"
+                                android:text="@string/merchant_phone"/>
+
+                            <TextView
+                                android:id="@+id/txtRstPhone"
+                                style="@style/OrderItemDial"
+                                android:text="15309392838"
+                                />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <TextView
+                        style="@style/DefaultText"
+                        android:layout_gravity="center_vertical"
+                        android:text="6KM"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/txt_margin_large"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/WrapperText"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="@dimen/txt_margin_large"
+                        android:background="@drawable/ic_delivery_dish"/>
+
+                    <LinearLayout
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
                         <LinearLayout
                             android:layout_width="0px"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:gravity="center_vertical"
                             android:orientation="vertical">
 
                             <TextView
                                 style="@style/OrderDetailItemName"
-                                android:text="宝庆美食园(春晖店)"/>
+                                android:text="雨山区慈湖河路690号附近"/>
 
-                            <TextView
-                                style="@style/OrderDetailItemDetail"
-                                android:text="雨山区印山东路696号101室"/>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    style="@style/OrderDetailItemDetail"
+                                    android:text="王先生"/>
+
+                            </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -102,283 +163,229 @@
 
                                 <TextView
                                     style="@style/TipTitle"
-                                    android:text="@string/merchant_phone"/>
+                                    android:text="@string/client_phone"/>
 
                                 <TextView
-                                    android:id="@+id/txtRstPhone"
                                     style="@style/OrderItemDial"
                                     android:text="15309392838"
                                     />
 
                             </LinearLayout>
+
                         </LinearLayout>
-
-                        <TextView
-                            style="@style/DefaultText"
-                            android:layout_gravity="center_vertical"
-                            android:text="6KM"/>
-
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/txt_margin_large"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/WrapperText"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginRight="@dimen/txt_margin_large"
-                            android:background="@drawable/ic_delivery_dish"/>
-
-                        <LinearLayout
-                            android:layout_width="0px"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <LinearLayout
-                                android:layout_width="0px"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    style="@style/OrderDetailItemName"
-                                    android:text="雨山区慈湖河路690号附近"/>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
-
-                                    <TextView
-                                        style="@style/OrderDetailItemDetail"
-                                        android:text="王先生"/>
-
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center_vertical"
-                                    android:orientation="horizontal">
-
-                                    <TextView
-                                        style="@style/TipTitle"
-                                        android:text="@string/client_phone"/>
-
-                                    <TextView
-                                        style="@style/OrderItemDial"
-                                        android:text="15309392838"
-                                        />
-
-                                </LinearLayout>
-
-                            </LinearLayout>
-                        </LinearLayout>
-
-                        <TextView
-                            style="@style/DefaultText"
-                            android:layout_gravity="center_vertical"
-                            android:text="6KM"/>
-
-                    </LinearLayout>
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <include layout="@layout/layout_horizontal_gap"/>
-
-            <LinearLayout
-                android:id="@+id/wrapper_waiting"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/group_margin_vertical_gap"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-
-                <android.support.v4.widget.ContentLoadingProgressBar
-                    android:id="@+id/waitingbar"
-                    style="?android:attr/progressBarStyle"
-                    android:layout_width="@dimen/ctrl_large"
-                    android:layout_height="@dimen/ctrl_large"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/txt_margin_default"
-                    android:text="@string/loading_detail"/>
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/wrapper_detail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/txt_margin_large"
-                android:layout_marginTop="@dimen/group_margin_vertical_gap"
-                android:background="@android:color/white"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <include
-                    layout="@layout/layout_horizontal_gap"></include>
-
-                <com.bfdelivery.cavaliers.ui.views.OrderDetailItemView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:detail="我要香菜，不要蒜蓉"
-                    app:detailColor="@color/colorTxtAlert"
-                    app:tag="@string/order_remark"/>
-
-                <include layout="@layout/layout_horizontal_gap"></include>
-
-                <LinearLayout
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingRight="@dimen/txt_margin_default">
-
-                    <com.bfdelivery.cavaliers.ui.views.OrderDetailItemView
-                        android:layout_width="0px"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        app:detail="@string/wechat_pay"
-                        app:detailColor="@color/colorWeixin"
-                        app:tag="@string/payment_mode"/>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical|right"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/TipTitle"
-                            android:text="@string/makeorder_pre"/>
-
-                        <TextView
-                            style="@style/TipTitle"
-                            android:text="1"
-                            android:textColor="@color/colorTxtAlert"
-                            android:textSize="@dimen/txt_size_big"/>
-
-                        <TextView
-                            style="@style/TipTitle"
-                            android:text="@string/makeorder_after"/>
-
-                    </LinearLayout>
-                </LinearLayout>
-
-                <include layout="@layout/layout_horizontal_gap"></include>
-
-                <com.bfdelivery.cavaliers.ui.views.OrderDetailItemView
-                    android:id="@+id/itemCommodity"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:tag="@string/commodity_detail"/>
-
-                <LinearLayout
-                    android:id="@+id/wrapperCommodity"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingBottom="@dimen/txt_margin_mini"
-                    android:paddingLeft="@dimen/txt_margin_large"
-                    android:paddingRight="@dimen/txt_margin_large"
-                    android:paddingTop="@dimen/txt_margin_mini"
-                    android:visibility="visible">
-
-                    <com.bfdelivery.cavaliers.ui.views.NoScrollListView
-                        android:id="@+id/lstCommodities"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:divider="@drawable/divider_commodity"
-                        android:dividerHeight="3px"
-                        android:layerType="software"
-                        android:listSelector="@android:color/transparent"/>
-
-                    <include layout="@layout/layout_horizontal_dot_gap"/>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingBottom="@dimen/txt_margin_default"
-                        android:paddingTop="@dimen/txt_margin_default">
-
-                        <TextView
-                            style="@style/DefaultText"
-                            android:layout_width="0px"
-                            android:layout_weight="3"
-                            android:text="@string/discount"/>
-
-                        <View
-                            android:layout_width="0px"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"/>
-
-                        <TextView
-                            style="@style/DefaultText"
-                            android:layout_width="0px"
-                            android:layout_weight="1"
-                            android:gravity="right"
-                            android:text="-￥14"
-                            android:textColor="@color/colorTxtAlert"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical|right"
-                        android:orientation="horizontal"
-                        android:paddingBottom="@dimen/txt_margin_default"
-                        android:paddingTop="@dimen/txt_margin_default">
-
-                        <TextView
-                            style="@style/DefaultText"
-                            android:text="实付："
-                            android:textSize="@dimen/txt_size_big"/>
-
-                        <TextView
-                            style="@style/DefaultText"
-                            android:text="￥47"
-                            android:textColor="@color/colorTxtPrimary"
-                            android:textSize="@dimen/txt_size_big"/>
-
-                    </LinearLayout>
+                    <TextView
+                        style="@style/DefaultText"
+                        android:layout_gravity="center_vertical"
+                        android:text="6KM"/>
 
                 </LinearLayout>
-
-                <include layout="@layout/layout_horizontal_gap"></include>
-
-                <com.bfdelivery.cavaliers.ui.views.OrderDetailItemView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:detail="2017-08-08 20:53:39"
-                    app:tag="@string/mkorder_time"/>
-
-                <include layout="@layout/layout_horizontal_gap"></include>
-
-                <com.bfdelivery.cavaliers.ui.views.OrderDetailItemView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:detail="000100000002"
-                    app:tag="@string/order_number"/>
-
-                <include layout="@layout/layout_horizontal_gap"></include>
-
             </LinearLayout>
 
         </LinearLayout>
-    </ScrollView>
+
+        <include layout="@layout/layout_horizontal_gap"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/group_margin_vertical_gap">
+
+            <LinearLayout
+                android:id="@+id/infoWrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/wrapper_waiting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/group_margin_vertical_gap"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <android.support.v4.widget.ContentLoadingProgressBar
+                        android:id="@+id/waitingbar"
+                        style="?android:attr/progressBarStyle"
+                        android:layout_width="@dimen/ctrl_large"
+                        android:layout_height="@dimen/ctrl_large"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/txt_margin_default"
+                        android:text="@string/loading_detail"/>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/wrapper_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/txt_margin_large"
+                    android:background="@android:color/white"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <include
+                        layout="@layout/layout_horizontal_gap"></include>
+
+                    <com.bfdelivery.cavaliers.ui.views.OrderDetailItemView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:detail="我要香菜，不要蒜蓉"
+                        app:detailColor="@color/colorTxtAlert"
+                        app:tag="@string/order_remark"/>
+
+                    <include layout="@layout/layout_horizontal_gap"></include>
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingRight="@dimen/txt_margin_default">
+
+                        <com.bfdelivery.cavaliers.ui.views.OrderDetailItemView
+                            android:layout_width="0px"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            app:detail="@string/wechat_pay"
+                            app:detailColor="@color/colorWeixin"
+                            app:tag="@string/payment_mode"/>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|right"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/TipTitle"
+                                android:text="@string/makeorder_pre"/>
+
+                            <TextView
+                                style="@style/TipTitle"
+                                android:text="1"
+                                android:textColor="@color/colorTxtAlert"
+                                android:textSize="@dimen/txt_size_big"/>
+
+                            <TextView
+                                style="@style/TipTitle"
+                                android:text="@string/makeorder_after"/>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <include layout="@layout/layout_horizontal_gap"></include>
+
+                    <com.bfdelivery.cavaliers.ui.views.OrderDetailItemView
+                        android:id="@+id/itemCommodity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:tag="@string/commodity_detail"/>
+
+                    <LinearLayout
+                        android:id="@+id/wrapperCommodity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingBottom="@dimen/txt_margin_mini"
+                        android:paddingLeft="@dimen/txt_margin_large"
+                        android:paddingRight="@dimen/txt_margin_large"
+                        android:paddingTop="@dimen/txt_margin_mini"
+                        android:visibility="visible">
+
+                        <com.bfdelivery.cavaliers.ui.views.NoScrollListView
+                            android:id="@+id/lstCommodities"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:divider="@drawable/divider_commodity"
+                            android:dividerHeight="3px"
+                            android:layerType="software"
+                            android:listSelector="@android:color/transparent"/>
+
+                        <include layout="@layout/layout_horizontal_dot_gap"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingBottom="@dimen/txt_margin_default"
+                            android:paddingTop="@dimen/txt_margin_default">
+
+                            <TextView
+                                style="@style/DefaultText"
+                                android:layout_width="0px"
+                                android:layout_weight="3"
+                                android:text="@string/discount"/>
+
+                            <View
+                                android:layout_width="0px"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"/>
+
+                            <TextView
+                                style="@style/DefaultText"
+                                android:layout_width="0px"
+                                android:layout_weight="1"
+                                android:gravity="right"
+                                android:text="-￥14"
+                                android:textColor="@color/colorTxtAlert"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical|right"
+                            android:orientation="horizontal"
+                            android:paddingBottom="@dimen/txt_margin_default"
+                            android:paddingTop="@dimen/txt_margin_default">
+
+                            <TextView
+                                style="@style/DefaultText"
+                                android:text="实付："
+                                android:textSize="@dimen/txt_size_big"/>
+
+                            <TextView
+                                style="@style/DefaultText"
+                                android:text="￥47"
+                                android:textColor="@color/colorTxtPrimary"
+                                android:textSize="@dimen/txt_size_big"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <include layout="@layout/layout_horizontal_gap"></include>
+
+                    <com.bfdelivery.cavaliers.ui.views.OrderDetailItemView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:detail="2017-08-08 20:53:39"
+                        app:tag="@string/mkorder_time"/>
+
+                    <include layout="@layout/layout_horizontal_gap"></include>
+
+                    <com.bfdelivery.cavaliers.ui.views.OrderDetailItemView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:detail="000100000002"
+                        app:tag="@string/order_number"/>
+
+                    <include layout="@layout/layout_horizontal_gap"></include>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+
 </RelativeLayout>

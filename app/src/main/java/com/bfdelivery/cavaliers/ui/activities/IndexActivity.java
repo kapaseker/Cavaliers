@@ -261,7 +261,7 @@ public class IndexActivity extends BaseActivity
 
 	@Override
 	public void onLocationChanged(AMapLocation aMapLocation) {
-		Log.d("POS", aMapLocation.getLatitude() + "," + aMapLocation.getLongitude());
+		Log.d("AMAPPOS", aMapLocation.getLatitude() + "," + aMapLocation.getLongitude());
 	}
 
 	private void afterLogin() {

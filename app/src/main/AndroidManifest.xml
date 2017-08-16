@@ -67,6 +67,9 @@
             android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".ui.activities.DailySettleActivity"/>
 
+        <!--定位服务-->
+        <service android:name="com.amap.api.location.APSService"/>
+
         <!-- about jpush -->
         <activity
             android:name="cn.jpush.android.ui.PopWinActivity"
