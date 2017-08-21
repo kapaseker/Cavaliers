@@ -60,7 +60,10 @@
     <string name="contact_merchant">联系商家</string>
     <string name="served">确认送达</string>
     <string name="receive_order">接单</string>
+    <string name="taken_order">已取餐</string>
+    <string name="complete_order">完成配送</string>
     <string name="ready_delivery">准备配送</string>
+    <string name="vacant">无</string>
 
     <string name="delivery_demand">配送要求：</string>
     <string name="delivery_expect">期望到达：</string>
@@ -76,7 +79,7 @@
     <string name="payment_mode">支付方式：</string>
     <string name="alipay">支付宝</string>
     <string name="wechat_pay">微信支付</string>
-    <string name="cash_pay">货到付款</string>
+    <string name="cash_pay">线下支付</string>
     <string name="chinaums_pay">银联支付</string>
     <string name="complete_delivery">完成配送</string>
     <string name="loading_detail">正在加载详情数据</string>
@@ -90,4 +93,7 @@
     <string name="tstDistance">24.67KM</string>
     <string name="tstIncome">￥200</string>
     <string name="tstOrderCount">12单</string>
+
+    <string name="suffix_km">%sKM</string>
+    <string name="suffix_m">%sM</string>
 </resources>

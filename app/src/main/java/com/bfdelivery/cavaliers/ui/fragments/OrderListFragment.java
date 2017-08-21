@@ -1,6 +1,7 @@
 package com.bfdelivery.cavaliers.ui.fragments;
 
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -19,8 +20,12 @@ import com.bfdelivery.cavaliers.background.server.config.HttpStatus;
 import com.bfdelivery.cavaliers.background.server.request.CavV1Service;
 import com.bfdelivery.cavaliers.background.server.request.DistributeService;
 import com.bfdelivery.cavaliers.constant.DeliveryStatus;
+import com.bfdelivery.cavaliers.database.location.LocationData;
 import com.bfdelivery.cavaliers.dataset.ListOutlineData;
 import com.bfdelivery.cavaliers.ui.activities.OrderDetailActivity;
+import com.bfdelivery.cavaliers.util.DataBridge;
+import com.bfdelivery.cavaliers.util.DistanceUtil;
+import com.bfdelivery.cavaliers.util.LocationSaver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +37,7 @@ import retrofit2.Response;
  * 订单页面
  */
 
-public class OrderListFragment extends Fragment {
+public class OrderListFragment extends Fragment implements OnListItemListener {
 
 	RecyclerView mListOrder = null;
 	OrderAdapter mOrderAdapter = null;
@@ -107,14 +112,31 @@ public class OrderListFragment extends Fragment {
 		mListOrder.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 		mListOrder.setHasFixedSize(true);
 
-		mOrderAdapter = new OrderAdapter();
+		mOrderAdapter = new OrderAdapter(this);
 		mListOrder.setAdapter(mOrderAdapter);
+	}
+
+	@Override
+	public void onDetail(int position, OrderList.DataBean dataBean) {
+		ListOutlineData outlineData = new ListOutlineData();
+		DataBridge.dataBeanToListOutLine(dataBean, outlineData);
+
+		Intent intent = new Intent(getContext(), OrderDetailActivity.class);
+		intent.putExtra(OrderDetailActivity.BUNDLE_KEY_POSTION, position);
+		intent.putExtra(OrderDetailActivity.BUNDLE_KEY_LISTDATA, outlineData);
+		startActivity(intent);
+	}
+
+	@Override
+	public void onAction(int position, OrderList.DataBean dataBean) {
+
 	}
 
 	private static final class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 		OrderList.DataBean mData;
 		int mIndex = 0;
+		OnListItemListener mOnListItemListener;
 
 		TextView mTxtIndex;
 
@@ -126,9 +148,13 @@ public class OrderListFragment extends Fragment {
 		TextView mTxtUsrName;
 		TextView mTxtUsrDis;
 
-		public OrderViewHolder(View itemView) {
+		View mActionWrapper;
+		TextView mButtonAction;
+
+		public OrderViewHolder(View itemView, OnListItemListener listItemListener) {
 			super(itemView);
 			initViewHolder(itemView);
+			mOnListItemListener = listItemListener;
 		}
 
 		private void initViewHolder(View itemView) {
@@ -142,7 +168,11 @@ public class OrderListFragment extends Fragment {
 			mTxtUsrName = (TextView) itemView.findViewById(R.id.txtUsrName);
 			mTxtUsrDis = (TextView) itemView.findViewById(R.id.txtUsrDis);
 
+			mActionWrapper = itemView.findViewById(R.id.wrapper_button);
+			mButtonAction = (TextView) itemView.findViewById(R.id.btnAction);
+
 			itemView.setOnClickListener(this);
+			mButtonAction.setOnClickListener(this);
 		}
 
 		private void bindData(int position, OrderList.DataBean data) {
@@ -152,18 +182,48 @@ public class OrderListFragment extends Fragment {
 			mTxtIndex.setText("#" + (position + 1));
 			mTxtUsrAddr.setText(data.getAddress().getDetail());
 			mTxtUsrName.setText(data.getAddress().getName());
+
+			mTxtRstName.setText(data.getShop().getName());
+			mTxtRstAddr.setText(data.getShop().getAddress());
+
+			LocationData location = LocationSaver.instance().getLocation();
+			if (location != null) {
+				float[] distance = new float[1];
+				Location.distanceBetween(location.getLatitude(), location.getLongitude(), data.getShop().getLatitude(), data.getShop().getLongitude(), distance);
+				mTxtRstDis.setText(DistanceUtil.formatDistance(itemView.getContext(), distance[0]));
+				Location.distanceBetween(location.getLatitude(), location.getLongitude(), data.getAddress().getLatitude(), data.getAddress().getLongitude(), distance);
+				mTxtUsrDis.setText(DistanceUtil.formatDistance(itemView.getContext(), distance[0]));
+			}
+
+			mActionWrapper.setVisibility(View.VISIBLE);
+
+			switch (data.getStatus()) {
+				case DeliveryStatus.NEW_RECEIVED:
+					mButtonAction.setText(R.string.receive_order);
+					break;
+				case DeliveryStatus.WAITING_TAKE:
+					mButtonAction.setText(R.string.taken_order);
+					break;
+				case DeliveryStatus.DEIVERING:
+					mButtonAction.setText(R.string.complete_order);
+					break;
+				case DeliveryStatus.COMPLETED:
+				case DeliveryStatus.EXCEPTION:
+					mActionWrapper.setVisibility(View.GONE);
+					break;
+			}
 		}
 
 		@Override
 		public void onClick(View v) {
 			if (v == itemView) {
-				ListOutlineData outlineData = new ListOutlineData();
-//				DataBridge.dataBeanToListOutLine(mData, outlineData);
-
-				Intent intent = new Intent(itemView.getContext(), OrderDetailActivity.class);
-				intent.putExtra(OrderDetailActivity.BUNDLE_KEY_POSTION, mIndex);
-				intent.putExtra(OrderDetailActivity.BUNDLE_KEY_LISTDATA, outlineData);
-				itemView.getContext().startActivity(intent);
+				if (mOnListItemListener != null) {
+					mOnListItemListener.onDetail(mIndex, mData);
+				}
+			} else if (v == mButtonAction) {
+				if (mOnListItemListener != null) {
+					mOnListItemListener.onAction(mIndex, mData);
+				}
 			}
 		}
 	}
@@ -172,11 +232,15 @@ public class OrderListFragment extends Fragment {
 
 		List<OrderList.DataBean> mOrderList = new ArrayList<>();
 
-		public OrderAdapter() {
+		OnListItemListener mOnListItemListener = null;
+
+		public OrderAdapter(OnListItemListener onListItemListener) {
+			mOnListItemListener = onListItemListener;
 		}
 
-		public OrderAdapter(List<OrderList.DataBean> orderList) {
+		public OrderAdapter(List<OrderList.DataBean> orderList, OnListItemListener onListItemListener) {
 			mOrderList.addAll(orderList);
+			mOnListItemListener = onListItemListener;
 		}
 
 		public void refreshData(List<OrderList.DataBean> orderLists) {
@@ -195,18 +259,17 @@ public class OrderListFragment extends Fragment {
 
 			View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_order_item, parent, false);
 
-			return new OrderViewHolder(itemView);
+			return new OrderViewHolder(itemView, mOnListItemListener);
 		}
 
 		@Override
 		public void onBindViewHolder(OrderViewHolder holder, int position) {
-//			holder.bindData(position, mOrderList.get(position));
+			holder.bindData(position, mOrderList.get(position));
 		}
 
 		@Override
 		public int getItemCount() {
-//			return mOrderList.size();
-			return 5;
+			return mOrderList.size();
 		}
 	}
 }

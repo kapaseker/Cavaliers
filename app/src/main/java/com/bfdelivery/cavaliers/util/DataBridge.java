@@ -19,8 +19,8 @@ public class DataBridge {
 	public static final void dataBeanToListOutLine(OrderList.DataBean dataBean, ListOutlineData outline) {
 
 		outline.setOrderId(dataBean.getNumber());
-		outline.setRstAddr("");
-		outline.setRstName("");
+		outline.setRstAddr(dataBean.getShop().getAddress());
+		outline.setRstName(dataBean.getShop().getName());
 		outline.setUsrName(dataBean.getAddress().getName());
 		outline.setUsrAddr(dataBean.getAddress().getDetail());
 

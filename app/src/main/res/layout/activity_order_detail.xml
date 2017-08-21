@@ -81,10 +81,12 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/txtRstName"
                             style="@style/OrderDetailItemName"
                             android:text="宝庆美食园(春晖店)"/>
 
                         <TextView
+                            android:id="@+id/txtRstAddr"
                             style="@style/OrderDetailItemDetail"
                             android:text="雨山区印山东路696号101室"/>
 
@@ -101,13 +103,14 @@
                             <TextView
                                 android:id="@+id/txtRstPhone"
                                 style="@style/OrderItemDial"
-                                android:text="15309392838"
+                                android:text=""
                                 />
 
                         </LinearLayout>
                     </LinearLayout>
 
                     <TextView
+                        android:id="@+id/txtRstDis"
                         style="@style/DefaultText"
                         android:layout_gravity="center_vertical"
                         android:text="6KM"/>
@@ -141,6 +144,7 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/txtUsrAddr"
                                 style="@style/OrderDetailItemName"
                                 android:text="雨山区慈湖河路690号附近"/>
 
@@ -150,6 +154,7 @@
                                 android:orientation="horizontal">
 
                                 <TextView
+                                    android:id="@+id/txtUsrName"
                                     style="@style/OrderDetailItemDetail"
                                     android:text="王先生"/>
 
@@ -166,8 +171,9 @@
                                     android:text="@string/client_phone"/>
 
                                 <TextView
+                                    android:id="@+id/txtUsrPhone"
                                     style="@style/OrderItemDial"
-                                    android:text="15309392838"
+                                    android:text=""
                                     />
 
                             </LinearLayout>
@@ -176,6 +182,7 @@
                     </LinearLayout>
 
                     <TextView
+                        android:id="@+id/txtUsrDis"
                         style="@style/DefaultText"
                         android:layout_gravity="center_vertical"
                         android:text="6KM"/>
@@ -236,7 +243,7 @@
                     <com.bfdelivery.cavaliers.ui.views.OrderDetailItemView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:detail="我要香菜，不要蒜蓉"
+                        android:id="@+id/orderNote"
                         app:detailColor="@color/colorTxtAlert"
                         app:tag="@string/order_remark"/>
 
@@ -253,6 +260,7 @@
                             android:layout_width="0px"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:id="@+id/orderPay"
                             app:detail="@string/wechat_pay"
                             app:detailColor="@color/colorWeixin"
                             app:tag="@string/payment_mode"/>
@@ -269,8 +277,8 @@
                                 android:text="@string/makeorder_pre"/>
 
                             <TextView
+                                android:id="@+id/orderIndex"
                                 style="@style/TipTitle"
-                                android:text="1"
                                 android:textColor="@color/colorTxtAlert"
                                 android:textSize="@dimen/txt_size_big"/>
 
@@ -366,6 +374,7 @@
                     <include layout="@layout/layout_horizontal_gap"></include>
 
                     <com.bfdelivery.cavaliers.ui.views.OrderDetailItemView
+                        android:id="@+id/itemOrderTime"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:detail="2017-08-08 20:53:39"
@@ -374,6 +383,7 @@
                     <include layout="@layout/layout_horizontal_gap"></include>
 
                     <com.bfdelivery.cavaliers.ui.views.OrderDetailItemView
+                        android:id="@+id/itemOrderId"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:detail="000100000002"

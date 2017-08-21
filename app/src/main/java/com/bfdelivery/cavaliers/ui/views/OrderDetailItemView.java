@@ -84,6 +84,30 @@ public class OrderDetailItemView extends LinearLayout implements View.OnClickLis
 		mItemCheckChangeListener = listener;
 	}
 
+	public void setTagColor(int color) {
+		mTxtTag.setTextColor(color);
+	}
+
+	public void setDetailColor(int color) {
+		mTxtDetail.setTextColor(color);
+	}
+
+	public void setTag(int res) {
+		mTxtTag.setText(res);
+	}
+
+	public void setTag(CharSequence tag) {
+		mTxtTag.setText(tag);
+	}
+
+	public void setDetail(int res) {
+		mTxtDetail.setText(res);
+	}
+
+	public void setDetail(CharSequence detail) {
+		mTxtDetail.setText(detail);
+	}
+
 	/**
 	 * 设置尾项是否勾选
 	 *

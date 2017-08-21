@@ -12,26 +12,28 @@ public class OrderDetail {
 
 
 	/**
-	 * number : 000100000002
+	 * number : paiKZ6DLvkG6
 	 * shop_id : 1
-	 * user_id : 2
+	 * user_id : 1
 	 * status : 0
 	 * pay_status : 0
-	 * pay_type : 1
-	 * product_amount : 38700
-	 * service_amount : 0
-	 * total_amount : 38700
-	 * coupon_amount : 0
+	 * pay_type : 0
+	 * product_amount : 432548
+	 * service_amount : 378
+	 * total_amount : 34051
+	 * coupon_amount : 39180
 	 * coupon_id : 0
-	 * pay_amount : 38700
-	 * remark : 没啥备注
-	 * tags : []
-	 * distribute_status : 1
-	 * created_at : 2017-08-07 11:07:50
-	 * updated_at : 2017-08-08 20:53:39
-	 * order_products : [{"id":1,"product_id":3,"name":"信息有限公司之滕春梅","num":3,"options":[{"name":"娄","value":"伟","add_price":0}],"price":7900,"remark":"","created_at":"2017-08-07 11:07:50","updated_at":"2017-08-07 11:07:50"},{"id":2,"product_id":5,"name":"信息有限公司之柏宁","num":3,"options":[],"price":5000,"remark":"","created_at":"2017-08-07 11:07:50","updated_at":"2017-08-07 11:07:50"}]
-	 * address : {"order_id":1,"name":"丁志明","mobile":"13611538449","post_code":"138400","province":"上海市","city":"济南","area":"双滦区","detail":"南方周末","longitude":"87.293129","latitude":"18.436163","tag":"家里"}
-	 * distribute : {"id":1,"status":1,"distributer_id":2,"distributer_name":"王小海","deleted_at":null,"created_at":"2017-08-08 20:53:39","updated_at":"2017-08-08 20:53:39","distributer":{"id":2,"registration_id":"afadfasladsfsafadsf","deleted_at":null,"created_at":null,"updated_at":"2017-08-09 09:58:43","name":"王小海","email":"greedying@163.com","mobile":"18923772567"}}
+	 * pay_amount : 401667
+	 * remark : 彩信发送动人一刻波导手机，手机中的战斗机幸福生活SOHU：足迹生活每一天
+	 * tags : 灵活，让篮球场不再是一个平面
+	 * distribute_time : 25107uruk1
+	 * distribute_status : 0
+	 * created_at : 2017-08-21 15:16:24
+	 * updated_at : 2017-08-21 15:16:24
+	 * order_products : [{"id":98,"product_id":898,"name":"传媒有限公司之伍文娟","num":8,"packing_box_num":0,"packing_box_price":4232,"specs":[],"price":68750,"remark":"科技有限公司传媒有限公司","created_at":"2017-08-21 15:16:24","updated_at":"2017-08-21 15:16:24"}]
+	 * shop : {"id":1,"name":"鸿睿思博加盟店","banner":"http://lorempixel.com/640/480/?25977","description":"为了她的节日，献上您纯金般的心！倾诉冬日暖语晚报，不晚报以帽取人！","longitude":"123.452878","latitude":"41.725355","address":"事业我一定争取，对你我从未放弃!","phone":"18767863835","status":0,"send_amount":4556,"service_amount":6730,"sell_times":{"friday":[["13 30","15 15"],["23 30","23 15"]]},"average_minutes":25}
+	 * address : {"order_id":98,"name":"郑建","sex":1,"mobile":"18028840099","post_code":"022400","province":"黑龙江省","city":"成都","area":"沙市区","detail":"一呼天下应","longitude":"31.213005","latitude":"99.242325","tag":"公司"}
+	 * distribute : {"id":98,"status":2,"distributer_id":1,"distributer_name":"配送员姓名","deleted_at":null,"created_at":"2017-08-21 15:16:24","updated_at":"2017-08-21 15:16:24"}
 	 */
 
 	private String number;
@@ -47,12 +49,14 @@ public class OrderDetail {
 	private int coupon_id;
 	private int pay_amount;
 	private String remark;
+	private String tags;
+	private String distribute_time;
 	private int distribute_status;
 	private String created_at;
 	private String updated_at;
+	private ShopBean shop;
 	private AddressBean address;
 	private DistributeBean distribute;
-	private List<?> tags;
 	private List<OrderProductsBean> order_products;
 
 	public String getNumber() {
@@ -159,6 +163,22 @@ public class OrderDetail {
 		this.remark = remark;
 	}
 
+	public String getTags() {
+		return tags;
+	}
+
+	public void setTags(String tags) {
+		this.tags = tags;
+	}
+
+	public String getDistribute_time() {
+		return distribute_time;
+	}
+
+	public void setDistribute_time(String distribute_time) {
+		this.distribute_time = distribute_time;
+	}
+
 	public int getDistribute_status() {
 		return distribute_status;
 	}
@@ -183,6 +203,14 @@ public class OrderDetail {
 		this.updated_at = updated_at;
 	}
 
+	public ShopBean getShop() {
+		return shop;
+	}
+
+	public void setShop(ShopBean shop) {
+		this.shop = shop;
+	}
+
 	public AddressBean getAddress() {
 		return address;
 	}
@@ -199,14 +227,6 @@ public class OrderDetail {
 		this.distribute = distribute;
 	}
 
-	public List<?> getTags() {
-		return tags;
-	}
-
-	public void setTags(List<?> tags) {
-		this.tags = tags;
-	}
-
 	public List<OrderProductsBean> getOrder_products() {
 		return order_products;
 	}
@@ -215,31 +235,181 @@ public class OrderDetail {
 		this.order_products = order_products;
 	}
 
+	public static class ShopBean {
+		/**
+		 * id : 1
+		 * name : 鸿睿思博加盟店
+		 * banner : http://lorempixel.com/640/480/?25977
+		 * description : 为了她的节日，献上您纯金般的心！倾诉冬日暖语晚报，不晚报以帽取人！
+		 * longitude : 123.452878
+		 * latitude : 41.725355
+		 * address : 事业我一定争取，对你我从未放弃!
+		 * phone : 18767863835
+		 * status : 0
+		 * send_amount : 4556
+		 * service_amount : 6730
+		 * sell_times : {"friday":[["13 30","15 15"],["23 30","23 15"]]}
+		 * average_minutes : 25
+		 */
+
+		private int id;
+		private String name;
+		private String banner;
+		private String description;
+		private double longitude;
+		private double latitude;
+		private String address;
+		private String phone;
+		private int status;
+		private int send_amount;
+		private int service_amount;
+		private SellTimesBean sell_times;
+		private int average_minutes;
+
+		public int getId() {
+			return id;
+		}
+
+		public void setId(int id) {
+			this.id = id;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		public String getBanner() {
+			return banner;
+		}
+
+		public void setBanner(String banner) {
+			this.banner = banner;
+		}
+
+		public String getDescription() {
+			return description;
+		}
+
+		public void setDescription(String description) {
+			this.description = description;
+		}
+
+		public double getLongitude() {
+			return longitude;
+		}
+
+		public void setLongitude(double longitude) {
+			this.longitude = longitude;
+		}
+
+		public double getLatitude() {
+			return latitude;
+		}
+
+		public void setLatitude(double latitude) {
+			this.latitude = latitude;
+		}
+
+		public void setAddress(String address) {
+			this.address = address;
+		}
+
+		public String getAddress() {
+			return address;
+		}
+
+		public String getPhone() {
+			return phone;
+		}
+
+		public void setPhone(String phone) {
+			this.phone = phone;
+		}
+
+		public int getStatus() {
+			return status;
+		}
+
+		public void setStatus(int status) {
+			this.status = status;
+		}
+
+		public int getSend_amount() {
+			return send_amount;
+		}
+
+		public void setSend_amount(int send_amount) {
+			this.send_amount = send_amount;
+		}
+
+		public int getService_amount() {
+			return service_amount;
+		}
+
+		public void setService_amount(int service_amount) {
+			this.service_amount = service_amount;
+		}
+
+		public SellTimesBean getSell_times() {
+			return sell_times;
+		}
+
+		public void setSell_times(SellTimesBean sell_times) {
+			this.sell_times = sell_times;
+		}
+
+		public int getAverage_minutes() {
+			return average_minutes;
+		}
+
+		public void setAverage_minutes(int average_minutes) {
+			this.average_minutes = average_minutes;
+		}
+
+		public static class SellTimesBean {
+			private List<List<String>> friday;
+
+			public List<List<String>> getFriday() {
+				return friday;
+			}
+
+			public void setFriday(List<List<String>> friday) {
+				this.friday = friday;
+			}
+		}
+	}
+
 	public static class AddressBean {
 		/**
-		 * order_id : 1
-		 * name : 丁志明
-		 * mobile : 13611538449
-		 * post_code : 138400
-		 * province : 上海市
-		 * city : 济南
-		 * area : 双滦区
-		 * detail : 南方周末
-		 * longitude : 87.293129
-		 * latitude : 18.436163
-		 * tag : 家里
+		 * order_id : 98
+		 * name : 郑建
+		 * sex : 1
+		 * mobile : 18028840099
+		 * post_code : 022400
+		 * province : 黑龙江省
+		 * city : 成都
+		 * area : 沙市区
+		 * detail : 一呼天下应
+		 * longitude : 31.213005
+		 * latitude : 99.242325
+		 * tag : 公司
 		 */
 
 		private int order_id;
 		private String name;
+		private int sex;
 		private String mobile;
 		private String post_code;
 		private String province;
 		private String city;
 		private String area;
 		private String detail;
-		private String longitude;
-		private String latitude;
+		private double longitude;
+		private double latitude;
 		private String tag;
 
 		public int getOrder_id() {
@@ -256,6 +426,14 @@ public class OrderDetail {
 
 		public void setName(String name) {
 			this.name = name;
+		}
+
+		public int getSex() {
+			return sex;
+		}
+
+		public void setSex(int sex) {
+			this.sex = sex;
 		}
 
 		public String getMobile() {
@@ -306,19 +484,19 @@ public class OrderDetail {
 			this.detail = detail;
 		}
 
-		public String getLongitude() {
+		public double getLongitude() {
 			return longitude;
 		}
 
-		public void setLongitude(String longitude) {
+		public void setLongitude(double longitude) {
 			this.longitude = longitude;
 		}
 
-		public String getLatitude() {
+		public double getLatitude() {
 			return latitude;
 		}
 
-		public void setLatitude(String latitude) {
+		public void setLatitude(double latitude) {
 			this.latitude = latitude;
 		}
 
@@ -333,14 +511,13 @@ public class OrderDetail {
 
 	public static class DistributeBean {
 		/**
-		 * id : 1
-		 * status : 1
-		 * distributer_id : 2
-		 * distributer_name : 王小海
+		 * id : 98
+		 * status : 2
+		 * distributer_id : 1
+		 * distributer_name : 配送员姓名
 		 * deleted_at : null
-		 * created_at : 2017-08-08 20:53:39
-		 * updated_at : 2017-08-08 20:53:39
-		 * distributer : {"id":2,"registration_id":"afadfasladsfsafadsf","deleted_at":null,"created_at":null,"updated_at":"2017-08-09 09:58:43","name":"王小海","email":"greedying@163.com","mobile":"18923772567"}
+		 * created_at : 2017-08-21 15:16:24
+		 * updated_at : 2017-08-21 15:16:24
 		 */
 
 		private int id;
@@ -350,7 +527,6 @@ public class OrderDetail {
 		private Object deleted_at;
 		private String created_at;
 		private String updated_at;
-		private DistributerBean distributer;
 
 		public int getId() {
 			return id;
@@ -407,124 +583,34 @@ public class OrderDetail {
 		public void setUpdated_at(String updated_at) {
 			this.updated_at = updated_at;
 		}
-
-		public DistributerBean getDistributer() {
-			return distributer;
-		}
-
-		public void setDistributer(DistributerBean distributer) {
-			this.distributer = distributer;
-		}
-
-		public static class DistributerBean {
-			/**
-			 * id : 2
-			 * registration_id : afadfasladsfsafadsf
-			 * deleted_at : null
-			 * created_at : null
-			 * updated_at : 2017-08-09 09:58:43
-			 * name : 王小海
-			 * email : greedying@163.com
-			 * mobile : 18923772567
-			 */
-
-			private int id;
-			private String registration_id;
-			private Object deleted_at;
-			private Object created_at;
-			private String updated_at;
-			private String name;
-			private String email;
-			private String mobile;
-
-			public int getId() {
-				return id;
-			}
-
-			public void setId(int id) {
-				this.id = id;
-			}
-
-			public String getRegistration_id() {
-				return registration_id;
-			}
-
-			public void setRegistration_id(String registration_id) {
-				this.registration_id = registration_id;
-			}
-
-			public Object getDeleted_at() {
-				return deleted_at;
-			}
-
-			public void setDeleted_at(Object deleted_at) {
-				this.deleted_at = deleted_at;
-			}
-
-			public Object getCreated_at() {
-				return created_at;
-			}
-
-			public void setCreated_at(Object created_at) {
-				this.created_at = created_at;
-			}
-
-			public String getUpdated_at() {
-				return updated_at;
-			}
-
-			public void setUpdated_at(String updated_at) {
-				this.updated_at = updated_at;
-			}
-
-			public String getName() {
-				return name;
-			}
-
-			public void setName(String name) {
-				this.name = name;
-			}
-
-			public String getEmail() {
-				return email;
-			}
-
-			public void setEmail(String email) {
-				this.email = email;
-			}
-
-			public String getMobile() {
-				return mobile;
-			}
-
-			public void setMobile(String mobile) {
-				this.mobile = mobile;
-			}
-		}
 	}
 
 	public static class OrderProductsBean {
 		/**
-		 * id : 1
-		 * product_id : 3
-		 * name : 信息有限公司之滕春梅
-		 * num : 3
-		 * options : [{"name":"娄","value":"伟","add_price":0}]
-		 * price : 7900
-		 * remark :
-		 * created_at : 2017-08-07 11:07:50
-		 * updated_at : 2017-08-07 11:07:50
+		 * id : 98
+		 * product_id : 898
+		 * name : 传媒有限公司之伍文娟
+		 * num : 8
+		 * packing_box_num : 0
+		 * packing_box_price : 4232
+		 * specs : []
+		 * price : 68750
+		 * remark : 科技有限公司传媒有限公司
+		 * created_at : 2017-08-21 15:16:24
+		 * updated_at : 2017-08-21 15:16:24
 		 */
 
 		private int id;
 		private int product_id;
 		private String name;
 		private int num;
+		private int packing_box_num;
+		private int packing_box_price;
 		private int price;
 		private String remark;
 		private String created_at;
 		private String updated_at;
-		private List<OptionsBean> options;
+		private List<?> specs;
 
 		public int getId() {
 			return id;
@@ -556,6 +642,22 @@ public class OrderDetail {
 
 		public void setNum(int num) {
 			this.num = num;
+		}
+
+		public int getPacking_box_num() {
+			return packing_box_num;
+		}
+
+		public void setPacking_box_num(int packing_box_num) {
+			this.packing_box_num = packing_box_num;
+		}
+
+		public int getPacking_box_price() {
+			return packing_box_price;
+		}
+
+		public void setPacking_box_price(int packing_box_price) {
+			this.packing_box_price = packing_box_price;
 		}
 
 		public int getPrice() {
@@ -590,48 +692,12 @@ public class OrderDetail {
 			this.updated_at = updated_at;
 		}
 
-		public List<OptionsBean> getOptions() {
-			return options;
+		public List<?> getSpecs() {
+			return specs;
 		}
 
-		public void setOptions(List<OptionsBean> options) {
-			this.options = options;
-		}
-
-		public static class OptionsBean {
-			/**
-			 * name : 娄
-			 * value : 伟
-			 * add_price : 0
-			 */
-
-			private String name;
-			private String value;
-			private int add_price;
-
-			public String getName() {
-				return name;
-			}
-
-			public void setName(String name) {
-				this.name = name;
-			}
-
-			public String getValue() {
-				return value;
-			}
-
-			public void setValue(String value) {
-				this.value = value;
-			}
-
-			public int getAdd_price() {
-				return add_price;
-			}
-
-			public void setAdd_price(int add_price) {
-				this.add_price = add_price;
-			}
+		public void setSpecs(List<?> specs) {
+			this.specs = specs;
 		}
 	}
 }

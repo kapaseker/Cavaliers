@@ -9,6 +9,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -18,10 +19,10 @@ import retrofit2.http.Query;
 public interface DistributeService {
 
 	@GET("orders")
-	Call<OrderList> listOrders(@Query("pager") int pager,@Query("status") int status);
+	Call<OrderList> listOrders(@Query("pager") int pager, @Query("status") int status);
 
-	@GET("order")
-	Call<OrderDetail> orderDetail(@Query("number") String number);
+	@GET("orders/{num}")
+	Call<OrderDetail> orderDetail(@Path("num") String number);
 
 	@POST("accepted-orders")
 	Call<Void> acceptOrder(@Body OrderNumber number);

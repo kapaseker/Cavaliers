@@ -36,19 +36,18 @@
         <include layout="@layout/layout_orderlistitem_dest"></include>
 
         <LinearLayout
+            android:id="@+id/wrapper_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/txt_margin_default"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <TextView
+                android:id="@+id/btnAction"
                 style="@style/ButtonOrderItem"
                 android:text="@string/receive_order"/>
 
-            <TextView
-                style="@style/ButtonOrderItem"
-                android:text="@string/ready_delivery"
-                android:visibility="gone"/>
         </LinearLayout>
     </LinearLayout>
 
