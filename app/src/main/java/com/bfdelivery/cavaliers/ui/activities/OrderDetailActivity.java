@@ -47,6 +47,8 @@ public class OrderDetailActivity extends BasePageActivity {
 	View mWrapperWating = null;
 	View mWrapperDeatilInfo = null;
 
+	TextView mTxtOrderIndex = null;
+
 	TextView mTxtRstName = null;
 	TextView mTxtRstAddr = null;
 	TextView mTxtRstPhone = null;
@@ -85,6 +87,8 @@ public class OrderDetailActivity extends BasePageActivity {
 		mWaitingBar = (ContentLoadingProgressBar) findViewById(R.id.waitingbar);
 		mWrapperDeatilInfo = findViewById(R.id.wrapper_detail);
 
+		mTxtOrderIndex = (TextView) findViewById(R.id.txtOrderIndex);
+
 		mTxtRstName = (TextView) findViewById(R.id.txtRstName);
 		mTxtRstAddr = (TextView) findViewById(R.id.txtRstAddr);
 		mTxtRstPhone = (TextView) findViewById(R.id.txtRstPhone);
@@ -120,6 +124,8 @@ public class OrderDetailActivity extends BasePageActivity {
 				mWrapperCommodity.setVisibility(checked ? View.VISIBLE : View.GONE);
 			}
 		});
+
+		mTxtOrderIndex.setText(getString(R.string.pre_pos, mIndex + 1));
 
 		mTxtUsrName.setText(mOutlineData.getUsrName());
 		mTxtUsrAddr.setText(mOutlineData.getUsrAddr());

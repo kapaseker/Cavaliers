@@ -96,4 +96,5 @@
 
     <string name="suffix_km">%sKM</string>
     <string name="suffix_m">%sM</string>
+    <string name="pre_pos">#%d</string>
 </resources>

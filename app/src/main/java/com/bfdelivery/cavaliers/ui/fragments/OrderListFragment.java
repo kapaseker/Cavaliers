@@ -179,7 +179,7 @@ public class OrderListFragment extends Fragment implements OnListItemListener {
 			mIndex = position;
 			mData = data;
 
-			mTxtIndex.setText("#" + (position + 1));
+			mTxtIndex.setText(itemView.getContext().getString(R.string.pre_pos, position + 1));
 			mTxtUsrAddr.setText(data.getAddress().getDetail());
 			mTxtUsrName.setText(data.getAddress().getName());
 
