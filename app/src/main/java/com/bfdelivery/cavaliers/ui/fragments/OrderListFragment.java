@@ -18,7 +18,7 @@ import com.bfdelivery.cavaliers.background.server.bean.response.OrderList;
 import com.bfdelivery.cavaliers.background.server.config.HttpStatus;
 import com.bfdelivery.cavaliers.background.server.request.CavV1Service;
 import com.bfdelivery.cavaliers.background.server.request.DistributeService;
-import com.bfdelivery.cavaliers.config.OrderDataEntry;
+import com.bfdelivery.cavaliers.constant.DeliveryStatus;
 import com.bfdelivery.cavaliers.dataset.ListOutlineData;
 import com.bfdelivery.cavaliers.ui.activities.OrderDetailActivity;
 
@@ -40,7 +40,7 @@ public class OrderListFragment extends Fragment {
 
 	DistributeService mService;
 
-	private int mOrderType = OrderDataEntry.NEW_RECEIVED;
+	private int mOrderType = DeliveryStatus.NEW_RECEIVED;
 
 	public static final String BUNDLE_KEY_ORDERTYPE = "order.type";
 
@@ -70,7 +70,7 @@ public class OrderListFragment extends Fragment {
 	}
 
 	private void handleData(Bundle data) {
-		mOrderType = data.getInt(BUNDLE_KEY_ORDERTYPE, OrderDataEntry.NEW_RECEIVED);
+		mOrderType = data.getInt(BUNDLE_KEY_ORDERTYPE, DeliveryStatus.NEW_RECEIVED);
 	}
 
 	private void requestOrder(int page) {

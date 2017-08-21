@@ -33,10 +33,11 @@ import com.bfdelivery.cavaliers.background.server.request.CavV1Service;
 import com.bfdelivery.cavaliers.background.server.request.DistributeService;
 import com.bfdelivery.cavaliers.config.LocationErrorCode;
 import com.bfdelivery.cavaliers.config.NecessaryPermission;
-import com.bfdelivery.cavaliers.config.OrderDataEntry;
+import com.bfdelivery.cavaliers.constant.DeliveryStatus;
 import com.bfdelivery.cavaliers.ui.activities.base.BaseActivity;
 import com.bfdelivery.cavaliers.ui.adapters.OrderFragmentPageAdapter;
 import com.bfdelivery.cavaliers.util.LocationClientFactory;
+import com.bfdelivery.cavaliers.util.LocationSaver;
 import com.cmccmap.permissionchecker.PermissionChecker;
 import com.cmccmap.permissionchecker.PermissionRequestor;
 
@@ -147,7 +148,7 @@ public class IndexActivity extends BaseActivity
 	@Override
 	protected void processViewAndData() {
 		mPagers.setAdapter(new OrderFragmentPageAdapter(getSupportFragmentManager(),
-				getResources().getStringArray(R.array.index_order_list), new int[]{OrderDataEntry.NEW_RECEIVED, OrderDataEntry.WAITING_TAKE, OrderDataEntry.DEIVERING}));
+				getResources().getStringArray(R.array.index_order_list), new int[]{DeliveryStatus.NEW_RECEIVED, DeliveryStatus.WAITING_TAKE, DeliveryStatus.DEIVERING}));
 		mTabs.setupWithViewPager(mPagers);
 	}
 
@@ -264,7 +265,7 @@ public class IndexActivity extends BaseActivity
 	public void onLocationChanged(AMapLocation aMapLocation) {
 
 		if (aMapLocation.getErrorCode() == LocationErrorCode.OK) {
-
+			LocationSaver.instance().saveLocation(aMapLocation.getLatitude(), aMapLocation.getLongitude());
 		} else {
 
 		}

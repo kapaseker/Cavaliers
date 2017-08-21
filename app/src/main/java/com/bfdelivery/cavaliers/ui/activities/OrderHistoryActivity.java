@@ -6,7 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.view.MenuItem;
 
 import com.bfdelivery.cavaliers.R;
-import com.bfdelivery.cavaliers.config.OrderDataEntry;
+import com.bfdelivery.cavaliers.constant.DeliveryStatus;
 import com.bfdelivery.cavaliers.ui.activities.base.BasePageActivity;
 import com.bfdelivery.cavaliers.ui.adapters.OrderFragmentPageAdapter;
 
@@ -35,7 +35,7 @@ public class OrderHistoryActivity extends BasePageActivity {
 		mPagers = (ViewPager) findViewById(R.id.viewpager);
 
 		mPagers.setAdapter(new OrderFragmentPageAdapter(getSupportFragmentManager(), getResources().getStringArray(R.array.history_order),
-				new int[]{OrderDataEntry.COMPLETED, OrderDataEntry.EXCEPTION}
+				new int[]{DeliveryStatus.COMPLETED, DeliveryStatus.EXCEPTION}
 		));
 		mTabs.setupWithViewPager(mPagers);
 	}
