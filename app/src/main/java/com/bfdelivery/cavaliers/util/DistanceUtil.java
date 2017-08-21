@@ -14,7 +14,7 @@ public class DistanceUtil {
 		String strDistance = "";
 
 		if (meter >= 1000F) {
-			strDistance = context.getString(R.string.suffix_km, "" + ((int) meter) / 1000f);
+			strDistance = context.getString(R.string.suffix_km, "" + ((int) (meter / 1000f * 10)) / 10F);
 		} else {
 			strDistance = context.getString(R.string.suffix_m, "" + ((int) meter));
 		}
