@@ -7,7 +7,6 @@ import java.util.List;
 /**
  * Created by Panoo on 2017/8/6.
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class OrderList {
 
 
@@ -340,6 +339,7 @@ public class OrderList {
 			this.order_products = order_products;
 		}
 
+		@JsonIgnoreProperties(ignoreUnknown = true)
 		public static class ShopBean {
 			/**
 			 * id : 1
@@ -629,9 +629,10 @@ public class OrderList {
 			private int status;
 			private int distributer_id;
 			private String distributer_name;
-			private Object deleted_at;
+			private String deleted_at;
 			private String created_at;
 			private String updated_at;
+			private String distributer_phone;
 
 			public int getId() {
 				return id;
@@ -665,11 +666,11 @@ public class OrderList {
 				this.distributer_name = distributer_name;
 			}
 
-			public Object getDeleted_at() {
+			public String getDeleted_at() {
 				return deleted_at;
 			}
 
-			public void setDeleted_at(Object deleted_at) {
+			public void setDeleted_at(String deleted_at) {
 				this.deleted_at = deleted_at;
 			}
 
@@ -687,6 +688,14 @@ public class OrderList {
 
 			public void setUpdated_at(String updated_at) {
 				this.updated_at = updated_at;
+			}
+
+			public String getDistributer_phone() {
+				return distributer_phone;
+			}
+
+			public void setDistributer_phone(String distributer_phone) {
+				this.distributer_phone = distributer_phone;
 			}
 		}
 

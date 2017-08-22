@@ -2,7 +2,7 @@ package com.bfdelivery.cavaliers.ui.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.bfdelivery.cavaliers.ui.fragments.OrderListFragment;
 
@@ -10,7 +10,7 @@ import com.bfdelivery.cavaliers.ui.fragments.OrderListFragment;
  * Created by Panoo on 2017/7/23.
  */
 
-public class OrderFragmentPageAdapter extends FragmentPagerAdapter {
+public class OrderFragmentPageAdapter extends FragmentStatePagerAdapter {
 
 	String[] mTitles = null;
 	int[] mOrderTypes = null;

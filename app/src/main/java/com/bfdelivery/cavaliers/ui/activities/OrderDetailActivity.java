@@ -1,8 +1,11 @@
 package com.bfdelivery.cavaliers.ui.activities;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.widget.ContentLoadingProgressBar;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,28 +13,42 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationListener;
 import com.bfdelivery.cavaliers.R;
 import com.bfdelivery.cavaliers.background.callbacks.BaseCallback;
+import com.bfdelivery.cavaliers.background.server.bean.request.OrderNumber;
 import com.bfdelivery.cavaliers.background.server.bean.response.OrderDetail;
 import com.bfdelivery.cavaliers.background.server.config.HttpStatus;
 import com.bfdelivery.cavaliers.background.server.request.CavV1Service;
 import com.bfdelivery.cavaliers.background.server.request.DistributeService;
+import com.bfdelivery.cavaliers.config.LocationErrorCode;
+import com.bfdelivery.cavaliers.constant.CavConfig;
+import com.bfdelivery.cavaliers.constant.DeliveryStatus;
 import com.bfdelivery.cavaliers.constant.PayType;
 import com.bfdelivery.cavaliers.database.location.LocationData;
 import com.bfdelivery.cavaliers.dataset.ListOutlineData;
 import com.bfdelivery.cavaliers.ui.activities.base.BasePageActivity;
 import com.bfdelivery.cavaliers.ui.views.OrderDetailItemView;
 import com.bfdelivery.cavaliers.util.DistanceUtil;
+import com.bfdelivery.cavaliers.util.LocationClientFactory;
 import com.bfdelivery.cavaliers.util.LocationSaver;
+import com.bfdelivery.cavaliers.util.OrderStringBridge;
 
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class OrderDetailActivity extends BasePageActivity {
+import static android.app.ProgressDialog.show;
+
+public class OrderDetailActivity extends BasePageActivity implements View.OnClickListener {
 
 	public static final String BUNDLE_KEY_POSTION = "OrderDetailActivity.index";
 	public static final String BUNDLE_KEY_LISTDATA = "OrderDetailActivity.listData";
+
+	AMapLocationClient mLocationClient = null;
 
 	OrderDetail mDetailInfo = null;
 
@@ -48,6 +65,7 @@ public class OrderDetailActivity extends BasePageActivity {
 	View mWrapperDeatilInfo = null;
 
 	TextView mTxtOrderIndex = null;
+	TextView mTxtOrderStatus = null;
 
 	TextView mTxtRstName = null;
 	TextView mTxtRstAddr = null;
@@ -58,6 +76,8 @@ public class OrderDetailActivity extends BasePageActivity {
 	TextView mTxtUsrAddr = null;
 	TextView mTxtUsrPhone = null;
 	TextView mTxtUsrDis = null;
+
+	TextView mBtnAction = null;
 
 	DistributeService mDistributeService = null;
 
@@ -71,6 +91,15 @@ public class OrderDetailActivity extends BasePageActivity {
 		mDistributeService = CavV1Service.createDistributeService();
 
 		requestOrderDetial();
+
+		mLocationClient = LocationClientFactory.createOnceTimeLocationClient(this);
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		mLocationClient.stopLocation();
+		mLocationClient.onDestroy();
 	}
 
 	@Override
@@ -87,7 +116,9 @@ public class OrderDetailActivity extends BasePageActivity {
 		mWaitingBar = (ContentLoadingProgressBar) findViewById(R.id.waitingbar);
 		mWrapperDeatilInfo = findViewById(R.id.wrapper_detail);
 
+		mTxtOrderStatus = (TextView) findViewById(R.id.txtOrderStatus);
 		mTxtOrderIndex = (TextView) findViewById(R.id.txtOrderIndex);
+		mBtnAction = (TextView) findViewById(R.id.btnAction);
 
 		mTxtRstName = (TextView) findViewById(R.id.txtRstName);
 		mTxtRstAddr = (TextView) findViewById(R.id.txtRstAddr);
@@ -114,7 +145,6 @@ public class OrderDetailActivity extends BasePageActivity {
 	@Override
 	protected void processViewAndData() {
 
-		mListCommodity.setAdapter(new CommodityAdapter());
 		mCommodityItem.setChecked(true);
 
 		mCommodityItem.setOnItemCheckListener(new OrderDetailItemView.OnItemCheckChangeListener() {
@@ -131,9 +161,14 @@ public class OrderDetailActivity extends BasePageActivity {
 		mTxtUsrAddr.setText(mOutlineData.getUsrAddr());
 		mTxtRstName.setText(mOutlineData.getRstName());
 		mTxtRstAddr.setText(mOutlineData.getRstAddr());
+		mBtnAction.setOnClickListener(this);
 	}
 
 	private void requestOrderDetial() {
+
+		mWrapperWating.setVisibility(View.VISIBLE);
+		mWrapperDeatilInfo.setVisibility(View.GONE);
+		mWaitingBar.show();
 
 		Call<OrderDetail> detail = mDistributeService.orderDetail(mOutlineData.getOrderId());
 		detail.enqueue(new BaseCallback<OrderDetail>() {
@@ -144,13 +179,12 @@ public class OrderDetailActivity extends BasePageActivity {
 
 				if (response.code() == HttpStatus.SC_OK) {
 					refreshData(response.body());
-				} else {
-
 				}
 			}
 
 			@Override
 			public void onComplete() {
+				mWaitingBar.hide();
 				mWrapperWating.setVisibility(View.GONE);
 				mWrapperDeatilInfo.setVisibility(View.VISIBLE);
 			}
@@ -160,6 +194,7 @@ public class OrderDetailActivity extends BasePageActivity {
 	private void refreshData(OrderDetail detailInfo) {
 		mDetailInfo = detailInfo;
 
+		mListCommodity.setAdapter(new CommodityAdapter());
 		mTxtRstName.setText(mDetailInfo.getShop().getName());
 		mTxtRstAddr.setText(mDetailInfo.getShop().getAddress());
 		mTxtRstPhone.setText(mDetailInfo.getShop().getPhone());
@@ -194,11 +229,204 @@ public class OrderDetailActivity extends BasePageActivity {
 				break;
 		}
 
+		mTxtOrderStatus.setText(OrderStringBridge.getStatusByOrderStatu(mDetailInfo.getDistribute().getStatus()));
+
 		mOrderTime.setDetail(mDetailInfo.getCreated_at());
 		mOrderId.setDetail(mDetailInfo.getNumber());
+
+		int resId = OrderStringBridge.getActionByOrderStatu(mDetailInfo.getDistribute().getStatus());
+
+		if (resId > 0) {
+			mBtnAction.setVisibility(View.VISIBLE);
+			mBtnAction.setText(resId);
+		} else {
+			mBtnAction.setVisibility(View.GONE);
+		}
+	}
+
+	@Override
+	public void onClick(View v) {
+		if (v == mBtnAction) {
+
+			switch (mDetailInfo.getDistribute().getStatus()) {
+				case DeliveryStatus.NEW_RECEIVED:
+					acceptOrder();
+					break;
+				case DeliveryStatus.WAITING_TAKE:
+					takeOrder();
+					break;
+				case DeliveryStatus.DEIVERING:
+					completeOrder();
+					break;
+			}
+		}
+	}
+
+	private void acceptOrder() {
+
+		new AlertDialog.Builder(this).setMessage(R.string.tip_receive_order).setPositiveButton(R.string.btn_sure_take, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				acceptOrderInner();
+			}
+
+		}).setNegativeButton(R.string.btn_not_sure, null).show();
+
+	}
+
+	private void acceptOrderInner() {
+		OrderNumber postParam = new OrderNumber(mDetailInfo.getNumber());
+		Call<Void> request = mDistributeService.acceptOrder(postParam);
+
+		final ProgressDialog watingDialog = show(this, null, getString(R.string.receiving_order), true);
+
+		request.enqueue(new BaseCallback<Void>() {
+			@Override
+			public void onResponse(Call<Void> call, Response<Void> response) {
+				super.onResponse(call, response);
+				if (response.code() == HttpStatus.SC_OK) {
+					Toast.makeText(OrderDetailActivity.this, R.string.receive_order_succeed, Toast.LENGTH_SHORT).show();
+					requestOrderDetial();
+				} else {
+					onFailure(call, null);
+				}
+			}
+
+			@Override
+			public void onFailure(Call<Void> call, Throwable t) {
+				super.onFailure(call, t);
+				Toast.makeText(OrderDetailActivity.this, R.string.receive_order_failed, Toast.LENGTH_SHORT).show();
+			}
+
+			@Override
+			public void onComplete() {
+				watingDialog.dismiss();
+			}
+		});
+	}
+
+	private void takeOrder() {
+		new AlertDialog.Builder(this).setMessage(R.string.tip_take_order).setPositiveButton(R.string.btn_begin_deli, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				takeOrderInner();
+			}
+
+		}).setNegativeButton(R.string.btn_waiting, null).show();
+	}
+
+	private void takeOrderInner() {
+		OrderNumber postParam = new OrderNumber(mDetailInfo.getNumber());
+		Call<Void> request = mDistributeService.sendOrder(postParam);
+
+		final ProgressDialog watingDialog = show(this, null, getString(R.string.tip_doing_act), true);
+
+		request.enqueue(new BaseCallback<Void>() {
+			@Override
+			public void onResponse(Call<Void> call, Response<Void> response) {
+				super.onResponse(call, response);
+				if (response.code() == HttpStatus.SC_OK) {
+					Toast.makeText(OrderDetailActivity.this, R.string.receive_order_succeed, Toast.LENGTH_SHORT).show();
+					requestOrderDetial();
+				} else {
+					onFailure(call, null);
+				}
+			}
+
+			@Override
+			public void onFailure(Call<Void> call, Throwable t) {
+				super.onFailure(call, t);
+				Toast.makeText(OrderDetailActivity.this, R.string.receive_order_failed, Toast.LENGTH_SHORT).show();
+			}
+
+			@Override
+			public void onComplete() {
+				watingDialog.dismiss();
+			}
+		});
+	}
+
+	private void completeOrder() {
+
+		new AlertDialog.Builder(this).setMessage(R.string.tip_complete_order).setPositiveButton(R.string.btn_complete_deli, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				affirmLocation();
+			}
+
+		}).setNegativeButton(R.string.btn_waiting, null).show();
+	}
+
+
+	private void affirmLocation() {
+
+		final ProgressDialog waitingDialog = ProgressDialog.show(this, null, getString(R.string.fetching_location), false);
+
+		mLocationClient.setLocationListener(new AMapLocationListener() {
+			@Override
+			public void onLocationChanged(AMapLocation aMapLocation) {
+				if (aMapLocation.getErrorCode() == LocationErrorCode.OK) {
+
+					float[] distance = new float[1];
+					Location.distanceBetween(mDetailInfo.getAddress().getLatitude(), mDetailInfo.getAddress().getLongitude(), aMapLocation.getLatitude(), aMapLocation.getLongitude(), distance);
+					if (distance[0] <= CavConfig.CAV_COMPLETE_ORDER_DISTANCE) {
+						completeOrderInner();
+					} else {
+						Toast.makeText(OrderDetailActivity.this, R.string.complete_order_failed_by_distance, Toast.LENGTH_SHORT).show();
+					}
+
+				} else {
+					Toast.makeText(OrderDetailActivity.this, R.string.complete_order_failed_by_location_failed, Toast.LENGTH_SHORT).show();
+				}
+
+				waitingDialog.dismiss();
+			}
+		});
+
+		mLocationClient.startLocation();
+	}
+
+	private void completeOrderInner() {
+		OrderNumber postParam = new OrderNumber(mDetailInfo.getNumber());
+		Call<Void> request = mDistributeService.completeOrder(postParam);
+
+		final ProgressDialog waitingDialog = show(this, null, getString(R.string.tip_doing_act), true);
+
+		request.enqueue(new BaseCallback<Void>() {
+			@Override
+			public void onResponse(Call<Void> call, Response<Void> response) {
+				super.onResponse(call, response);
+				if (response.code() == HttpStatus.SC_OK) {
+					Toast.makeText(OrderDetailActivity.this, R.string.complete_order_succeed, Toast.LENGTH_SHORT).show();
+					requestOrderDetial();
+				} else {
+					onFailure(call, null);
+				}
+			}
+
+			@Override
+			public void onFailure(Call<Void> call, Throwable t) {
+				super.onFailure(call, t);
+				Toast.makeText(OrderDetailActivity.this, R.string.complete_order_failed, Toast.LENGTH_SHORT).show();
+			}
+
+			@Override
+			public void onComplete() {
+				waitingDialog.dismiss();
+			}
+		});
 	}
 
 	private static class CommodityAdapter extends BaseAdapter {
+
+		private static class CommodityViewHolder {
+			TextView mTxtName;
+			TextView mTxtCount;
+			TextView mTxtPrice;
+
+			public CommodityViewHolder() {
+			}
+		}
 
 		@Override
 		public int getCount() {

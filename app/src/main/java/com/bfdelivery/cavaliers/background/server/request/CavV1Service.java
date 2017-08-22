@@ -1,6 +1,7 @@
 package com.bfdelivery.cavaliers.background.server.request;
 
 import com.bfdelivery.cavaliers.background.database.PreferenceRecorder;
+import com.bfdelivery.cavaliers.background.server.config.JacksonSafeConvertFactory;
 import com.bfdelivery.cavaliers.background.server.config.RequestConfig;
 
 import java.io.IOException;
@@ -10,7 +11,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.jackson.JacksonConverterFactory;
 
 /**
  * Created by Panoo on 2017/8/6.
@@ -42,7 +42,7 @@ public class CavV1Service {
 	private static final Retrofit distributerServiceBuilder = new Retrofit
 			.Builder()
 			.baseUrl(RequestConfig.DISTRIBUTER_HOST)
-			.addConverterFactory(JacksonConverterFactory.create())
+			.addConverterFactory(JacksonSafeConvertFactory.create())
 			.client(httpClientBuilder.build())
 			.build();
 

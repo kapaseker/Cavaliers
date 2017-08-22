@@ -235,6 +235,7 @@ public class OrderDetail {
 		this.order_products = order_products;
 	}
 
+	@JsonIgnoreProperties(ignoreUnknown = true)
 	public static class ShopBean {
 		/**
 		 * id : 1
@@ -370,6 +371,7 @@ public class OrderDetail {
 			this.average_minutes = average_minutes;
 		}
 
+		@JsonIgnoreProperties(ignoreUnknown = true)
 		public static class SellTimesBean {
 			private List<List<String>> friday;
 
@@ -383,6 +385,7 @@ public class OrderDetail {
 		}
 	}
 
+	@JsonIgnoreProperties(ignoreUnknown = true)
 	public static class AddressBean {
 		/**
 		 * order_id : 98
@@ -509,6 +512,7 @@ public class OrderDetail {
 		}
 	}
 
+	@JsonIgnoreProperties(ignoreUnknown = true)
 	public static class DistributeBean {
 		/**
 		 * id : 98
@@ -527,6 +531,7 @@ public class OrderDetail {
 		private Object deleted_at;
 		private String created_at;
 		private String updated_at;
+		private String distributer_phone;
 
 		public int getId() {
 			return id;
@@ -582,6 +587,14 @@ public class OrderDetail {
 
 		public void setUpdated_at(String updated_at) {
 			this.updated_at = updated_at;
+		}
+
+		public String getDistributer_phone() {
+			return distributer_phone;
+		}
+
+		public void setDistributer_phone(String distributer_phone) {
+			this.distributer_phone = distributer_phone;
 		}
 	}
 

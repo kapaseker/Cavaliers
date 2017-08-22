@@ -1,11 +1,13 @@
 package com.bfdelivery.cavaliers.ui.fragments;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.ContentLoadingProgressBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 
 import com.bfdelivery.cavaliers.R;
 import com.bfdelivery.cavaliers.background.callbacks.BaseCallback;
+import com.bfdelivery.cavaliers.background.server.bean.request.OrderNumber;
 import com.bfdelivery.cavaliers.background.server.bean.response.OrderList;
 import com.bfdelivery.cavaliers.background.server.config.HttpStatus;
 import com.bfdelivery.cavaliers.background.server.request.CavV1Service;
@@ -26,6 +29,7 @@ import com.bfdelivery.cavaliers.ui.activities.OrderDetailActivity;
 import com.bfdelivery.cavaliers.util.DataBridge;
 import com.bfdelivery.cavaliers.util.DistanceUtil;
 import com.bfdelivery.cavaliers.util.LocationSaver;
+import com.bfdelivery.cavaliers.util.OrderStringBridge;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +48,8 @@ public class OrderListFragment extends Fragment implements OnListItemListener {
 	ContentLoadingProgressBar mWaitingBar = null;
 
 	DistributeService mService;
+
+	private int mListPage = 1;
 
 	private int mOrderType = DeliveryStatus.NEW_RECEIVED;
 
@@ -71,7 +77,7 @@ public class OrderListFragment extends Fragment implements OnListItemListener {
 		super.onViewCreated(view, savedInstanceState);
 		handleData(getArguments());
 		initView(view);
-		requestOrder(1);
+		requestOrder(mListPage);
 	}
 
 	private void handleData(Bundle data) {
@@ -129,7 +135,41 @@ public class OrderListFragment extends Fragment implements OnListItemListener {
 
 	@Override
 	public void onAction(int position, OrderList.DataBean dataBean) {
+		if (dataBean.getDistribute().getStatus() == DeliveryStatus.NEW_RECEIVED) {
+			acceptOrder(dataBean);
+		}
+	}
 
+	private void acceptOrder(final OrderList.DataBean dataBean) {
+
+		new AlertDialog.Builder(getContext()).setMessage(R.string.tip_receive_order).setPositiveButton(R.string.btn_sure_take, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				acceptOrderInner(dataBean.getNumber());
+			}
+
+		}).setNegativeButton(R.string.btn_not_sure, null).show();
+
+	}
+
+	private void acceptOrderInner(String orderNumber) {
+		Call<Void> request = null;
+		OrderNumber postParam = new OrderNumber(orderNumber);
+		request = mService.acceptOrder(postParam);
+		request.enqueue(new BaseCallback<Void>() {
+			@Override
+			public void onResponse(Call<Void> call, Response<Void> response) {
+				super.onResponse(call, response);
+				if (response.code() == HttpStatus.SC_OK) {
+//					requestOrderDetial();
+				}
+			}
+
+			@Override
+			public void onComplete() {
+
+			}
+		});
 	}
 
 	private static final class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -197,20 +237,12 @@ public class OrderListFragment extends Fragment implements OnListItemListener {
 
 			mActionWrapper.setVisibility(View.VISIBLE);
 
-			switch (data.getStatus()) {
-				case DeliveryStatus.NEW_RECEIVED:
-					mButtonAction.setText(R.string.receive_order);
-					break;
-				case DeliveryStatus.WAITING_TAKE:
-					mButtonAction.setText(R.string.taken_order);
-					break;
-				case DeliveryStatus.DEIVERING:
-					mButtonAction.setText(R.string.complete_order);
-					break;
-				case DeliveryStatus.COMPLETED:
-				case DeliveryStatus.EXCEPTION:
-					mActionWrapper.setVisibility(View.GONE);
-					break;
+			int resID = OrderStringBridge.getActionByOrderStatu(data.getDistribute().getStatus());
+
+			if (resID > 0 && data.getDistribute().getStatus() == DeliveryStatus.NEW_RECEIVED) {
+				mButtonAction.setText(resID);
+			} else {
+				mActionWrapper.setVisibility(View.GONE);
 			}
 		}
 

@@ -24,6 +24,14 @@ public class LocationClientFactory {
 		return client;
 	}
 
+	public static final AMapLocationClient createOnceTimeLocationClient(Context appContext) {
+		AMapLocationClient client = new AMapLocationClient(appContext);
+		AMapLocationClientOption option = getDefaultOption();
+		option.setOnceLocation(true);
+		client.setLocationOption(option);
+		return client;
+	}
+
 	private static final AMapLocationClientOption getDefaultOption() {
 		AMapLocationClientOption option = new AMapLocationClientOption();
 		option.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);

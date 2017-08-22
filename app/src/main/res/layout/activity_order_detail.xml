@@ -17,7 +17,6 @@
         android:background="@drawable/slct_orderdetialbottom_control"
         android:gravity="center"
         android:padding="@dimen/txt_margin_large"
-        android:text="@string/complete_delivery"
         android:textColor="@android:color/white"
         android:textSize="@dimen/txt_size_big"/>
 
@@ -43,11 +42,10 @@
                     style="@style/OrderIndex"/>
 
                 <TextView
-                    android:id="@+id/txtOderStatus"
+                    android:id="@+id/txtOrderStatus"
                     style="@style/OrderDetailStatus"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/txt_margin_small"
-                    android:text="配送中"/>
+                    android:layout_marginRight="@dimen/txt_margin_small"/>
             </RelativeLayout>
 
             <include layout="@layout/layout_horizontal_dot_gap"/>
@@ -81,13 +79,11 @@
 
                         <TextView
                             android:id="@+id/txtRstName"
-                            style="@style/OrderDetailItemName"
-                            android:text="宝庆美食园(春晖店)"/>
+                            style="@style/OrderDetailItemName"/>
 
                         <TextView
                             android:id="@+id/txtRstAddr"
-                            style="@style/OrderDetailItemDetail"
-                            android:text="雨山区印山东路696号101室"/>
+                            style="@style/OrderDetailItemDetail"/>
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -102,7 +98,6 @@
                             <TextView
                                 android:id="@+id/txtRstPhone"
                                 style="@style/OrderItemDial"
-                                android:text=""
                                 />
 
                         </LinearLayout>
@@ -144,8 +139,7 @@
 
                             <TextView
                                 android:id="@+id/txtUsrAddr"
-                                style="@style/OrderDetailItemName"
-                                android:text="雨山区慈湖河路690号附近"/>
+                                style="@style/OrderDetailItemName"/>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -154,8 +148,7 @@
 
                                 <TextView
                                     android:id="@+id/txtUsrName"
-                                    style="@style/OrderDetailItemDetail"
-                                    android:text="王先生"/>
+                                    style="@style/OrderDetailItemDetail"/>
 
                             </LinearLayout>
 
@@ -240,9 +233,9 @@
                         layout="@layout/layout_horizontal_gap"></include>
 
                     <com.bfdelivery.cavaliers.ui.views.OrderDetailItemView
+                        android:id="@+id/orderNote"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/orderNote"
                         app:detailColor="@color/colorTxtAlert"
                         app:tag="@string/order_remark"/>
 
@@ -256,11 +249,10 @@
                         android:paddingRight="@dimen/txt_margin_default">
 
                         <com.bfdelivery.cavaliers.ui.views.OrderDetailItemView
+                            android:id="@+id/orderPay"
                             android:layout_width="0px"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:id="@+id/orderPay"
-                            app:detail="@string/wechat_pay"
                             app:detailColor="@color/colorWeixin"
                             app:tag="@string/payment_mode"/>
 
@@ -272,6 +264,7 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                android:id="@+id/txtCountPrefix"
                                 style="@style/TipTitle"
                                 android:text="@string/makeorder_pre"/>
 
@@ -282,6 +275,7 @@
                                 android:textSize="@dimen/txt_size_big"/>
 
                             <TextView
+                                android:id="@+id/txtCountSuffix"
                                 style="@style/TipTitle"
                                 android:text="@string/makeorder_after"/>
 
@@ -338,11 +332,11 @@
                                 android:layout_weight="1"/>
 
                             <TextView
+                                android:id="@+id/txtDiscount"
                                 style="@style/DefaultText"
                                 android:layout_width="0px"
                                 android:layout_weight="1"
                                 android:gravity="right"
-                                android:text="-￥14"
                                 android:textColor="@color/colorTxtAlert"/>
 
                         </LinearLayout>
@@ -357,12 +351,12 @@
 
                             <TextView
                                 style="@style/DefaultText"
-                                android:text="实付："
+                                android:text="@string/actual_fee"
                                 android:textSize="@dimen/txt_size_big"/>
 
                             <TextView
+                                android:id="@+id/txtRealFee"
                                 style="@style/DefaultText"
-                                android:text="￥47"
                                 android:textColor="@color/colorTxtPrimary"
                                 android:textSize="@dimen/txt_size_big"/>
 
@@ -376,7 +370,6 @@
                         android:id="@+id/itemOrderTime"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:detail="2017-08-08 20:53:39"
                         app:tag="@string/mkorder_time"/>
 
                     <include layout="@layout/layout_horizontal_gap"></include>
@@ -385,7 +378,6 @@
                         android:id="@+id/itemOrderId"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:detail="000100000002"
                         app:tag="@string/order_number"/>
 
                     <include layout="@layout/layout_horizontal_gap"></include>
