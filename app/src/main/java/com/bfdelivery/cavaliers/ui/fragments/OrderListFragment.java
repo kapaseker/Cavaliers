@@ -5,8 +5,7 @@ import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.ContentLoadingProgressBar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,6 +25,7 @@ import com.bfdelivery.cavaliers.constant.DeliveryStatus;
 import com.bfdelivery.cavaliers.database.location.LocationData;
 import com.bfdelivery.cavaliers.dataset.ListOutlineData;
 import com.bfdelivery.cavaliers.ui.activities.OrderDetailActivity;
+import com.bfdelivery.cavaliers.ui.fragments.base.BaseFragment;
 import com.bfdelivery.cavaliers.util.DataBridge;
 import com.bfdelivery.cavaliers.util.DistanceUtil;
 import com.bfdelivery.cavaliers.util.LocationSaver;
@@ -41,11 +41,12 @@ import retrofit2.Response;
  * 订单页面
  */
 
-public class OrderListFragment extends Fragment implements OnListItemListener {
+public class OrderListFragment extends BaseFragment implements OnListItemListener, SwipeRefreshLayout.OnRefreshListener {
 
+	SwipeRefreshLayout mRefreshLayout = null;
 	RecyclerView mListOrder = null;
 	OrderAdapter mOrderAdapter = null;
-	ContentLoadingProgressBar mWaitingBar = null;
+//	ContentLoadingProgressBar mWaitingBar = null;
 
 	DistributeService mService;
 
@@ -65,26 +66,33 @@ public class OrderListFragment extends Fragment implements OnListItemListener {
 		return fragment;
 	}
 
-	@Nullable
 	@Override
-	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.fragment_order, container, false);
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		handleData(getArguments());
 	}
 
+	@Override
+	protected void initializeView(View rootView, Bundle savedInstanceState) {
+		initView(rootView);
+		requestOrder();
+	}
 
 	@Override
-	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
-		handleData(getArguments());
-		initView(view);
-		requestOrder(mListPage);
+	public int getLayoutResource() {
+		return R.layout.fragment_order;
 	}
 
 	private void handleData(Bundle data) {
 		mOrderType = data.getInt(BUNDLE_KEY_ORDERTYPE, DeliveryStatus.NEW_RECEIVED);
 	}
 
-	private void requestOrder(int page) {
+	private void requestOrder() {
+		mRefreshLayout.setRefreshing(true);
+		requestOrderInner(mListPage);
+	}
+
+	private void requestOrderInner(int page) {
 		mService = CavV1Service.createDistributeService();
 		final Call<OrderList> request = mService.listOrders(page, mOrderType);
 		request.enqueue(new BaseCallback<OrderList>() {
@@ -97,7 +105,6 @@ public class OrderListFragment extends Fragment implements OnListItemListener {
 			public void onResponse(Call<OrderList> call, Response<OrderList> response) {
 				super.onResponse(call, response);
 				if (response.code() == HttpStatus.SC_OK) {
-					mWaitingBar.hide();
 					mOrderAdapter.refreshData(response.body().getData());
 					mListOrder.setVisibility(View.VISIBLE);
 				}
@@ -105,21 +112,23 @@ public class OrderListFragment extends Fragment implements OnListItemListener {
 
 			@Override
 			public void onComplete() {
-				mWaitingBar.setVisibility(View.GONE);
+				mRefreshLayout.setRefreshing(false);
 			}
 		});
-		mWaitingBar.setVisibility(View.VISIBLE);
 	}
 
 	private void initView(View view) {
 		mListOrder = (RecyclerView) view.findViewById(R.id.list_order);
-		mWaitingBar = (ContentLoadingProgressBar) view.findViewById(R.id.waitingbar);
+		mRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefresh);
+//		mWaitingBar = (ContentLoadingProgressBar) view.findViewById(R.id.waitingbar);
 
 		mListOrder.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 		mListOrder.setHasFixedSize(true);
 
 		mOrderAdapter = new OrderAdapter(this);
 		mListOrder.setAdapter(mOrderAdapter);
+
+		mRefreshLayout.setOnRefreshListener(this);
 	}
 
 	@Override
@@ -161,7 +170,7 @@ public class OrderListFragment extends Fragment implements OnListItemListener {
 			public void onResponse(Call<Void> call, Response<Void> response) {
 				super.onResponse(call, response);
 				if (response.code() == HttpStatus.SC_OK) {
-//					requestOrderDetial();
+					requestOrder();
 				}
 			}
 
@@ -170,6 +179,11 @@ public class OrderListFragment extends Fragment implements OnListItemListener {
 
 			}
 		});
+	}
+
+	@Override
+	public void onRefresh() {
+		requestOrderInner(mListPage);
 	}
 
 	private static final class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
