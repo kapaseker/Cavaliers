@@ -4,6 +4,7 @@ import com.bfdelivery.cavaliers.background.server.bean.request.JPushParam;
 import com.bfdelivery.cavaliers.background.server.bean.request.OrderNumber;
 import com.bfdelivery.cavaliers.background.server.bean.response.OrderDetail;
 import com.bfdelivery.cavaliers.background.server.bean.response.OrderList;
+import com.bfdelivery.cavaliers.background.server.bean.response.PersonInfoBean;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -24,6 +25,9 @@ public interface DistributeService {
 	@GET("orders/{num}")
 	Call<OrderDetail> orderDetail(@Path("num") String number);
 
+	@GET("my-infos")
+	Call<PersonInfoBean> personInfo();
+
 	@POST("accepted-orders")
 	Call<Void> acceptOrder(@Body OrderNumber number);
 
@@ -35,4 +39,6 @@ public interface DistributeService {
 
 	@POST("jpushs")
 	Call<Void> jpushToken(@Body JPushParam param);
+
+
 }

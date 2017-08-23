@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'org.greenrobot.greendao'
 android {
     compileSdkVersion 25
     buildToolsVersion "26.0.0"
@@ -49,11 +48,6 @@ android {
     }
 }
 
-
-greendao {
-    targetGenDir 'src/main/java'
-}
-
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -71,6 +65,7 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-databind:2.8.9'
     compile 'com.fasterxml.jackson.core:jackson-core:2.8.9'
     compile 'org.greenrobot:greendao:3.2.2'
+    compile 'org.greenrobot:greendao-generator:3.2.2'
     testCompile 'junit:junit:4.12'
     compile project(':permissioncheker-1.1.7')
 }

@@ -19,9 +19,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -34,10 +34,12 @@ import com.bfdelivery.cavaliers.background.server.request.DistributeService;
 import com.bfdelivery.cavaliers.config.LocationErrorCode;
 import com.bfdelivery.cavaliers.config.NecessaryPermission;
 import com.bfdelivery.cavaliers.constant.DeliveryStatus;
+import com.bfdelivery.cavaliers.database.userinfo.UserInfo;
 import com.bfdelivery.cavaliers.ui.activities.base.BaseActivity;
 import com.bfdelivery.cavaliers.ui.adapters.OrderFragmentPageAdapter;
 import com.bfdelivery.cavaliers.util.LocationClientFactory;
 import com.bfdelivery.cavaliers.util.LocationSaver;
+import com.bfdelivery.cavaliers.util.UserInfoManager;
 import com.cmccmap.permissionchecker.PermissionChecker;
 import com.cmccmap.permissionchecker.PermissionRequestor;
 
@@ -53,8 +55,8 @@ public class IndexActivity extends BaseActivity
 	DrawerLayout mDrawer = null;
 
 	View mPortraitView = null;
-	View mNameView = null;
-	View mDescriptionVew = null;
+	TextView mNameView = null;
+	TextView mDescriptionVew = null;
 
 	DistributeService mDistributeService = null;
 
@@ -134,8 +136,8 @@ public class IndexActivity extends BaseActivity
 		View headView = navigationView.getHeaderView(0);
 
 		mPortraitView = headView.findViewById(R.id.imgHeadPortrait);
-		mNameView = headView.findViewById(R.id.usrName);
-		mDescriptionVew = headView.findViewById(R.id.usrDescription);
+		mNameView = (TextView) headView.findViewById(R.id.usrName);
+		mDescriptionVew = (TextView) headView.findViewById(R.id.usrDescription);
 
 		headView.setOnClickListener(this);
 	}
@@ -162,27 +164,27 @@ public class IndexActivity extends BaseActivity
 		}
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.index, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onPrepareOptionsMenu(Menu menu) {
-		return super.onPrepareOptionsMenu(menu);
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		int id = item.getItemId();
-
-		if (id == R.id.action_msg) {
-			return true;
-		}
-
-		return super.onOptionsItemSelected(item);
-	}
+//	@Override
+//	public boolean onCreateOptionsMenu(Menu menu) {
+//		getMenuInflater().inflate(R.menu.index, menu);
+//		return true;
+//	}
+//
+//	@Override
+//	public boolean onPrepareOptionsMenu(Menu menu) {
+//		return super.onPrepareOptionsMenu(menu);
+//	}
+//
+//	@Override
+//	public boolean onOptionsItemSelected(MenuItem item) {
+//		int id = item.getItemId();
+//
+//		if (id == R.id.action_msg) {
+//			return true;
+//		}
+//
+//		return super.onOptionsItemSelected(item);
+//	}
 
 	@SuppressWarnings("StatementWithEmptyBody")
 	@Override
@@ -275,6 +277,22 @@ public class IndexActivity extends BaseActivity
 
 	private void afterLogin() {
 		processNecessaryPermission();
+		UserInfoManager.instance().fetchUserInfo(new UserInfoManager.OnUserInfoListener() {
+			@Override
+			public void onUserInfoReceived(UserInfo info) {
+				updateUserInfo(info);
+			}
+
+			@Override
+			public void onBegin() {
+
+			}
+		});
+	}
+
+	private void updateUserInfo(UserInfo info) {
+		mDescriptionVew.setText(info.getUserPhone());
+		mNameView.setText(info.getUserName());
 	}
 
 	private void processNecessaryPermission() {
@@ -309,8 +327,8 @@ public class IndexActivity extends BaseActivity
 	private ActivityOptionsCompat createUserCenterShareOption() {
 
 		Pair<View, String> headPair = Pair.create(mPortraitView, getString(R.string.transition_head));
-		Pair<View, String> namePair = Pair.create(mNameView, getString(R.string.transition_title));
-		Pair<View, String> descPair = Pair.create(mDescriptionVew, getString(R.string.transition_desc));
+		Pair<View, String> namePair = Pair.create((View) mNameView, getString(R.string.transition_title));
+		Pair<View, String> descPair = Pair.create((View) mDescriptionVew, getString(R.string.transition_desc));
 
 		return ActivityOptionsCompat.makeSceneTransitionAnimation(this, headPair, namePair, descPair);
 	}

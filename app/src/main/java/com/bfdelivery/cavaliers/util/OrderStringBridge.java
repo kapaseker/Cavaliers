@@ -17,10 +17,11 @@ public class OrderStringBridge {
 			case DeliveryStatus.WAITING_TAKE:
 				return (R.string.wait_take);
 			case DeliveryStatus.EXCEPTION:
+				return (R.string.order_exception);
 			case DeliveryStatus.COMPLETED:
 				return (R.string.order_completed);
 			default:
-				return (R.string.order_completed);
+				return (R.string.order_unknown);
 		}
 	}
 

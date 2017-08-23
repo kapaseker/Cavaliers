@@ -92,6 +92,8 @@
     <string name="wait_take">待取餐</string>
     <string name="delivering">配送中</string>
     <string name="order_completed">配送完成</string>
+    <string name="order_exception">异常订单</string>
+    <string name="order_unknown">未知订单</string>
 
     <string name="delivery_demand">配送要求：</string>
     <string name="delivery_expect">期望到达：</string>

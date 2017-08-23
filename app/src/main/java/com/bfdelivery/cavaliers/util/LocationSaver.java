@@ -4,7 +4,7 @@ import com.bfdelivery.cavaliers.database.location.LocationData;
 import com.bfdelivery.cavaliers.database.location.LocationDataService;
 
 /**
- * Created by Panoo on 2017/8/21.
+ * 定位位置保存器
  */
 
 public class LocationSaver {
@@ -16,13 +16,12 @@ public class LocationSaver {
 	}
 
 	public void saveLocation(double latitude, double longitude) {
-		saveLocation(new LocationData(null, latitude, longitude, System.currentTimeMillis()));
+		saveLocation(new LocationData(null, latitude, longitude, 0L));
 	}
 
-	public void saveLocation(LocationData data) {
-		LocationDataService dataService = LocationDataService.getInstance();
-		dataService.deleteAll();
-		dataService.insert(data);
+	public LocationSaver saveLocation(LocationData data) {
+		LocationDataService.getInstance().saveLocation(data);
+		return this;
 	}
 
 	public LocationData getLocation() {

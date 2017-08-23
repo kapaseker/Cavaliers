@@ -6,4 +6,5 @@ package com.bfdelivery.cavaliers.database;
 
 public class DBDataEntry {
 	public static final String DB_LOCATION = "db_location";
+	public static final String DB_USER = "db_user";
 }

@@ -35,4 +35,12 @@ public class LocationDataService extends BaseDataService<LocationData> {
 	public AbstractDao getDataDao() {
 		return mDataDao;
 	}
+
+	public void saveLocation(LocationData locationData) {
+		locationData.setGentime(System.currentTimeMillis());
+		if (count() > 0) {
+			deleteAll();
+		}
+		insert(locationData);
+	}
 }
