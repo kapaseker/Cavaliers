@@ -74,12 +74,14 @@ public class IndexActivity extends BaseActivity
 		mLocationClient = LocationClientFactory.createLocationClient(this);
 		mLocationClient.setLocationListener(this);
 
-		if (PreferenceRecorder.needLogin()) {
-			// login
-			startActivityForResult(new Intent(this, LoginActivity.class), REQUEST_LOGIN);
-		} else {
-			afterLogin();
-		}
+		afterCreate();
+	}
+
+	@Override
+	protected void onNewIntent(Intent intent) {
+		super.onNewIntent(intent);
+
+		afterCreate();
 	}
 
 	@Override
@@ -104,11 +106,6 @@ public class IndexActivity extends BaseActivity
 	protected void onDestroy() {
 		super.onDestroy();
 		mLocationClient.onDestroy();
-	}
-
-	@Override
-	protected void onNewIntent(Intent intent) {
-		super.onNewIntent(intent);
 	}
 
 	@Override
@@ -273,6 +270,17 @@ public class IndexActivity extends BaseActivity
 		}
 
 		Log.d("AMAPPOS", aMapLocation.getLatitude() + "," + aMapLocation.getLongitude());
+	}
+
+	private void afterCreate() {
+
+		if (PreferenceRecorder.needLogin()) {
+			// login
+			startActivityForResult(new Intent(this, LoginActivity.class), REQUEST_LOGIN);
+		} else {
+			afterLogin();
+		}
+
 	}
 
 	private void afterLogin() {

@@ -43,7 +43,9 @@ public class NewOrderTipActivity extends BaseActivity implements View.OnClickLis
 	public void onClick(View v) {
 		switch (v.getId()) {
 			case R.id.btnCheck:
-				startActivity(new Intent(this, IndexActivity.class));
+				Intent intent = new Intent(this, IndexActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(intent);
 				break;
 		}
 	}

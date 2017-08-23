@@ -32,7 +32,7 @@ public class CavV1Service {
 			}
 
 			requestBuilder.header("Accept", "application/json")
-					.header("Authorization", "Bearer " + PreferenceRecorder.getToken())
+					.header("Authorization", "Bearer " + PreferenceRecorder.getAccessToken())
 					.build();
 
 			return chain.proceed(requestBuilder.build());

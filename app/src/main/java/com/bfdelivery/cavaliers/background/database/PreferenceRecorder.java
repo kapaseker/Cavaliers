@@ -36,10 +36,10 @@ public final class PreferenceRecorder {
 	}
 
 	public static boolean needLogin() {
-		return TextUtils.isEmpty(getToken());
+		return TextUtils.isEmpty(getAccessToken());
 	}
 
-	public static String getToken() {
+	public static String getAccessToken() {
 		return (String) readData(ACCESS_TOKEN, "", INNERTYPE.STRING);
 	}
 

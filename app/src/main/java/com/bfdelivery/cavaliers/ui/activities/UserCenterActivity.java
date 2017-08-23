@@ -1,10 +1,13 @@
 package com.bfdelivery.cavaliers.ui.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.bfdelivery.cavaliers.R;
 import com.bfdelivery.cavaliers.background.callbacks.BaseCallback;
+import com.bfdelivery.cavaliers.background.database.PreferenceRecorder;
 import com.bfdelivery.cavaliers.background.server.bean.response.PersonInfoBean;
 import com.bfdelivery.cavaliers.background.server.config.HttpStatus;
 import com.bfdelivery.cavaliers.background.server.request.CavV1Service;
@@ -16,10 +19,11 @@ import com.bfdelivery.cavaliers.util.UserInfoManager;
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class UserCenterActivity extends BasePageActivity {
+public class UserCenterActivity extends BasePageActivity implements View.OnClickListener {
 
 	TextView mTxtUsrName;
 	TextView mTxtUsrPhone;
+	View mBtnSignOut;
 
 	OrderDetailItemView mItemUsrId;
 	OrderDetailItemView mItemGrade;
@@ -42,12 +46,25 @@ public class UserCenterActivity extends BasePageActivity {
 		mItemUsrId = (OrderDetailItemView) findViewById(R.id.itemId);
 		mItemGrade = (OrderDetailItemView) findViewById(R.id.itemGrade);
 		mItemOrderCount = (OrderDetailItemView) findViewById(R.id.itemCount);
+		mBtnSignOut = findViewById(R.id.btnSignOut);
 		getSupportActionBar().setTitle(R.string.user_center);
+
+		mBtnSignOut.setOnClickListener(this);
 	}
 
 	@Override
 	protected void handleData(Bundle data) {
 
+	}
+
+	@Override
+	public void onClick(View v) {
+		if (v == mBtnSignOut) {
+			PreferenceRecorder.saveAccessToken("");
+			Intent intent = new Intent(this, IndexActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
+		}
 	}
 
 	@Override
