@@ -81,8 +81,7 @@
 
                 <TextView
                     android:id="@+id/txtOrderCount"
-                    style="@style/DailySettleDetail"
-                    android:text="@string/tstOrderCount"/>
+                    style="@style/DailySettleDetail"/>
             </LinearLayout>
 
             <View
@@ -120,8 +119,7 @@
 
                         <TextView
                             android:id="@+id/txtOnline"
-                            style="@style/DailySettleDetail"
-                            android:text="@string/tstIncome"/>
+                            style="@style/DailySettleDetail"/>
                     </LinearLayout>
 
                     <View
@@ -142,8 +140,7 @@
 
                         <TextView
                             android:id="@+id/txtCash"
-                            style="@style/DailySettleDetail"
-                            android:text="@string/tstIncome"/>
+                            style="@style/DailySettleDetail"/>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
