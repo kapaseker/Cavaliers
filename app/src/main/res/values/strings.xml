@@ -118,6 +118,9 @@
     <string name="permission_necessary_tip">为了帮助您更好的使用本产品，希望您给予本产品申请的相关权限。</string>
     <string name="i_know">我知道了</string>
 
+    <string name="prefix_rmb">￥%.1f</string>
+    <string name="suffix_count">%d单</string>
+
     <!--    Test String Resource     -->
     <string name="tstUserName">欧阳正茂</string>
     <string name="tstPhone">135****9837</string>

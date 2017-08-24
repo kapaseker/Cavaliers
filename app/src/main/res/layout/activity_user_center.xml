@@ -74,14 +74,6 @@
         <include layout="@layout/layout_horizontal_gap"></include>
 
         <com.bfdelivery.cavaliers.ui.views.OrderDetailItemView
-            android:id="@+id/itemGrade"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:tag="@string/cav_grade"></com.bfdelivery.cavaliers.ui.views.OrderDetailItemView>
-
-        <include layout="@layout/layout_horizontal_gap"></include>
-
-        <com.bfdelivery.cavaliers.ui.views.OrderDetailItemView
             android:id="@+id/itemCount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

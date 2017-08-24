@@ -26,7 +26,6 @@ public class UserCenterActivity extends BasePageActivity implements View.OnClick
 	View mBtnSignOut;
 
 	OrderDetailItemView mItemUsrId;
-	OrderDetailItemView mItemGrade;
 	OrderDetailItemView mItemOrderCount;
 
 	@Override
@@ -44,7 +43,6 @@ public class UserCenterActivity extends BasePageActivity implements View.OnClick
 		mTxtUsrName = (TextView) findViewById(R.id.txtUsrName);
 		mTxtUsrPhone = (TextView) findViewById(R.id.txtUsrPhone);
 		mItemUsrId = (OrderDetailItemView) findViewById(R.id.itemId);
-		mItemGrade = (OrderDetailItemView) findViewById(R.id.itemGrade);
 		mItemOrderCount = (OrderDetailItemView) findViewById(R.id.itemCount);
 		mBtnSignOut = findViewById(R.id.btnSignOut);
 		getSupportActionBar().setTitle(R.string.user_center);
@@ -100,7 +98,6 @@ public class UserCenterActivity extends BasePageActivity implements View.OnClick
 		mTxtUsrName.setText(info.getName());
 		mTxtUsrPhone.setText(info.getMobile());
 		mItemUsrId.setDetail(info.getId() + "");
-		mItemGrade.setDetail(info.getScore() + "");
-		mItemOrderCount.setDetail(info.getOrder_num() + "");
+		mItemOrderCount.setDetail(getString(R.string.suffix_count, info.getTotal_orders()));
 	}
 }
