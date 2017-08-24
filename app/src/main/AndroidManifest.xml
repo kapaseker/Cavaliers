@@ -66,6 +66,12 @@
             android:name=".ui.activities.LoginActivity"
             android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".ui.activities.DailySettleActivity"/>
+        <activity
+            android:name=".ui.activities.NewOrderTipActivity"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance"
+            android:taskAffinity=":NewOrderTip">
+        </activity>
 
         <!--定位服务-->
         <service android:name="com.amap.api.location.APSService"/>
@@ -155,12 +161,6 @@
             </intent-filter>
         </receiver>
         <!-- 以上为jpush的内容 -->
-        <activity
-            android:name=".ui.activities.NewOrderTipActivity"
-            android:launchMode="singleTask"
-            android:taskAffinity=":NewOrderTip"
-            >
-        </activity>
     </application>
 
 </manifest>

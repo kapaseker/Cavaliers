@@ -8,6 +8,9 @@ import android.os.Bundle;
 import com.bfdelivery.cavaliers.background.database.PreferenceRecorder;
 import com.bfdelivery.cavaliers.ui.activities.NewOrderTipActivity;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import cn.jpush.android.api.JPushInterface;
 
 public class JpushMsgReceiver extends BroadcastReceiver {
@@ -29,8 +32,21 @@ public class JpushMsgReceiver extends BroadcastReceiver {
 	}
 
 	private void processMsg(Context context, Bundle data) {
-		Intent newMsgIntent = new Intent(context, NewOrderTipActivity.class);
-		newMsgIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		context.startActivity(newMsgIntent);
+
+		String msgContent = data.getString(JPushInterface.EXTRA_MESSAGE);
+
+		try {
+			JSONObject jsonObject = new JSONObject(msgContent);
+			String type = jsonObject.getString("type");
+			if ("neworder".equals(type)) {
+				Intent newMsgIntent = new Intent(context, NewOrderTipActivity.class);
+				newMsgIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				newMsgIntent.putExtras(data);
+				context.startActivity(newMsgIntent);
+			}
+		} catch (JSONException e) {
+
+		}
+
 	}
 }

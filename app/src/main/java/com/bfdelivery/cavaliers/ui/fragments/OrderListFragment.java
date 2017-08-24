@@ -218,7 +218,7 @@ public class OrderListFragment extends BaseFragment implements OnListItemListene
 			mTxtRstAddr = (TextView) itemView.findViewById(R.id.txtRstrtAddr);
 			mTxtRstDis = (TextView) itemView.findViewById(R.id.txtRstrtDis);
 
-			mTxtUsrAddr = (TextView) itemView.findViewById(R.id.txtUsrAddress);
+			mTxtUsrAddr = (TextView) itemView.findViewById(R.id.txtUsrAddr);
 			mTxtUsrName = (TextView) itemView.findViewById(R.id.txtUsrName);
 			mTxtUsrDis = (TextView) itemView.findViewById(R.id.txtUsrDis);
 

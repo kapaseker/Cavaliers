@@ -39,8 +39,7 @@
         <TextView
             android:id="@+id/txtRstrtDis"
             style="@style/DefaultText"
-            android:layout_gravity="center_vertical"
-            android:text="2KM"/>
+            android:layout_gravity="center_vertical"/>
     </LinearLayout>
 
     <LinearLayout
@@ -62,20 +61,17 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/txtUsrAddress"
+                android:id="@+id/txtUsrAddr"
                 style="@style/OrderItemName"
-                android:text="雨山区慈湖河路690号附近"
                 />
 
             <TextView
                 android:id="@+id/txtUsrName"
-                style="@style/OrderItemDetail"
-                android:text="李女士"/>
+                style="@style/OrderItemDetail"/>
 
             <TextView
                 android:id="@+id/txtUsrPhone"
                 style="@style/OrderItemDial"
-                android:text="15309392838"
                 android:visibility="gone"
                 />
         </LinearLayout>
@@ -83,7 +79,6 @@
         <TextView
             android:id="@+id/txtUsrDis"
             style="@style/DefaultText"
-            android:layout_gravity="center_vertical"
-            android:text="6KM"/>
+            android:layout_gravity="center_vertical"/>
     </LinearLayout>
 </LinearLayout>

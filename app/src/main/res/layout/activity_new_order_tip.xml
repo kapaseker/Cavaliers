@@ -23,7 +23,7 @@
 
         <TextView
             style="@style/WrapperText"
-            android:text="您有新的订单啦！"
+            android:text="@string/tip_new_order"
             android:textColor="@color/white"
             android:textSize="@dimen/txt_size_superBig"
             />
