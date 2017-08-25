@@ -8,6 +8,28 @@ import com.bfdelivery.cavaliers.constant.DeliveryStatus;
  */
 
 public class OrderStringBridge {
+
+	public static final String getSecretPhone(String phone) {
+
+		String secretPhone = phone;
+		int secretCount = secretPhone.length() - 7;
+		int secretStart = 3;
+
+		if (secretPhone.length() <= 8) {
+			secretCount = secretPhone.length() / 2;
+			secretStart = (secretPhone.length() - secretCount) / 2;
+		}
+
+		String prefix = secretPhone.substring(0, secretStart);
+		String suffix = secretPhone.substring(secretStart + secretCount, secretPhone.length());
+		for (int i = 0; i < secretCount; ++i) {
+			prefix += "*";
+		}
+		secretPhone = prefix + suffix;
+
+		return secretPhone;
+	}
+
 	public static final int getStatusByOrderStatu(int status) {
 		switch (status) {
 			case DeliveryStatus.NEW_RECEIVED:

@@ -2,7 +2,9 @@ package com.bfdelivery.cavaliers.ui.activities;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.app.AlertDialog;
@@ -223,7 +225,31 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 
 		mTxtUsrName.setText(mDetailInfo.getAddress().getName());
 		mTxtUsrAddr.setText(mDetailInfo.getAddress().getDetail());
-		mTxtUsrPhone.setText(mDetailInfo.getAddress().getMobile());
+
+		int orderDistibuteStatus = mDetailInfo.getDistribute().getStatus();
+		if (orderDistibuteStatus == DeliveryStatus.NEW_RECEIVED
+				|| orderDistibuteStatus == DeliveryStatus.DEIVERING
+				|| orderDistibuteStatus == DeliveryStatus.WAITING_TAKE
+				) {
+			mTxtUsrPhone.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.ic_dial), null);
+			mTxtRstPhone.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.ic_dial), null);
+
+			mTxtUsrPhone.setOnClickListener(this);
+			mTxtRstPhone.setOnClickListener(this);
+
+			mTxtRstPhone.setText(mDetailInfo.getShop().getPhone());
+			mTxtUsrPhone.setText(mDetailInfo.getAddress().getMobile());
+		} else {
+			mTxtUsrPhone.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+			mTxtRstPhone.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+
+			mTxtUsrPhone.setOnClickListener(null);
+			mTxtRstPhone.setOnClickListener(null);
+
+			mTxtRstPhone.setText(OrderStringBridge.getSecretPhone(mDetailInfo.getShop().getPhone()));
+			mTxtUsrPhone.setText(OrderStringBridge.getSecretPhone(mDetailInfo.getAddress().getMobile()));
+		}
+
 
 		LocationData location = LocationSaver.instance().getLocation();
 		if (location != null) {
@@ -284,19 +310,21 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 					completeOrder();
 					break;
 			}
+		} else if (v == mTxtUsrPhone) {
+			callPhone(mDetailInfo.getAddress().getMobile());
+		} else if (v == mTxtRstPhone) {
+			callPhone(mDetailInfo.getShop().getPhone());
 		}
 	}
 
+	private void callPhone(String phoneNumber) {
+		Intent callIntent = new Intent(Intent.ACTION_DIAL);
+		callIntent.setData(Uri.parse("tel:" + phoneNumber));
+		startActivity(callIntent);
+	}
+
 	private void acceptOrder() {
-
-		new AlertDialog.Builder(this).setMessage(R.string.tip_receive_order).setPositiveButton(R.string.btn_sure_take, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				acceptOrderInner();
-			}
-
-		}).setNegativeButton(R.string.btn_not_sure, null).show();
-
+		acceptOrderInner();
 	}
 
 	private void acceptOrderInner() {
@@ -334,10 +362,35 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 		new AlertDialog.Builder(this).setMessage(R.string.tip_take_order).setPositiveButton(R.string.btn_begin_deli, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				takeOrderInner();
+				affirmRstrLocation();
 			}
 
 		}).setNegativeButton(R.string.btn_waiting, null).show();
+	}
+
+	private void affirmRstrLocation() {
+
+		final ProgressDialog waitingDialog = ProgressDialog.show(this, null, getString(R.string.fetching_location), false);
+
+		mLocationClient.setLocationListener(new AMapLocationListener() {
+			@Override
+			public void onLocationChanged(AMapLocation aMapLocation) {
+				if (aMapLocation.getErrorCode() == LocationErrorCode.OK) {
+
+					float[] distance = new float[1];
+					Location.distanceBetween(mDetailInfo.getShop().getLatitude(), mDetailInfo.getShop().getLongitude(), aMapLocation.getLatitude(), aMapLocation.getLongitude(), distance);
+					if (distance[0] <= CavConfig.CAV_COMPLETE_ORDER_DISTANCE) {
+						takeOrderInner();
+						return;
+					}
+				}
+
+				Toast.makeText(OrderDetailActivity.this, R.string.complete_order_failed_by_location_failed, Toast.LENGTH_SHORT).show();
+				waitingDialog.dismiss();
+			}
+		});
+
+		mLocationClient.startLocation();
 	}
 
 	private void takeOrderInner() {
@@ -376,14 +429,14 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 		new AlertDialog.Builder(this).setMessage(R.string.tip_complete_order).setPositiveButton(R.string.btn_complete_deli, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				affirmLocation();
+				affirmUsrLocation();
 			}
 
 		}).setNegativeButton(R.string.btn_waiting, null).show();
 	}
 
 
-	private void affirmLocation() {
+	private void affirmUsrLocation() {
 
 		final ProgressDialog waitingDialog = ProgressDialog.show(this, null, getString(R.string.fetching_location), false);
 
@@ -396,14 +449,11 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 					Location.distanceBetween(mDetailInfo.getAddress().getLatitude(), mDetailInfo.getAddress().getLongitude(), aMapLocation.getLatitude(), aMapLocation.getLongitude(), distance);
 					if (distance[0] <= CavConfig.CAV_COMPLETE_ORDER_DISTANCE) {
 						completeOrderInner();
-					} else {
-						Toast.makeText(OrderDetailActivity.this, R.string.complete_order_failed_by_distance, Toast.LENGTH_SHORT).show();
+						return;
 					}
-
-				} else {
-					Toast.makeText(OrderDetailActivity.this, R.string.complete_order_failed_by_location_failed, Toast.LENGTH_SHORT).show();
 				}
 
+				Toast.makeText(OrderDetailActivity.this, R.string.complete_order_failed_by_location_failed, Toast.LENGTH_SHORT).show();
 				waitingDialog.dismiss();
 			}
 		});

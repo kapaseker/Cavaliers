@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.bfdelivery.cavaliers.background.database.PreferenceRecorder;
 import com.bfdelivery.cavaliers.ui.activities.NewOrderTipActivity;
@@ -34,6 +35,8 @@ public class JpushMsgReceiver extends BroadcastReceiver {
 	private void processMsg(Context context, Bundle data) {
 
 		String msgContent = data.getString(JPushInterface.EXTRA_MESSAGE);
+
+		Log.d("MSG",msgContent);
 
 		try {
 			JSONObject jsonObject = new JSONObject(msgContent);

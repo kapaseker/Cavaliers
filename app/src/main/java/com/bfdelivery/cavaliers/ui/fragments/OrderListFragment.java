@@ -1,18 +1,17 @@
 package com.bfdelivery.cavaliers.ui.fragments;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bfdelivery.cavaliers.R;
 import com.bfdelivery.cavaliers.background.callbacks.BaseCallback;
@@ -26,6 +25,7 @@ import com.bfdelivery.cavaliers.database.location.LocationData;
 import com.bfdelivery.cavaliers.dataset.ListOutlineData;
 import com.bfdelivery.cavaliers.ui.activities.OrderDetailActivity;
 import com.bfdelivery.cavaliers.ui.fragments.base.BaseFragment;
+import com.bfdelivery.cavaliers.ui.views.EndlessRecyclerViewScrollListener;
 import com.bfdelivery.cavaliers.util.DataBridge;
 import com.bfdelivery.cavaliers.util.DistanceUtil;
 import com.bfdelivery.cavaliers.util.LocationSaver;
@@ -50,6 +50,8 @@ public class OrderListFragment extends BaseFragment implements OnListItemListene
 
 	DistributeService mService;
 
+	EndlessRecyclerViewScrollListener mScrollListener;
+
 	private int mListPage = 1;
 
 	private int mOrderType = DeliveryStatus.NEW_RECEIVED;
@@ -73,6 +75,12 @@ public class OrderListFragment extends BaseFragment implements OnListItemListene
 	}
 
 	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		mListOrder.removeOnScrollListener(mScrollListener);
+	}
+
+	@Override
 	protected void initializeView(View rootView, Bundle savedInstanceState) {
 		initView(rootView);
 		requestOrder();
@@ -89,10 +97,11 @@ public class OrderListFragment extends BaseFragment implements OnListItemListene
 
 	private void requestOrder() {
 		mRefreshLayout.setRefreshing(true);
-		requestOrderInner(mListPage);
+		mListPage = 1;
+		requestOrderInner(mListPage, false);
 	}
 
-	private void requestOrderInner(int page) {
+	private void requestOrderInner(int page, final boolean append) {
 		mService = CavV1Service.createDistributeService();
 		final Call<OrderList> request = mService.listOrders(page, mOrderType);
 		request.enqueue(new BaseCallback<OrderList>() {
@@ -105,7 +114,13 @@ public class OrderListFragment extends BaseFragment implements OnListItemListene
 			public void onResponse(Call<OrderList> call, Response<OrderList> response) {
 				super.onResponse(call, response);
 				if (response.code() == HttpStatus.SC_OK) {
-					mOrderAdapter.refreshData(response.body().getData());
+
+					if (append) {
+						mOrderAdapter.appendData(response.body().getData());
+					} else {
+						mOrderAdapter.refreshData(response.body().getData());
+					}
+
 					mListOrder.setVisibility(View.VISIBLE);
 				}
 			}
@@ -121,14 +136,21 @@ public class OrderListFragment extends BaseFragment implements OnListItemListene
 		mListOrder = (RecyclerView) view.findViewById(R.id.list_order);
 		mRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefresh);
 //		mWaitingBar = (ContentLoadingProgressBar) view.findViewById(R.id.waitingbar);
-
-		mListOrder.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+		LinearLayoutManager layoutManger = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+		mListOrder.setLayoutManager(layoutManger);
 		mListOrder.setHasFixedSize(true);
 
 		mOrderAdapter = new OrderAdapter(this);
 		mListOrder.setAdapter(mOrderAdapter);
 
 		mRefreshLayout.setOnRefreshListener(this);
+		mScrollListener = new EndlessRecyclerViewScrollListener(layoutManger) {
+			@Override
+			public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+				requestOrderInner(++mListPage, true);
+			}
+		};
+		mListOrder.addOnScrollListener(mScrollListener);
 	}
 
 	@Override
@@ -150,15 +172,7 @@ public class OrderListFragment extends BaseFragment implements OnListItemListene
 	}
 
 	private void acceptOrder(final OrderList.DataBean dataBean) {
-
-		new AlertDialog.Builder(getContext()).setMessage(R.string.tip_receive_order).setPositiveButton(R.string.btn_sure_take, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				acceptOrderInner(dataBean.getNumber());
-			}
-
-		}).setNegativeButton(R.string.btn_not_sure, null).show();
-
+		acceptOrderInner(dataBean.getNumber());
 	}
 
 	private void acceptOrderInner(String orderNumber) {
@@ -170,8 +184,17 @@ public class OrderListFragment extends BaseFragment implements OnListItemListene
 			public void onResponse(Call<Void> call, Response<Void> response) {
 				super.onResponse(call, response);
 				if (response.code() == HttpStatus.SC_OK) {
+					Toast.makeText(getContext(), R.string.receive_order_succeed, Toast.LENGTH_SHORT).show();
 					requestOrder();
+				} else {
+					onFailure(call, null);
 				}
+			}
+
+			@Override
+			public void onFailure(Call<Void> call, Throwable t) {
+				super.onFailure(call, t);
+				Toast.makeText(getContext(), R.string.receive_order_failed, Toast.LENGTH_SHORT).show();
 			}
 
 			@Override
@@ -183,7 +206,8 @@ public class OrderListFragment extends BaseFragment implements OnListItemListene
 
 	@Override
 	public void onRefresh() {
-		requestOrderInner(mListPage);
+		mListPage = 1;
+		requestOrderInner(mListPage, false);
 	}
 
 	private static final class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -296,8 +320,9 @@ public class OrderListFragment extends BaseFragment implements OnListItemListene
 		}
 
 		public void appendData(List<OrderList.DataBean> orderLists) {
+			int orignStart = getItemCount();
 			mOrderList.addAll(orderLists);
-			notifyDataSetChanged();
+			notifyItemRangeInserted(orignStart, orderLists.size());
 		}
 
 		@Override
