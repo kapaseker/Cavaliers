@@ -623,7 +623,7 @@ public class OrderDetail {
 		private String remark;
 		private String created_at;
 		private String updated_at;
-		private List<?> specs;
+//		private List<?> specs;
 
 		public int getId() {
 			return id;
@@ -705,12 +705,5 @@ public class OrderDetail {
 			this.updated_at = updated_at;
 		}
 
-		public List<?> getSpecs() {
-			return specs;
-		}
-
-		public void setSpecs(List<?> specs) {
-			this.specs = specs;
-		}
 	}
 }

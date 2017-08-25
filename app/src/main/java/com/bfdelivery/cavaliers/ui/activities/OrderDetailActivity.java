@@ -38,6 +38,11 @@ import com.bfdelivery.cavaliers.util.LocationClientFactory;
 import com.bfdelivery.cavaliers.util.LocationSaver;
 import com.bfdelivery.cavaliers.util.OrderStringBridge;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -77,9 +82,18 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 	TextView mTxtUsrPhone = null;
 	TextView mTxtUsrDis = null;
 
+	TextView mTxtDiscount;
+	TextView mTxtRealFee;
+
+	View mOrderTimePrefix;
+	View mOrderTimeSuffix;
+	TextView mTxtOrderTime;
+
 	TextView mBtnAction = null;
 
 	DistributeService mDistributeService = null;
+
+	DecimalFormat mDecimalFormat = new DecimalFormat("#.##");
 
 	private int mIndex = 0;
 	private ListOutlineData mOutlineData = null;
@@ -89,6 +103,7 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 		super.onCreate(savedInstanceState);
 
 		mDistributeService = CavV1Service.createDistributeService();
+		mDecimalFormat.setRoundingMode(RoundingMode.HALF_UP);
 
 		requestOrderDetial();
 
@@ -129,6 +144,13 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 		mTxtUsrAddr = (TextView) findViewById(R.id.txtUsrAddr);
 		mTxtUsrPhone = (TextView) findViewById(R.id.txtUsrPhone);
 		mTxtUsrDis = (TextView) findViewById(R.id.txtUsrDis);
+
+		mOrderTimePrefix = findViewById(R.id.txtTimePrefix);
+		mOrderTimeSuffix = findViewById(R.id.txtTimeSuffix);
+		mTxtOrderTime = (TextView) findViewById(R.id.orderTimes);
+
+		mTxtDiscount = (TextView) findViewById(R.id.txtDiscount);
+		mTxtRealFee = (TextView) findViewById(R.id.txtRealFee);
 
 		mOrderId = (OrderDetailItemView) findViewById(R.id.itemOrderId);
 		mOrderTime = (OrderDetailItemView) findViewById(R.id.itemOrderTime);
@@ -194,7 +216,7 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 	private void refreshData(OrderDetail detailInfo) {
 		mDetailInfo = detailInfo;
 
-		mListCommodity.setAdapter(new CommodityAdapter());
+		mListCommodity.setAdapter(new CommodityAdapter(detailInfo.getOrder_products()));
 		mTxtRstName.setText(mDetailInfo.getShop().getName());
 		mTxtRstAddr.setText(mDetailInfo.getShop().getAddress());
 		mTxtRstPhone.setText(mDetailInfo.getShop().getPhone());
@@ -242,6 +264,9 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 		} else {
 			mBtnAction.setVisibility(View.GONE);
 		}
+
+		mTxtDiscount.setText(mDecimalFormat.format(mDetailInfo.getCoupon_amount() / 100F));
+		mTxtRealFee.setText(mDecimalFormat.format(mDetailInfo.getPay_amount() / 100F));
 	}
 
 	@Override
@@ -420,22 +445,52 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 	private static class CommodityAdapter extends BaseAdapter {
 
 		private static class CommodityViewHolder {
+
 			TextView mTxtName;
 			TextView mTxtCount;
 			TextView mTxtPrice;
+			DecimalFormat mFormat = new DecimalFormat("#.##");
 
-			public CommodityViewHolder() {
+
+			public CommodityViewHolder(View rootView) {
+				mTxtName = (TextView) rootView.findViewById(R.id.txtCommodityName);
+				mTxtCount = (TextView) rootView.findViewById(R.id.txtCommodityCount);
+				mTxtPrice = (TextView) rootView.findViewById(R.id.txtCommodityPrice);
+				mFormat.setRoundingMode(RoundingMode.HALF_UP);
+			}
+
+			public void bindData(int position, OrderDetail.OrderProductsBean data) {
+				mTxtName.setText(data.getName());
+				int comCount = data.getNum();
+				if (comCount > 1) {
+					mTxtCount.setTextColor(mTxtCount.getResources().getColor(R.color.colorTxtAlert));
+				} else {
+					mTxtCount.setTextColor(mTxtCount.getResources().getColor(R.color.colorTxtDefault));
+				}
+				mTxtCount.setText("x" + comCount);
+				mTxtPrice.setText(mFormat.format(data.getPrice() / 100F));
+			}
+		}
+
+		List<OrderDetail.OrderProductsBean> mProductsBean = new ArrayList<>();
+
+		public CommodityAdapter() {
+		}
+
+		public CommodityAdapter(List<OrderDetail.OrderProductsBean> productsBean) {
+			if (productsBean != null && productsBean.size() > 0) {
+				mProductsBean.addAll(productsBean);
 			}
 		}
 
 		@Override
 		public int getCount() {
-			return 7;
+			return mProductsBean.size();
 		}
 
 		@Override
-		public Object getItem(int position) {
-			return null;
+		public OrderDetail.OrderProductsBean getItem(int position) {
+			return mProductsBean.get(position);
 		}
 
 		@Override
@@ -446,11 +501,16 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 
+			CommodityViewHolder holder;
 			if (convertView == null) {
 				convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_commodity_item, parent, false);
+				holder = new CommodityViewHolder(convertView);
+				convertView.setTag(holder);
 			} else {
-
+				holder = (CommodityViewHolder) convertView.getTag();
 			}
+
+			holder.bindData(position, getItem(position));
 
 			return convertView;
 		}

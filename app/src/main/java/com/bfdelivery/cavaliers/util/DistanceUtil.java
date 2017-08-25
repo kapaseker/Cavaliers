@@ -4,6 +4,9 @@ import android.content.Context;
 
 import com.bfdelivery.cavaliers.R;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+
 /**
  * Created by Panoo on 2017/8/21.
  */
@@ -14,7 +17,9 @@ public class DistanceUtil {
 		String strDistance = "";
 
 		if (meter >= 1000F) {
-			strDistance = context.getString(R.string.suffix_km, "" + ((int) (meter / 1000f * 10)) / 10F);
+			DecimalFormat decimalFormat = new DecimalFormat("#.#");
+			decimalFormat.setRoundingMode(RoundingMode.HALF_DOWN);
+			strDistance = context.getString(R.string.suffix_km, decimalFormat.format(meter / 1000f));
 		} else {
 			strDistance = context.getString(R.string.suffix_m, "" + ((int) meter));
 		}

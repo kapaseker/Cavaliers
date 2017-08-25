@@ -118,8 +118,9 @@
     <string name="permission_necessary_tip">为了帮助您更好的使用本产品，希望您给予本产品申请的相关权限。</string>
     <string name="i_know">我知道了</string>
     <string name="tip_new_order">您有新的订单啦！</string>>
+    <string name="usr_first_order">用户首单</string>
 
-    <string name="prefix_rmb">￥%.1f</string>
+    <string name="prefix_rmb">￥%s</string>
     <string name="suffix_count">%d单</string>
 
     <!--    Test String Resource     -->

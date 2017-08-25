@@ -264,18 +264,18 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/txtCountPrefix"
+                                android:id="@+id/txtTimePrefix"
                                 style="@style/TipTitle"
                                 android:text="@string/makeorder_pre"/>
 
                             <TextView
-                                android:id="@+id/orderIndex"
+                                android:id="@+id/orderTimes"
                                 style="@style/TipTitle"
                                 android:textColor="@color/colorTxtAlert"
                                 android:textSize="@dimen/txt_size_big"/>
 
                             <TextView
-                                android:id="@+id/txtCountSuffix"
+                                android:id="@+id/txtTimeSuffix"
                                 style="@style/TipTitle"
                                 android:text="@string/makeorder_after"/>
 

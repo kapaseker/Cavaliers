@@ -16,6 +16,9 @@ import com.bfdelivery.cavaliers.database.userinfo.UserInfo;
 import com.bfdelivery.cavaliers.ui.activities.base.BasePageActivity;
 import com.bfdelivery.cavaliers.util.UserInfoManager;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -29,6 +32,7 @@ public class DailySettleActivity extends BasePageActivity {
 	private View mInfoWrapper;
 
 	ContentLoadingProgressBar mLoadingProgressBar = null;
+	DecimalFormat mDecimalFormat = new DecimalFormat("#.##");
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +60,8 @@ public class DailySettleActivity extends BasePageActivity {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 			mLoadingProgressBar.setIndeterminateTintList(ColorStateList.valueOf(getResources().getColor(R.color.white)));
 		}
+
+		mDecimalFormat.setRoundingMode(RoundingMode.HALF_UP);
 	}
 
 	@Override
@@ -96,8 +102,8 @@ public class DailySettleActivity extends BasePageActivity {
 		mTxtUsrName.setText(result.getName());
 		mTxtUsrPhone.setText(result.getMobile());
 		mTxtOrderCount.setText(getString(R.string.suffix_count, result.getToday_done_orders()));
-		mTxtCashPay.setText(getString(R.string.prefix_rmb, (result.getToday_offline_amount() / 10) / 10F));
-		mTxtOnlinePay.setText(getString(R.string.prefix_rmb, (result.getToday_wechat_amount() / 10) / 10F));
+		mTxtCashPay.setText(getString(R.string.prefix_rmb, mDecimalFormat.format(result.getToday_offline_amount() / 100F)));
+		mTxtOnlinePay.setText(getString(R.string.prefix_rmb, mDecimalFormat.format(result.getToday_wechat_amount() / 100F)));
 	}
 
 }
