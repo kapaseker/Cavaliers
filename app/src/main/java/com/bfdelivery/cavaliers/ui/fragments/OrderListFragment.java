@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -46,7 +47,7 @@ public class OrderListFragment extends BaseFragment implements OnListItemListene
 	SwipeRefreshLayout mRefreshLayout = null;
 	RecyclerView mListOrder = null;
 	OrderAdapter mOrderAdapter = null;
-//	ContentLoadingProgressBar mWaitingBar = null;
+	ContentLoadingProgressBar mWaitingBar = null;
 
 	DistributeService mService;
 
@@ -102,6 +103,11 @@ public class OrderListFragment extends BaseFragment implements OnListItemListene
 	}
 
 	private void requestOrderInner(int page, final boolean append) {
+
+		if (append) {
+			mWaitingBar.show();
+		}
+
 		mService = CavV1Service.createDistributeService();
 		final Call<OrderList> request = mService.listOrders(page, mOrderType);
 		request.enqueue(new BaseCallback<OrderList>() {
@@ -128,6 +134,7 @@ public class OrderListFragment extends BaseFragment implements OnListItemListene
 			@Override
 			public void onComplete() {
 				mRefreshLayout.setRefreshing(false);
+				mWaitingBar.hide();
 			}
 		});
 	}
@@ -135,7 +142,7 @@ public class OrderListFragment extends BaseFragment implements OnListItemListene
 	private void initView(View view) {
 		mListOrder = (RecyclerView) view.findViewById(R.id.list_order);
 		mRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefresh);
-//		mWaitingBar = (ContentLoadingProgressBar) view.findViewById(R.id.waitingbar);
+		mWaitingBar = (ContentLoadingProgressBar) view.findViewById(R.id.waitingbar);
 		LinearLayoutManager layoutManger = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
 		mListOrder.setLayoutManager(layoutManger);
 		mListOrder.setHasFixedSize(true);
