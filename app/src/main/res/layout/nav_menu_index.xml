@@ -13,8 +13,9 @@
         android:drawableLeft="@drawable/icon_setting"
         android:drawablePadding="@dimen/txt_margin_default"
         android:gravity="center"
-        android:textColor="@color/colorTxtDefault"
         android:text="@string/action_settings"
-        android:textSize="@dimen/txt_size_default"/>
+        android:textColor="@color/colorTxtDefault"
+        android:textSize="@dimen/txt_size_default"
+        android:visibility="gone"/>
 
 </RelativeLayout>
