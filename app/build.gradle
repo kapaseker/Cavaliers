@@ -18,16 +18,20 @@ android {
         }
     }
 
+    lintOptions {
+        checkReleaseBuilds true
+    }
+
     signingConfigs {
         debug {
-            storeFile file('cav.jks')
+            storeFile file('./app/cav.jks')
             keyAlias 'cavalier'
             keyPassword 'cav@2017'
             storePassword 'cav@2017'
         }
 
         release {
-            storeFile file('cav.jks')
+            storeFile file('./app/cav.jks')
             keyAlias 'cavalier'
             keyPassword 'cav@2017'
             storePassword 'cav@2017'

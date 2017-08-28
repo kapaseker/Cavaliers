@@ -86,7 +86,8 @@
             android:layout_marginTop="@dimen/login_edt_pdlr"
             android:text="@string/need_help"
             android:textColor="@color/whiteLightDark"
-            android:textSize="@dimen/txt_size_small"/>
+            android:textSize="@dimen/txt_size_small"
+            android:visibility="gone"/>
     </LinearLayout>
 
 

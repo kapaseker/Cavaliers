@@ -34,8 +34,6 @@ public class LoginActivity extends BasePageActivity implements View.OnClickListe
 
 	ProgressDialog mWaittingDialog = null;
 
-	private static final long DEF_ANIMATE_INTERVAL = 680L;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -44,13 +42,16 @@ public class LoginActivity extends BasePageActivity implements View.OnClickListe
 	@Override
 	protected void onPrepareLayout() {
 		setContentView(R.layout.activity_login);
+	}
+
+	@Override
+	protected void initView() {
 		getSupportActionBar().setTitle(R.string.sign_in);
 
 		mBtnLogin = findViewById(R.id.btnLogin);
 		mEditUserName = (EditText) findViewById(R.id.edtUsrName);
 		mEditPasswd = (EditText) findViewById(R.id.edtPasswd);
 		mGapLine = findViewById(R.id.gapLine);
-
 
 		mBtnLogin.setOnClickListener(this);
 		mEditUserName.addTextChangedListener(new TextWatcher() {
@@ -88,11 +89,6 @@ public class LoginActivity extends BasePageActivity implements View.OnClickListe
 
 			}
 		});
-	}
-
-	@Override
-	protected void initView() {
-
 	}
 
 	@Override
