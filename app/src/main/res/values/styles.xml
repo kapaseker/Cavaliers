@@ -53,6 +53,15 @@
         <item name="android:ellipsize">end</item>
     </style>
 
+    <style name="OverlayDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
     <style name="OrderItemDial" parent="@style/DefaultText">
         <item name="android:drawablePadding">@dimen/txt_margin_small</item>
         <item name="android:drawableRight">@drawable/ic_dial</item>

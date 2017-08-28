@@ -41,8 +41,6 @@ public class NewOrderTipActivity extends BaseActivity implements View.OnClickLis
 		super.onCreate(savedInstanceState);
 		mVibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
 		mSoundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
-
-		makeTipMedia();
 	}
 
 	@Override
@@ -132,12 +130,19 @@ public class NewOrderTipActivity extends BaseActivity implements View.OnClickLis
 	}
 
 	@Override
-	protected void onDestroy() {
-		super.onDestroy();
+	protected void onStart() {
+		super.onStart();
+		makeTipMedia();
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
 		mVibrator.cancel();
 		mSoundPool.stop(mStreamId);
 		mSoundPool.unload(mSoundId);
 		mSoundPool.release();
+		finish();
 	}
 
 	/**
