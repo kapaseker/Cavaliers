@@ -1,6 +1,9 @@
 package com.bfdelivery.cavaliers.ui.fragments;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -21,6 +24,7 @@ import com.bfdelivery.cavaliers.background.server.bean.response.OrderList;
 import com.bfdelivery.cavaliers.background.server.config.HttpStatus;
 import com.bfdelivery.cavaliers.background.server.request.CavV1Service;
 import com.bfdelivery.cavaliers.background.server.request.DistributeService;
+import com.bfdelivery.cavaliers.constant.CavConfig;
 import com.bfdelivery.cavaliers.constant.DeliveryStatus;
 import com.bfdelivery.cavaliers.database.location.LocationData;
 import com.bfdelivery.cavaliers.dataset.ListOutlineData;
@@ -59,6 +63,8 @@ public class OrderListFragment extends BaseFragment implements OnListItemListene
 
 	public static final String BUNDLE_KEY_ORDERTYPE = "order.type";
 
+	BroadcastReceiver mLocationReceiver = null;
+
 	public static OrderListFragment newIntance(int orderType) {
 		OrderListFragment fragment = new OrderListFragment();
 
@@ -73,6 +79,13 @@ public class OrderListFragment extends BaseFragment implements OnListItemListene
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		handleData(getArguments());
+
+		mLocationReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				mOrderAdapter.notifyDataSetChanged();
+			}
+		};
 	}
 
 	@Override
@@ -90,6 +103,20 @@ public class OrderListFragment extends BaseFragment implements OnListItemListene
 	@Override
 	public int getLayoutResource() {
 		return R.layout.fragment_order;
+	}
+
+	@Override
+	public void onStart() {
+		super.onStart();
+		IntentFilter locationFilter = new IntentFilter();
+		locationFilter.addAction(CavConfig.ACTION_LOCATION_OK);
+		getContext().registerReceiver(mLocationReceiver, locationFilter);
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		getContext().unregisterReceiver(mLocationReceiver);
 	}
 
 	private void handleData(Bundle data) {

@@ -33,6 +33,7 @@ import com.bfdelivery.cavaliers.background.server.request.CavV1Service;
 import com.bfdelivery.cavaliers.background.server.request.DistributeService;
 import com.bfdelivery.cavaliers.config.LocationErrorCode;
 import com.bfdelivery.cavaliers.config.NecessaryPermission;
+import com.bfdelivery.cavaliers.constant.CavConfig;
 import com.bfdelivery.cavaliers.constant.DeliveryStatus;
 import com.bfdelivery.cavaliers.database.userinfo.UserInfo;
 import com.bfdelivery.cavaliers.ui.activities.base.BaseActivity;
@@ -265,6 +266,7 @@ public class IndexActivity extends BaseActivity
 
 		if (aMapLocation.getErrorCode() == LocationErrorCode.OK) {
 			LocationSaver.instance().saveLocation(aMapLocation.getLatitude(), aMapLocation.getLongitude());
+			sendBroadcast(new Intent(CavConfig.ACTION_LOCATION_OK));
 		} else {
 
 		}
