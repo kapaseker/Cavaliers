@@ -1,7 +1,11 @@
 package com.bfdelivery.cavaliers.ui.activities;
 
 import android.content.Intent;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Bundle;
+import android.os.Vibrator;
+import android.support.annotation.Nullable;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -17,7 +21,7 @@ import java.io.IOException;
 
 import cn.jpush.android.api.JPushInterface;
 
-public class NewOrderTipActivity extends BaseActivity implements View.OnClickListener {
+public class NewOrderTipActivity extends BaseActivity implements View.OnClickListener, SoundPool.OnLoadCompleteListener {
 
 	NewOrderPushMsg mPushMsg = null;
 
@@ -25,6 +29,21 @@ public class NewOrderTipActivity extends BaseActivity implements View.OnClickLis
 	TextView mTxtUsrName = null;
 	TextView mTxtRstName = null;
 	TextView mTxtRstAddr = null;
+
+	Vibrator mVibrator = null;
+	SoundPool mSoundPool = null;
+
+	private int mSoundId;
+	private int mStreamId;
+
+	@Override
+	protected void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		mVibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+		mSoundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
+
+		makeTipMedia();
+	}
 
 	@Override
 	protected void onPrepareLayout() {
@@ -55,6 +74,7 @@ public class NewOrderTipActivity extends BaseActivity implements View.OnClickLis
 		String msgContent = data.getString(JPushInterface.EXTRA_MESSAGE);
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		mapper.configure(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES, false);
 		try {
 			mPushMsg = mapper.readValue(msgContent, NewOrderPushMsg.class);
 		} catch (IOException e) {
@@ -64,10 +84,19 @@ public class NewOrderTipActivity extends BaseActivity implements View.OnClickLis
 
 	@Override
 	protected void processViewAndData() {
-		mTxtRstName.setText(mPushMsg.getShop().getName());
-		mTxtRstAddr.setText(mPushMsg.getShop().getAddress());
-		mTxtUsrName.setText(mPushMsg.getAddress().getName());
-		mTxtUsrAddr.setText(mPushMsg.getAddress().getDetail());
+		if (mPushMsg != null) {
+			mTxtRstName.setText(mPushMsg.getShop().getName());
+			mTxtRstAddr.setText(mPushMsg.getShop().getAddress());
+			mTxtUsrName.setText(mPushMsg.getAddress().getName());
+			mTxtUsrAddr.setText(mPushMsg.getAddress().getDetail());
+		}
+	}
+
+	@Override
+	protected void onNewIntent(Intent intent) {
+		super.onNewIntent(intent);
+		handleData(intent.getExtras());
+		processViewAndData();
 	}
 
 	@Override
@@ -96,6 +125,21 @@ public class NewOrderTipActivity extends BaseActivity implements View.OnClickLis
 		return super.onKeyDown(keyCode, event);
 	}
 
+	private void makeTipMedia() {
+		mVibrator.vibrate(new long[]{0, 1000, 1000}, 0);
+		mSoundPool.setOnLoadCompleteListener(this);
+		mSoundId = mSoundPool.load(this, R.raw.neworder_music, 1);
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		mVibrator.cancel();
+		mSoundPool.stop(mStreamId);
+		mSoundPool.unload(mSoundId);
+		mSoundPool.release();
+	}
+
 	/**
 	 * 去查看订单了
 	 */
@@ -105,5 +149,10 @@ public class NewOrderTipActivity extends BaseActivity implements View.OnClickLis
 		intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
 		startActivity(intent);
 		finish();
+	}
+
+	@Override
+	public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
+		mStreamId = soundPool.play(sampleId, 1.0F, 1.0F, 5, -1, 1);
 	}
 }
