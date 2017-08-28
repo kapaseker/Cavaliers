@@ -89,7 +89,7 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 
 	View mOrderTimePrefix;
 	View mOrderTimeSuffix;
-	TextView mTxtOrderTime;
+	TextView mTxtOrderTimes;
 
 	TextView mBtnAction = null;
 
@@ -149,7 +149,7 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 
 		mOrderTimePrefix = findViewById(R.id.txtTimePrefix);
 		mOrderTimeSuffix = findViewById(R.id.txtTimeSuffix);
-		mTxtOrderTime = (TextView) findViewById(R.id.orderTimes);
+		mTxtOrderTimes = (TextView) findViewById(R.id.orderTimes);
 
 		mTxtDiscount = (TextView) findViewById(R.id.txtDiscount);
 		mTxtRealFee = (TextView) findViewById(R.id.txtRealFee);
@@ -275,6 +275,16 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 				mOrderPay.setDetail(R.string.wechat_pay);
 				mOrderPay.setDetailColor(getResources().getColor(R.color.colorWeixin));
 				break;
+		}
+
+		if (mDetailInfo.getOrder_num() > 1) {
+			mOrderTimePrefix.setVisibility(View.VISIBLE);
+			mOrderTimeSuffix.setVisibility(View.VISIBLE);
+			mTxtOrderTimes.setText(mDetailInfo.getOrder_num() + "");
+		} else {
+			mOrderTimePrefix.setVisibility(View.GONE);
+			mOrderTimeSuffix.setVisibility(View.GONE);
+			mTxtOrderTimes.setText(R.string.usr_first_order);
 		}
 
 		mTxtOrderStatus.setText(OrderStringBridge.getStatusByOrderStatu(mDetailInfo.getDistribute().getStatus()));

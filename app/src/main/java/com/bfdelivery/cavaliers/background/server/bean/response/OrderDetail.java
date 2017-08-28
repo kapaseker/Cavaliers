@@ -57,6 +57,7 @@ public class OrderDetail {
 	private ShopBean shop;
 	private AddressBean address;
 	private DistributeBean distribute;
+	private int order_num;
 	private List<OrderProductsBean> order_products;
 
 	public String getNumber() {
@@ -185,6 +186,14 @@ public class OrderDetail {
 
 	public void setDistribute_status(int distribute_status) {
 		this.distribute_status = distribute_status;
+	}
+
+	public int getOrder_num() {
+		return order_num;
+	}
+
+	public void setOrder_num(int order_num) {
+		this.order_num = order_num;
 	}
 
 	public String getCreated_at() {
