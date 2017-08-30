@@ -37,8 +37,6 @@ public interface DistributeService {
 	@POST("finished-orders")
 	Call<Void> completeOrder(@Body OrderNumber number);
 
-	@POST("jpushs")
+	@POST("jpushes")
 	Call<Void> jpushToken(@Body JPushParam param);
-
-
 }

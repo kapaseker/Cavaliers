@@ -27,6 +27,7 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationListener;
 import com.bfdelivery.cavaliers.R;
+import com.bfdelivery.cavaliers.background.callbacks.BaseCallback;
 import com.bfdelivery.cavaliers.background.database.PreferenceRecorder;
 import com.bfdelivery.cavaliers.background.server.bean.request.JPushParam;
 import com.bfdelivery.cavaliers.background.server.request.CavV1Service;
@@ -43,10 +44,6 @@ import com.bfdelivery.cavaliers.util.LocationSaver;
 import com.bfdelivery.cavaliers.util.UserInfoManager;
 import com.cmccmap.permissionchecker.PermissionChecker;
 import com.cmccmap.permissionchecker.PermissionRequestor;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class IndexActivity extends BaseActivity
 		implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, AMapLocationListener {
@@ -216,21 +213,7 @@ public class IndexActivity extends BaseActivity
 			case REQUEST_LOGIN:
 
 				if (resultCode == Activity.RESULT_OK) {
-
-					mDistributeService.jpushToken(new JPushParam(PreferenceRecorder.getJpushId())).enqueue(new Callback<Void>() {
-						@Override
-						public void onResponse(Call<Void> call, Response<Void> response) {
-
-						}
-
-						@Override
-						public void onFailure(Call<Void> call, Throwable t) {
-
-						}
-					});
-
 					afterLogin();
-
 				} else {
 					finish();
 				}
@@ -295,6 +278,13 @@ public class IndexActivity extends BaseActivity
 
 			@Override
 			public void onBegin() {
+
+			}
+		});
+
+		mDistributeService.jpushToken(new JPushParam(PreferenceRecorder.getJpushId())).enqueue(new BaseCallback<Void>() {
+			@Override
+			public void onComplete() {
 
 			}
 		});
