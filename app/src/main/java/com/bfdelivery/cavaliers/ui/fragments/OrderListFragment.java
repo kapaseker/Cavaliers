@@ -7,7 +7,6 @@ import android.content.IntentFilter;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -51,7 +50,6 @@ public class OrderListFragment extends BaseFragment implements OnListItemListene
 	SwipeRefreshLayout mRefreshLayout = null;
 	RecyclerView mListOrder = null;
 	OrderAdapter mOrderAdapter = null;
-	ContentLoadingProgressBar mWaitingBar = null;
 
 	DistributeService mService;
 
@@ -132,7 +130,7 @@ public class OrderListFragment extends BaseFragment implements OnListItemListene
 	private void requestOrderInner(int page, final boolean append) {
 
 		if (append) {
-			mWaitingBar.show();
+			mOrderAdapter.setLoading(true);
 		}
 
 		mService = CavV1Service.createDistributeService();
@@ -161,7 +159,7 @@ public class OrderListFragment extends BaseFragment implements OnListItemListene
 			@Override
 			public void onComplete() {
 				mRefreshLayout.setRefreshing(false);
-				mWaitingBar.hide();
+				mOrderAdapter.setLoading(false);
 			}
 		});
 	}
@@ -169,7 +167,6 @@ public class OrderListFragment extends BaseFragment implements OnListItemListene
 	private void initView(View view) {
 		mListOrder = (RecyclerView) view.findViewById(R.id.list_order);
 		mRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefresh);
-		mWaitingBar = (ContentLoadingProgressBar) view.findViewById(R.id.waitingbar);
 		LinearLayoutManager layoutManger = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
 		mListOrder.setLayoutManager(layoutManger);
 		mListOrder.setHasFixedSize(true);
@@ -242,6 +239,17 @@ public class OrderListFragment extends BaseFragment implements OnListItemListene
 	public void onRefresh() {
 		mListPage = 1;
 		requestOrderInner(mListPage, false);
+	}
+
+	private static final class FooterWaitingHolder extends RecyclerView.ViewHolder {
+
+		public FooterWaitingHolder(View itemView) {
+			super(itemView);
+		}
+
+		public void setLoading(boolean loading) {
+			itemView.setVisibility(loading ? View.VISIBLE : View.GONE);
+		}
 	}
 
 	private static final class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -332,11 +340,16 @@ public class OrderListFragment extends BaseFragment implements OnListItemListene
 		}
 	}
 
-	private static final class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder> {
+	private static final class OrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 		List<OrderList.DataBean> mOrderList = new ArrayList<>();
 
 		OnListItemListener mOnListItemListener = null;
+
+		private boolean mLoading = false;
+
+		private static final int TYPE_DATA = 0;
+		private static final int TYPE_WAITTING = 1;
 
 		public OrderAdapter(OnListItemListener onListItemListener) {
 			mOnListItemListener = onListItemListener;
@@ -359,22 +372,47 @@ public class OrderListFragment extends BaseFragment implements OnListItemListene
 			notifyItemRangeInserted(orignStart, orderLists.size());
 		}
 
-		@Override
-		public OrderViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-			View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_order_item, parent, false);
-
-			return new OrderViewHolder(itemView, mOnListItemListener);
+		public void setLoading(boolean loading) {
+			if (mLoading != loading) {
+				mLoading = loading;
+				notifyDataSetChanged();
+			}
 		}
 
 		@Override
-		public void onBindViewHolder(OrderViewHolder holder, int position) {
-			holder.bindData(position, mOrderList.get(position));
+		public int getItemViewType(int position) {
+			if (position == getItemCount() - 1) {
+				return TYPE_WAITTING;
+			} else {
+				return TYPE_DATA;
+			}
+		}
+
+		@Override
+		public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+			if (viewType == TYPE_DATA) {
+				View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_order_item, parent, false);
+				return new OrderViewHolder(itemView, mOnListItemListener);
+			} else {
+				View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_waitting, parent, false);
+				return new FooterWaitingHolder(itemView);
+			}
+		}
+
+		@Override
+		public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+			if (getItemViewType(position) == TYPE_DATA) {
+				((OrderViewHolder) holder).bindData(position, mOrderList.get(position));
+			} else {
+				FooterWaitingHolder waittingHolder = (FooterWaitingHolder) holder;
+				waittingHolder.setLoading(mLoading);
+			}
 		}
 
 		@Override
 		public int getItemCount() {
-			return mOrderList.size();
+			return mOrderList.size() + 1;
 		}
 	}
 }
