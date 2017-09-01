@@ -50,12 +50,13 @@ import retrofit2.Response;
 
 import static android.app.ProgressDialog.show;
 
-public class OrderDetailActivity extends BasePageActivity implements View.OnClickListener {
+public class OrderDetailActivity extends BasePageActivity implements View.OnClickListener, AMapLocationListener {
 
 	public static final String BUNDLE_KEY_POSTION = "OrderDetailActivity.index";
 	public static final String BUNDLE_KEY_LISTDATA = "OrderDetailActivity.listData";
 
 	AMapLocationClient mLocationClient = null;
+	AMapLocationListener mLocationListener = null;
 
 	OrderDetail mDetailInfo = null;
 
@@ -110,6 +111,7 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 		requestOrderDetial();
 
 		mLocationClient = LocationClientFactory.createOnceTimeLocationClient(this);
+		mLocationClient.setLocationListener(this);
 	}
 
 	@Override
@@ -381,8 +383,7 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 	private void affirmRstrLocation() {
 
 		final ProgressDialog waitingDialog = ProgressDialog.show(this, null, getString(R.string.fetching_location), false);
-
-		mLocationClient.setLocationListener(new AMapLocationListener() {
+		affirmLocation(new AMapLocationListener() {
 			@Override
 			public void onLocationChanged(AMapLocation aMapLocation) {
 				if (aMapLocation.getErrorCode() == LocationErrorCode.OK) {
@@ -391,16 +392,16 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 					Location.distanceBetween(mDetailInfo.getShop().getLatitude(), mDetailInfo.getShop().getLongitude(), aMapLocation.getLatitude(), aMapLocation.getLongitude(), distance);
 					if (distance[0] <= CavConfig.CAV_COMPLETE_ORDER_DISTANCE) {
 						takeOrderInner();
-						return;
+					} else {
+						Toast.makeText(OrderDetailActivity.this, R.string.take_order_failed_by_distance, Toast.LENGTH_SHORT).show();
 					}
+				} else {
+					Toast.makeText(OrderDetailActivity.this, getString(R.string.complete_order_failed_by_location_failed, aMapLocation.getErrorCode()), Toast.LENGTH_SHORT).show();
 				}
 
-				Toast.makeText(OrderDetailActivity.this, R.string.complete_order_failed_by_location_failed, Toast.LENGTH_SHORT).show();
 				waitingDialog.dismiss();
 			}
 		});
-
-		mLocationClient.startLocation();
 	}
 
 	private void takeOrderInner() {
@@ -414,7 +415,7 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 			public void onResponse(Call<Void> call, Response<Void> response) {
 				super.onResponse(call, response);
 				if (response.code() == HttpStatus.SC_OK) {
-					Toast.makeText(OrderDetailActivity.this, R.string.receive_order_succeed, Toast.LENGTH_SHORT).show();
+					Toast.makeText(OrderDetailActivity.this, R.string.take_order_succeed, Toast.LENGTH_SHORT).show();
 					requestOrderDetial();
 				} else {
 					onFailure(call, null);
@@ -424,7 +425,7 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 			@Override
 			public void onFailure(Call<Void> call, Throwable t) {
 				super.onFailure(call, t);
-				Toast.makeText(OrderDetailActivity.this, R.string.receive_order_failed, Toast.LENGTH_SHORT).show();
+				Toast.makeText(OrderDetailActivity.this, R.string.take_order_failed, Toast.LENGTH_SHORT).show();
 			}
 
 			@Override
@@ -449,8 +450,7 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 	private void affirmUsrLocation() {
 
 		final ProgressDialog waitingDialog = ProgressDialog.show(this, null, getString(R.string.fetching_location), false);
-
-		mLocationClient.setLocationListener(new AMapLocationListener() {
+		affirmLocation(new AMapLocationListener() {
 			@Override
 			public void onLocationChanged(AMapLocation aMapLocation) {
 				if (aMapLocation.getErrorCode() == LocationErrorCode.OK) {
@@ -459,15 +459,20 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 					Location.distanceBetween(mDetailInfo.getAddress().getLatitude(), mDetailInfo.getAddress().getLongitude(), aMapLocation.getLatitude(), aMapLocation.getLongitude(), distance);
 					if (distance[0] <= CavConfig.CAV_COMPLETE_ORDER_DISTANCE) {
 						completeOrderInner();
-						return;
+					} else {
+						Toast.makeText(OrderDetailActivity.this, R.string.complete_order_failed_by_distance, Toast.LENGTH_SHORT).show();
 					}
+				} else {
+					Toast.makeText(OrderDetailActivity.this, getString(R.string.complete_order_failed_by_location_failed, aMapLocation.getErrorCode()), Toast.LENGTH_SHORT).show();
 				}
 
-				Toast.makeText(OrderDetailActivity.this, R.string.complete_order_failed_by_location_failed, Toast.LENGTH_SHORT).show();
 				waitingDialog.dismiss();
 			}
 		});
+	}
 
+	private void affirmLocation(AMapLocationListener listener) {
+		mLocationListener = listener;
 		mLocationClient.startLocation();
 	}
 
@@ -500,6 +505,13 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 				waitingDialog.dismiss();
 			}
 		});
+	}
+
+	@Override
+	public void onLocationChanged(AMapLocation aMapLocation) {
+		if (mLocationListener != null) {
+			mLocationListener.onLocationChanged(aMapLocation);
+		}
 	}
 
 	private static class CommodityAdapter extends BaseAdapter {

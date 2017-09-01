@@ -73,18 +73,19 @@
     <string name="receive_order_succeed">接单成功，赶紧去取餐吧</string>
     <string name="receive_order_failed">接单失败，再试试</string>
 
-    <string name="tip_take_order">您确认到达商家，并开始配送么？</string>
+    <string name="tip_take_order">产品核对完毕，并开始配送？</string>
     <string name="btn_begin_deli">开始配送</string>
     <string name="btn_waiting">再等等</string>
     <string name="tip_doing_act">正在操作</string>
     <string name="take_order_succeed">取餐完成，开始配送吧</string>
+    <string name="take_order_failed_by_distance">您距离商家很远，无法开始配送</string>
     <string name="take_order_failed">取餐失败，再试试吧</string>
 
     <string name="tip_complete_order">您确认餐品已经送达到用户手中，并完成订单么？</string>
     <string name="btn_complete_deli">配送完成</string>
     <string name="complete_order_succeed">配送完成</string>
-    <string name="complete_order_failed_by_distance">您的距离用户很远，无法完成订单</string>
-    <string name="complete_order_failed_by_location_failed">定位失败，可以再试试</string>
+    <string name="complete_order_failed_by_distance">您距离用户很远，无法完成订单</string>
+    <string name="complete_order_failed_by_location_failed">定位失败，可以再试试（%d）</string>
     <string name="complete_order_failed">出问题了，再试试吧</string>
     <string name="fetching_location">正在获取当前位置，请稍后</string>
 
