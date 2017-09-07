@@ -1,19 +1,18 @@
 package com.bfdelivery.cavaliers.ui.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import com.bfdelivery.cavaliers.R;
 import com.bfdelivery.cavaliers.background.callbacks.BaseCallback;
-import com.bfdelivery.cavaliers.background.database.PreferenceRecorder;
 import com.bfdelivery.cavaliers.background.server.bean.response.PersonInfoBean;
 import com.bfdelivery.cavaliers.background.server.config.HttpStatus;
 import com.bfdelivery.cavaliers.background.server.request.CavV1Service;
 import com.bfdelivery.cavaliers.database.userinfo.UserInfo;
 import com.bfdelivery.cavaliers.ui.activities.base.BasePageActivity;
 import com.bfdelivery.cavaliers.ui.views.OrderDetailItemView;
+import com.bfdelivery.cavaliers.util.SignManager;
 import com.bfdelivery.cavaliers.util.UserInfoManager;
 
 import retrofit2.Call;
@@ -58,10 +57,8 @@ public class UserCenterActivity extends BasePageActivity implements View.OnClick
 	@Override
 	public void onClick(View v) {
 		if (v == mBtnSignOut) {
-			PreferenceRecorder.saveAccessToken("");
-			Intent intent = new Intent(this, IndexActivity.class);
-			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
+			finish();
+			SignManager.instance().reSignIn(this);
 		}
 	}
 

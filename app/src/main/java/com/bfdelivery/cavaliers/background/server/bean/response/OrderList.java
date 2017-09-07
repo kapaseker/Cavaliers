@@ -368,7 +368,7 @@ public class OrderList {
 			private int status;
 			private int send_amount;
 			private int service_amount;
-			private SellTimesBean sell_times;
+//			private SellTimesBean sell_times;
 			private int average_minutes;
 
 			public int getId() {
@@ -459,13 +459,13 @@ public class OrderList {
 				this.service_amount = service_amount;
 			}
 
-			public SellTimesBean getSell_times() {
-				return sell_times;
-			}
-
-			public void setSell_times(SellTimesBean sell_times) {
-				this.sell_times = sell_times;
-			}
+//			public SellTimesBean getSell_times() {
+//				return sell_times;
+//			}
+//
+//			public void setSell_times(SellTimesBean sell_times) {
+//				this.sell_times = sell_times;
+//			}
 
 			public int getAverage_minutes() {
 				return average_minutes;

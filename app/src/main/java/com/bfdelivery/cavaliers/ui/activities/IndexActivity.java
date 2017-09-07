@@ -261,7 +261,9 @@ public class IndexActivity extends BaseActivity
 
 		if (PreferenceRecorder.needLogin()) {
 			// login
-			startActivityForResult(new Intent(this, LoginActivity.class), REQUEST_LOGIN);
+			Intent loginIntent = new Intent(this, LoginActivity.class);
+			loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivityForResult(loginIntent, REQUEST_LOGIN);
 		} else {
 			afterLogin();
 		}

@@ -34,6 +34,7 @@ import com.bfdelivery.cavaliers.util.DataBridge;
 import com.bfdelivery.cavaliers.util.DistanceUtil;
 import com.bfdelivery.cavaliers.util.LocationSaver;
 import com.bfdelivery.cavaliers.util.OrderStringBridge;
+import com.bfdelivery.cavaliers.util.SignManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -153,6 +154,8 @@ public class OrderListFragment extends BaseFragment implements OnListItemListene
 					}
 
 					mListOrder.setVisibility(View.VISIBLE);
+				} else if (response.code() == HttpStatus.SC_UNAUTHORIZED) {
+					SignManager.instance().reSignIn(getContext());
 				}
 			}
 
