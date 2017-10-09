@@ -20,7 +20,7 @@ import retrofit2.http.Query;
 public interface DistributeService {
 
 	@GET("orders")
-	Call<OrderList> listOrders(@Query("pager") int pager, @Query("status") int status);
+	Call<OrderList> listOrders(@Query("page") int pager, @Query("status") int status);
 
 	@GET("orders/{num}")
 	Call<OrderDetail> orderDetail(@Path("num") String number);

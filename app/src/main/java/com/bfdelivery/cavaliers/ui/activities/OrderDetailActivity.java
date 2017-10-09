@@ -382,26 +382,28 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 
 	private void affirmRstrLocation() {
 
-		final ProgressDialog waitingDialog = ProgressDialog.show(this, null, getString(R.string.fetching_location), false);
-		affirmLocation(new AMapLocationListener() {
-			@Override
-			public void onLocationChanged(AMapLocation aMapLocation) {
-				if (aMapLocation.getErrorCode() == LocationErrorCode.OK) {
+//		final ProgressDialog waitingDialog = ProgressDialog.show(this, null, getString(R.string.fetching_location), false);
+//		affirmLocation(new AMapLocationListener() {
+//			@Override
+//			public void onLocationChanged(AMapLocation aMapLocation) {
+//				if (aMapLocation.getErrorCode() == LocationErrorCode.OK) {
+//
+//					float[] distance = new float[1];
+//					Location.distanceBetween(mDetailInfo.getShop().getLatitude(), mDetailInfo.getShop().getLongitude(), aMapLocation.getLatitude(), aMapLocation.getLongitude(), distance);
+//					if (distance[0] <= CavConfig.CAV_COMPLETE_ORDER_DISTANCE) {
+//						takeOrderInner();
+//					} else {
+//						Toast.makeText(OrderDetailActivity.this, R.string.take_order_failed_by_distance, Toast.LENGTH_SHORT).show();
+//					}
+//				} else {
+//					Toast.makeText(OrderDetailActivity.this, getString(R.string.complete_order_failed_by_location_failed, aMapLocation.getErrorCode()), Toast.LENGTH_SHORT).show();
+//				}
+//
+//				waitingDialog.dismiss();
+//			}
+//		});
 
-					float[] distance = new float[1];
-					Location.distanceBetween(mDetailInfo.getShop().getLatitude(), mDetailInfo.getShop().getLongitude(), aMapLocation.getLatitude(), aMapLocation.getLongitude(), distance);
-					if (distance[0] <= CavConfig.CAV_COMPLETE_ORDER_DISTANCE) {
-						takeOrderInner();
-					} else {
-						Toast.makeText(OrderDetailActivity.this, R.string.take_order_failed_by_distance, Toast.LENGTH_SHORT).show();
-					}
-				} else {
-					Toast.makeText(OrderDetailActivity.this, getString(R.string.complete_order_failed_by_location_failed, aMapLocation.getErrorCode()), Toast.LENGTH_SHORT).show();
-				}
-
-				waitingDialog.dismiss();
-			}
-		});
+		takeOrderInner();
 	}
 
 	private void takeOrderInner() {
