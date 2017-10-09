@@ -153,7 +153,6 @@ public class OrderList {
 		private int coupon_id;
 		private int pay_amount;
 		private String remark;
-		private String tags;
 		private String distribute_time;
 		private int distribute_status;
 		private String created_at;
@@ -265,14 +264,6 @@ public class OrderList {
 
 		public void setRemark(String remark) {
 			this.remark = remark;
-		}
-
-		public String getTags() {
-			return tags;
-		}
-
-		public void setTags(String tags) {
-			this.tags = tags;
 		}
 
 		public String getDistribute_time() {

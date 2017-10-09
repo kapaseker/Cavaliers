@@ -272,10 +272,12 @@ public class IndexActivity extends BaseActivity
 
 	private void afterLogin() {
 		processNecessaryPermission();
-		UserInfoManager.instance().fetchUserInfo(new UserInfoManager.OnUserInfoListener() {
+		UserInfoManager.instance().forceFetchUserInfo(new UserInfoManager.OnUserInfoListener() {
 			@Override
 			public void onUserInfoReceived(UserInfo info) {
-				updateUserInfo(info);
+				if (info != null) {
+					updateUserInfo(info);
+				}
 			}
 
 			@Override
