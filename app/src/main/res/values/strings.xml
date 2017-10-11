@@ -131,7 +131,7 @@
     <string name="tstIncome">￥200</string>
     <string name="tstOrderCount">12单</string>
 
-    <string name="suffix_km">%sKM</string>
-    <string name="suffix_m">%sM</string>
+    <string name="suffix_km">%s千米</string>
+    <string name="suffix_m">%s米</string>
     <string name="pre_pos">#%d</string>
 </resources>

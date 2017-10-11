@@ -30,13 +30,11 @@
                 android:id="@+id/usrName"
                 style="@style/NavHeadTitle"
                 android:layout_marginBottom="@dimen/txt_margin_mini"
-                android:text="@string/tstUserName"
                 android:transitionName="@string/transition_title"/>
 
             <TextView
                 android:id="@+id/usrDescription"
                 style="@style/NavHeadDetail"
-                android:text="@string/tstPhone"
                 android:transitionName="@string/transition_desc"/>
         </LinearLayout>
 

@@ -160,6 +160,8 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 		mOrderTime = (OrderDetailItemView) findViewById(R.id.itemOrderTime);
 		mOrderNote = (OrderDetailItemView) findViewById(R.id.orderNote);
 		mOrderPay = (OrderDetailItemView) findViewById(R.id.orderPay);
+
+		mTxtUsrName.setVisibility(View.VISIBLE);
 	}
 
 	@Override

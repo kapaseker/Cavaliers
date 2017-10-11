@@ -33,6 +33,7 @@
             android:orientation="vertical">
 
             <RelativeLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/txt_margin_default">
@@ -48,7 +49,7 @@
                     android:layout_marginRight="@dimen/txt_margin_small"/>
             </RelativeLayout>
 
-            <include layout="@layout/layout_horizontal_dot_gap"/>
+            <!--<include layout="@layout/layout_horizontal_dot_gap"/>-->
 
             <LinearLayout
                 android:id="@+id/wrapper_heading"

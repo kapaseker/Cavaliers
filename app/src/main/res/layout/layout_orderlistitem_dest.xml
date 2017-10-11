@@ -67,6 +67,7 @@
 
             <TextView
                 android:id="@+id/txtUsrName"
+                android:visibility="gone"
                 style="@style/OrderItemDetail"/>
 
             <TextView
