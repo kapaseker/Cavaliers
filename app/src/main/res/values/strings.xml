@@ -27,7 +27,7 @@
     <string name="order">订单</string>
     <string name="new_order">新订单</string>
     <string name="discount">优惠</string>
-    <string name="actual_fee">实付：</string>
+    <string name="actual_fee">实付（已支付）</string>
     <string name="click_to_check">点击查看</string>
 
     <string name="sign_in_ing">登录中...</string>
@@ -81,7 +81,7 @@
     <string name="take_order_failed_by_distance">您距离商家很远，无法开始配送</string>
     <string name="take_order_failed">取餐失败，再试试吧</string>
 
-    <string name="tip_complete_order">您确认餐品已经送达到用户手中，并完成订单么？</string>
+    <string name="tip_complete_order">订单已送达，完成订单？</string>
     <string name="btn_complete_deli">配送完成</string>
     <string name="complete_order_succeed">配送完成</string>
     <string name="complete_order_failed_by_distance">您距离用户很远，无法完成订单</string>
@@ -122,6 +122,7 @@
     <string name="usr_first_order">用户首单</string>
 
     <string name="prefix_rmb">￥%s</string>
+    <string name="prefix_discount_rmb">-￥%s</string>
     <string name="suffix_count">%d单</string>
 
     <!--    Test String Resource     -->

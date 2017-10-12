@@ -16,8 +16,8 @@
     <color name="colorTxtWhiteDetail">@color/colorWhiteHover</color>
 
     <color name="colorTxtError">#d50000</color>
-    <color name="colorTxtAlert">#f44336</color>
-    <color name="colorTxtAlertLight">#FF4638</color>
+    <color name="colorTxtAlert">#FBC02D</color>
+    <color name="colorTxtAlertLight">#FFEB3B</color>
     <color name="colorTip">@color/colorPrimaryLight</color>
     <color name="colorTxtPrimary">@color/colorPrimary</color>
     <color name="colorTxtPrimaryHover">@color/colorPrimaryDark</color>
