@@ -65,8 +65,8 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 
     ListView mListCommodity = null;
     OrderDetailItemView mCommodityItem = null;
-    OrderDetailItemView mOrderId = null;
-    OrderDetailItemView mOrderTime = null;
+//    OrderDetailItemView mOrderId = null;
+//    OrderDetailItemView mOrderTime = null;
     OrderDetailItemView mOrderNote = null;
     OrderDetailItemView mOrderPay = null;
     ContentLoadingProgressBar mWaitingBar = null;
@@ -80,12 +80,12 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 
     TextView mTxtRstName = null;
     TextView mTxtRstAddr = null;
-    TextView mTxtRstPhone = null;
+//    TextView mTxtRstPhone = null;
     TextView mTxtRstDis = null;
 
     TextView mTxtUsrName = null;
     TextView mTxtUsrAddr = null;
-    TextView mTxtUsrPhone = null;
+//    TextView mTxtUsrPhone = null;
     TextView mTxtUsrDis = null;
     TextView mTxtLabelActualFee = null;
 
@@ -96,8 +96,12 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 
     TextView mTxtDiscount;
     TextView mTxtRealFee;
+	TextView mTxtPackageFee;
+	TextView mTxtSubtotal;
+	TextView mTxtServiceFee;
+	TextView mTxtMkOrderTime;
+	TextView mTxtOrderNum;
 
-    View mLayoutOrders;
     TextView mTxtOrderTimes;
 
     TextView mBtnAction = null;
@@ -146,26 +150,28 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
         mTxtOrderStatus = (TextView) findViewById(R.id.txtOrderStatus);
         mTxtOrderIndex = (TextView) findViewById(R.id.txtOrderIndex);
         mBtnAction = (TextView) findViewById(R.id.btnAction);
+	    mTxtMkOrderTime = (TextView) findViewById(R.id.txtMakeOrderTime);
+	    mTxtOrderNum = (TextView) findViewById(R.id.txtOrderNumber);
 
         mTxtRstName = (TextView) findViewById(R.id.txtRstName);
         mTxtRstAddr = (TextView) findViewById(R.id.txtRstAddr);
-        mTxtRstPhone = (TextView) findViewById(R.id.txtRstPhone);
+//        mTxtRstPhone = (TextView) findViewById(R.id.txtRstPhone);
         mTxtRstDis = (TextView) findViewById(R.id.txtRstDis);
 
         mTxtUsrName = (TextView) findViewById(R.id.txtUsrName);
         mTxtUsrAddr = (TextView) findViewById(R.id.txtUsrAddr);
-        mTxtUsrPhone = (TextView) findViewById(R.id.txtUsrPhone);
+//        mTxtUsrPhone = (TextView) findViewById(R.id.txtUsrPhone);
         mTxtUsrDis = (TextView) findViewById(R.id.txtUsrDis);
 
-        mLayoutOrders = findViewById(R.id.layoutOrder);
         mTxtOrderTimes = (TextView) findViewById(R.id.orderTimes);
 
         mTxtDiscount = (TextView) findViewById(R.id.txtDiscount);
         mTxtRealFee = (TextView) findViewById(R.id.txtRealFee);
         mTxtLabelActualFee = (TextView) findViewById(R.id.txtLabelActualFee);
+	    mTxtServiceFee = (TextView) findViewById(R.id.txtServiceFee);
+	    mTxtPackageFee = (TextView) findViewById(R.id.txtPackaging);
+	    mTxtSubtotal = (TextView) findViewById(R.id.txtSubTotal);
 
-        mOrderId = (OrderDetailItemView) findViewById(R.id.itemOrderId);
-        mOrderTime = (OrderDetailItemView) findViewById(R.id.itemOrderTime);
         mOrderNote = (OrderDetailItemView) findViewById(R.id.orderNote);
         mOrderPay = (OrderDetailItemView) findViewById(R.id.orderPay);
 
@@ -239,7 +245,7 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
         mListCommodity.setAdapter(new CommodityAdapter(detailInfo.getOrder_products()));
         mTxtRstName.setText(mDetailInfo.getShop().getName());
         mTxtRstAddr.setText(mDetailInfo.getShop().getAddress());
-        mTxtRstPhone.setText(mDetailInfo.getShop().getPhone());
+//        mTxtRstPhone.setText(mDetailInfo.getShop().getPhone());
 
         mTxtUsrName.setText(mDetailInfo.getAddress().getName());
         mTxtUsrAddr.setText(mDetailInfo.getAddress().getDetail());
@@ -249,23 +255,23 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
                 || orderDistibuteStatus == DeliveryStatus.DEIVERING
                 || orderDistibuteStatus == DeliveryStatus.WAITING_TAKE
                 ) {
-            mTxtUsrPhone.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.ic_dial), null);
-            mTxtRstPhone.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.ic_dial), null);
+            mTxtRstName.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.ic_dial), null);
+            mTxtUsrName.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.ic_dial), null);
 
-            mTxtUsrPhone.setOnClickListener(this);
-            mTxtRstPhone.setOnClickListener(this);
+            mTxtRstName.setOnClickListener(this);
+            mTxtUsrName.setOnClickListener(this);
 
-            mTxtRstPhone.setText(mDetailInfo.getShop().getPhone());
-            mTxtUsrPhone.setText(mDetailInfo.getAddress().getMobile());
+//            mTxtRstPhone.setText(mDetailInfo.getShop().getPhone());
+//            mTxtUsrPhone.setText(mDetailInfo.getAddress().getMobile());
         } else {
-            mTxtUsrPhone.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
-            mTxtRstPhone.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+            mTxtRstName.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+            mTxtUsrName.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
 
-            mTxtUsrPhone.setOnClickListener(null);
-            mTxtRstPhone.setOnClickListener(null);
+            mTxtRstName.setOnClickListener(null);
+            mTxtUsrName.setOnClickListener(null);
 
-            mTxtRstPhone.setText(OrderStringBridge.getSecretPhone(mDetailInfo.getShop().getPhone()));
-            mTxtUsrPhone.setText(OrderStringBridge.getSecretPhone(mDetailInfo.getAddress().getMobile()));
+//            mTxtRstPhone.setText(OrderStringBridge.getSecretPhone(mDetailInfo.getShop().getPhone()));
+//            mTxtUsrPhone.setText(OrderStringBridge.getSecretPhone(mDetailInfo.getAddress().getMobile()));
         }
 
 
@@ -296,19 +302,21 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
         }
 
         mTxtFirstOrder.setVisibility(View.GONE);
-        mLayoutOrders.setVisibility(View.GONE);
+        mTxtOrderTimes.setVisibility(View.GONE);
 
         if (mDetailInfo.getOrder_num() > 1) {
-            mLayoutOrders.setVisibility(View.VISIBLE);
-            mTxtOrderTimes.setText(mDetailInfo.getOrder_num() + "");
+            mTxtOrderTimes.setVisibility(View.VISIBLE);
+	        mTxtOrderTimes.setText(getString(R.string.order_count, mDetailInfo.getOrder_num()));
         } else {
             mTxtFirstOrder.setVisibility(View.VISIBLE);
         }
 
-        mTxtOrderStatus.setText(OrderStringBridge.getStatusByOrderStatu(mDetailInfo.getDistribute().getStatus()));
+	    mTxtOrderStatus.setText(OrderStringBridge.getStatusByOrderStatu(mDetailInfo.getDistribute().getStatus()));
+	    mTxtMkOrderTime.setText(getString(R.string.suffix_makeorder, mDetailInfo.getCreated_at()));
+	    mTxtOrderNum.setText(getString(R.string.prefix_orderNum, mDetailInfo.getNumber()));
 
-        mOrderTime.setDetail(mDetailInfo.getCreated_at());
-        mOrderId.setDetail(mDetailInfo.getNumber());
+//        mOrderTime.setDetail(mDetailInfo.getCreated_at());
+//        mOrderId.setDetail(mDetailInfo.getNumber());
 
         int resId = OrderStringBridge.getActionByOrderStatu(mDetailInfo.getDistribute().getStatus());
 
@@ -338,9 +346,9 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
                     completeOrder();
                     break;
             }
-        } else if (v == mTxtUsrPhone) {
+        } else if (v == mTxtUsrName) {
             callPhone(mDetailInfo.getAddress().getMobile());
-        } else if (v == mTxtRstPhone) {
+        } else if (v == mTxtRstName) {
             callPhone(mDetailInfo.getShop().getPhone());
         }
     }
@@ -539,6 +547,7 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
             TextView mTxtName;
             TextView mTxtCount;
             TextView mTxtPrice;
+	        TextView mTxtUnit;
             DecimalFormat mFormat = new DecimalFormat("#.##");
 
 
@@ -546,6 +555,7 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
                 mTxtName = (TextView) rootView.findViewById(R.id.txtCommodityName);
                 mTxtCount = (TextView) rootView.findViewById(R.id.txtCommodityCount);
                 mTxtPrice = (TextView) rootView.findViewById(R.id.txtCommodityPrice);
+	            mTxtUnit = (TextView) rootView.findViewById(R.id.txtUnitPrice);
                 mFormat.setRoundingMode(RoundingMode.HALF_UP);
             }
 

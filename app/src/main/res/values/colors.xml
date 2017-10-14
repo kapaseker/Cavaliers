@@ -22,7 +22,8 @@
     <color name="colorTxtPrimary">@color/colorPrimary</color>
     <color name="colorTxtPrimaryHover">@color/colorPrimaryDark</color>
     <color name="colorTxtWarning">#FF8F00</color>
-    <color name="colorTxtDisable">#7A7A7A</color>
+    <color name="colorTxtDisable">#8A8A8A</color>
+    <color name="colorTxtInfo">#6A6A6A</color>
     <color name="colorTxtDetail">#4A4A4A</color>
     <color name="colorTxtDefault">#0E0E0E</color>
 

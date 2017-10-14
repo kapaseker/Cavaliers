@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/activityBackground"
-    android:layerType="software"
-    tools:context="com.bfdelivery.cavaliers.ui.activities.OrderDetailActivity">
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/activityBackground"
+                android:layerType="software"
+                tools:context="com.bfdelivery.cavaliers.ui.activities.OrderDetailActivity">
 
     <TextView
         android:id="@+id/btnAction"
@@ -17,7 +17,7 @@
         android:gravity="center"
         android:padding="@dimen/txt_margin_large"
         android:textColor="@android:color/white"
-        android:textSize="@dimen/txt_size_big" />
+        android:textSize="@dimen/txt_size_big"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -39,13 +39,13 @@
 
                 <TextView
                     android:id="@+id/txtOrderIndex"
-                    style="@style/OrderIndex" />
+                    style="@style/OrderIndex"/>
 
                 <TextView
                     android:id="@+id/txtOrderStatus"
                     style="@style/OrderDetailStatus"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/txt_margin_small" />
+                    android:layout_marginRight="@dimen/txt_margin_small"/>
             </RelativeLayout>
 
             <!--<include layout="@layout/layout_horizontal_dot_gap"/>-->
@@ -67,7 +67,7 @@
                         style="@style/WrapperText"
                         android:layout_gravity="center_vertical"
                         android:layout_marginRight="@dimen/txt_margin_large"
-                        android:background="@drawable/ic_fetch_dish" />
+                        android:background="@drawable/ic_fetch_dish"/>
 
 
                     <LinearLayout
@@ -79,34 +79,34 @@
 
                         <TextView
                             android:id="@+id/txtRstName"
-                            style="@style/OrderDetailItemName" />
+                            style="@style/OrderDetailItemName"/>
 
                         <TextView
                             android:id="@+id/txtRstAddr"
-                            style="@style/OrderDetailItemDetail" />
+                            style="@style/OrderDetailItemDetail"/>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                        <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:gravity="center_vertical"-->
+                        <!--android:orientation="horizontal">-->
 
-                            <TextView
-                                style="@style/TipTitle"
-                                android:text="@string/merchant_phone" />
+                        <!--<TextView-->
+                        <!--style="@style/TipTitle"-->
+                        <!--android:text="@string/merchant_phone" />-->
 
-                            <TextView
-                                android:id="@+id/txtRstPhone"
-                                style="@style/OrderItemDial" />
+                        <!--<TextView-->
+                        <!--android:id="@+id/txtRstPhone"-->
+                        <!--style="@style/OrderItemDial" />-->
 
-                        </LinearLayout>
+                        <!--</LinearLayout>-->
                     </LinearLayout>
 
                     <TextView
                         android:id="@+id/txtRstDis"
                         style="@style/DefaultText"
                         android:layout_gravity="center_vertical"
-                        android:text="6KM" />
+                        android:text="6KM"/>
 
                 </LinearLayout>
 
@@ -121,7 +121,7 @@
                         style="@style/WrapperText"
                         android:layout_gravity="center_vertical"
                         android:layout_marginRight="@dimen/txt_margin_large"
-                        android:background="@drawable/ic_delivery_dish" />
+                        android:background="@drawable/ic_delivery_dish"/>
 
                     <LinearLayout
                         android:layout_width="0px"
@@ -138,35 +138,41 @@
 
                             <TextView
                                 android:id="@+id/txtUsrAddr"
-                                style="@style/OrderDetailItemName" />
+                                style="@style/OrderDetailItemName"/>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_marginRight="@dimen/txt_margin_default"
+                                    android:id="@+id/orderTimes"
+                                    style="@style/TipTitle"
+                                    android:textColor="@color/colorPrimary"/>
 
                                 <TextView
                                     android:id="@+id/txtUsrName"
-                                    style="@style/OrderDetailItemDetail" />
+                                    style="@style/OrderDetailItemDetail"/>
 
                             </LinearLayout>
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center_vertical"
-                                android:orientation="horizontal">
+                            <!--<LinearLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:gravity="center_vertical"-->
+                            <!--android:orientation="horizontal">-->
 
-                                <TextView
-                                    style="@style/TipTitle"
-                                    android:text="@string/client_phone" />
+                            <!--<TextView-->
+                            <!--style="@style/TipTitle"-->
+                            <!--android:text="@string/client_phone" />-->
 
-                                <TextView
-                                    android:id="@+id/txtUsrPhone"
-                                    style="@style/OrderItemDial"
-                                    android:text="" />
+                            <!--<TextView-->
+                            <!--android:id="@+id/txtUsrPhone"-->
+                            <!--style="@style/OrderItemDial"-->
+                            <!--android:text="" />-->
 
-                            </LinearLayout>
+                            <!--</LinearLayout>-->
 
                         </LinearLayout>
                     </LinearLayout>
@@ -175,14 +181,14 @@
                         android:id="@+id/txtUsrDis"
                         style="@style/DefaultText"
                         android:layout_gravity="center_vertical"
-                        android:text="6KM" />
+                        android:text="6KM"/>
 
                 </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>
 
-        <include layout="@layout/layout_horizontal_gap" />
+        <include layout="@layout/layout_horizontal_gap"/>
 
         <ScrollView
             android:layout_width="match_parent"
@@ -208,13 +214,13 @@
                         android:id="@+id/waitingbar"
                         style="?android:attr/progressBarStyle"
                         android:layout_width="@dimen/ctrl_large"
-                        android:layout_height="@dimen/ctrl_large" />
+                        android:layout_height="@dimen/ctrl_large"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/txt_margin_default"
-                        android:text="@string/loading_detail" />
+                        android:text="@string/loading_detail"/>
                 </LinearLayout>
 
 
@@ -234,7 +240,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:detailColor="@color/colorTxtAlert"
-                        app:tag="@string/order_remark" />
+                        app:tag="@string/order_remark"/>
 
                     <include layout="@layout/layout_horizontal_gap"></include>
 
@@ -251,44 +257,19 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             app:detailColor="@color/colorWeixin"
-                            app:tag="@string/payment_mode" />
+                            app:tag="@string/payment_mode"/>
 
                         <TextView
                             android:id="@+id/txt_labelFirst"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/txt_size_small"
                             android:layout_gravity="center|right"
                             android:background="@drawable/bkg_alert_border"
                             android:padding="@dimen/radius_default"
                             android:text="@string/first_order"
                             android:textColor="@color/colorTxtAlert"
-                            android:visibility="visible" />
-
-                        <LinearLayout
-                            android:id="@+id/layoutOrder"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical|right"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal"
-                            android:visibility="gone">
-
-                            <TextView
-                                style="@style/TipTitle"
-                                android:text="@string/makeorder_pre" />
-
-                            <TextView
-                                android:id="@+id/orderTimes"
-                                style="@style/TipTitle"
-                                android:textColor="@color/colorTxtAlert"
-                                android:textSize="@dimen/txt_size_big" />
-
-                            <TextView
-                                style="@style/TipTitle"
-                                android:text="@string/makeorder_after" />
-
-                        </LinearLayout>
+                            android:textSize="@dimen/txt_size_small"
+                            android:visibility="visible"/>
                     </LinearLayout>
 
                     <include layout="@layout/layout_horizontal_gap"></include>
@@ -297,7 +278,7 @@
                         android:id="@+id/itemCommodity"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:tag="@string/commodity_detail" />
+                        app:tag="@string/commodity_detail"/>
 
                     <LinearLayout
                         android:id="@+id/wrapperCommodity"
@@ -317,81 +298,114 @@
                             android:divider="@drawable/divider_commodity"
                             android:dividerHeight="3px"
                             android:layerType="software"
-                            android:listSelector="@android:color/transparent" />
+                            android:listSelector="@android:color/transparent"/>
 
-                        <include layout="@layout/layout_horizontal_dot_gap" />
+                        <include layout="@layout/layout_horizontal_dot_gap"/>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal"
-                            android:paddingBottom="@dimen/txt_margin_default"
-                            android:paddingTop="@dimen/txt_margin_default">
+                        <RelativeLayout
+                            style="@style/FeeDetail">
 
                             <TextView
                                 style="@style/DefaultText"
-                                android:layout_width="0px"
-                                android:layout_weight="3"
-                                android:text="@string/discount"
-                                android:textColor="@color/colorTxtAlert" />
+                                android:text="@string/subtotal"/>
 
-                            <View
-                                android:layout_width="0px"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1" />
+                            <TextView
+                                android:id="@+id/txtSubTotal"
+                                style="@style/DefaultText"
+                                android:layout_alignParentRight="true"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            style="@style/FeeDetail">
+
+                            <TextView
+                                style="@style/DefaultText"
+                                android:text="@string/servicefee"/>
+
+                            <TextView
+                                android:id="@+id/txtServiceFee"
+                                style="@style/DefaultText"
+                                android:layout_alignParentRight="true"
+                                android:textColor="@color/colorTxtAlert"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            style="@style/FeeDetail">
+
+                            <TextView
+                                style="@style/DefaultText"
+                                android:text="@string/discount"
+                                android:textColor="@color/colorTxtAlert"/>
 
                             <TextView
                                 android:id="@+id/txtDiscount"
                                 style="@style/DefaultText"
-                                android:layout_width="0px"
-                                android:layout_weight="1"
-                                android:gravity="right"
-                                android:textColor="@color/colorTxtAlert" />
+                                android:layout_alignParentRight="true"
+                                android:textColor="@color/colorTxtAlert"/>
 
-                        </LinearLayout>
+                        </RelativeLayout>
 
                         <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal"
-                            android:paddingBottom="@dimen/txt_margin_default"
-                            android:paddingTop="@dimen/txt_margin_default">
+                            style="@style/FeeDetail">
+
+                            <TextView
+                                style="@style/DefaultText"
+                                android:text="@string/packaging"/>
+
+                            <TextView
+                                android:id="@+id/txtPackaging"
+                                style="@style/DefaultText"
+                                android:layout_alignParentRight="true"
+                                android:textColor="@color/colorTxtAlert"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            style="@style/FeeDetail">
 
                             <TextView
                                 android:id="@+id/txtLabelActualFee"
                                 style="@style/DefaultText"
-                                android:textSize="@dimen/txt_size_big" />
+                                android:textSize="@dimen/txt_size_big"/>
 
                             <TextView
-                                android:layout_alignParentRight="true"
                                 android:id="@+id/txtRealFee"
                                 style="@style/DefaultText"
+                                android:layout_alignParentRight="true"
                                 android:textColor="@color/colorAccent"
-                                android:textSize="@dimen/txt_size_big" />
+                                android:textSize="@dimen/txt_size_big"/>
+
+                        </RelativeLayout>
+
+                        <include layout="@layout/layout_horizontal_dot_gap"/>
+
+                        <RelativeLayout
+                            style="@style/FeeDetail">
+
+                            <TextView
+                                android:id="@+id/txtMakeOrderTime"
+                                style="@style/DefaultText"
+                                android:layout_alignParentRight="true"
+                                android:textColor="@color/colorTxtInfo"
+                                android:textSize="@dimen/txt_size_default"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            style="@style/FeeDetail">
+
+                            <TextView
+                                android:id="@+id/txtOrderNumber"
+                                style="@style/DefaultText"
+                                android:layout_alignParentRight="true"
+                                android:textColor="@color/colorTxtInfo"
+                                android:textSize="@dimen/txt_size_default"/>
 
                         </RelativeLayout>
 
                     </LinearLayout>
-
-                    <include layout="@layout/layout_horizontal_gap"></include>
-
-                    <com.bfdelivery.cavaliers.ui.views.OrderDetailItemView
-                        android:id="@+id/itemOrderTime"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:tag="@string/mkorder_time" />
-
-                    <include layout="@layout/layout_horizontal_gap"></include>
-
-                    <com.bfdelivery.cavaliers.ui.views.OrderDetailItemView
-                        android:id="@+id/itemOrderId"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:tag="@string/order_number" />
-
-                    <include layout="@layout/layout_horizontal_gap"></include>
 
                 </LinearLayout>
 

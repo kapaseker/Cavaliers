@@ -46,6 +46,13 @@
         <item name="android:textColor">@color/colorTxtDetail</item>
     </style>
 
+    <style name="FeeDetail">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingTop">@dimen/txt_margin_small</item>
+    </style>
+
     <style name="DefaultText" parent="@style/WrapperText">
         <item name="android:textColor">@color/colorTxtDefault</item>
         <item name="android:textSize">@dimen/txt_size_default</item>

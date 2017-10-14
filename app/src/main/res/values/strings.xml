@@ -27,6 +27,9 @@
     <string name="order">订单</string>
     <string name="new_order">新订单</string>
     <string name="discount">优惠</string>
+    <string name="subtotal">小计</string>
+    <string name="servicefee">服务费</string>
+    <string name="packaging">打包盒</string>
     <string name="actual_fee">实付（已支付）</string>
     <string name="click_to_check">点击查看</string>
 
@@ -124,6 +127,9 @@
     <string name="prefix_rmb">￥%s</string>
     <string name="prefix_discount_rmb">-￥%s</string>
     <string name="suffix_count">%d单</string>
+    <string name="order_count">下单%d次</string>
+    <string name="suffix_makeorder">%s下单</string>
+    <string name="prefix_orderNum">订单号%s</string>
 
     <!--    Test String Resource     -->
     <string name="tstUserName">欧阳正茂</string>

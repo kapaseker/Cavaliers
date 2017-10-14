@@ -14,6 +14,13 @@
         android:layout_weight="3"/>
 
     <TextView
+        android:id="@+id/txtUnitPrice"
+        style="@style/DefaultText"
+        android:layout_width="0px"
+        android:layout_weight="1"
+        android:gravity="right"/>
+
+    <TextView
         android:id="@+id/txtCommodityCount"
         style="@style/DefaultText"
         android:layout_width="0px"
