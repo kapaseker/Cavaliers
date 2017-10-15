@@ -326,8 +326,7 @@
                             <TextView
                                 android:id="@+id/txtServiceFee"
                                 style="@style/DefaultText"
-                                android:layout_alignParentRight="true"
-                                android:textColor="@color/colorTxtAlert"/>
+                                android:layout_alignParentRight="true"/>
 
                         </RelativeLayout>
 
@@ -357,8 +356,7 @@
                             <TextView
                                 android:id="@+id/txtPackaging"
                                 style="@style/DefaultText"
-                                android:layout_alignParentRight="true"
-                                android:textColor="@color/colorTxtAlert"/>
+                                android:layout_alignParentRight="true"/>
 
                         </RelativeLayout>
 

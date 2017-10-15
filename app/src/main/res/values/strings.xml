@@ -125,6 +125,7 @@
     <string name="usr_first_order">用户首单</string>
 
     <string name="prefix_rmb">￥%s</string>
+    <string name="prefix_count">x%s</string>
     <string name="prefix_discount_rmb">-￥%s</string>
     <string name="suffix_count">%d单</string>
     <string name="order_count">下单%d次</string>

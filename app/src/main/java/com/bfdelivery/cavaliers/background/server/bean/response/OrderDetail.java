@@ -670,7 +670,7 @@ public class OrderDetail {
 		private String name;
 		private int num;
 		private int packing_box_num;
-		private int packing_box_price;
+		private double packing_box_price;
 		private int price;
 		private String remark;
 		private String created_at;
@@ -717,11 +717,11 @@ public class OrderDetail {
 			this.packing_box_num = packing_box_num;
 		}
 
-		public int getPacking_box_price() {
+		public double getPacking_box_price() {
 			return packing_box_price;
 		}
 
-		public void setPacking_box_price(int packing_box_price) {
+		public void setPacking_box_price(double packing_box_price) {
 			this.packing_box_price = packing_box_price;
 		}
 
