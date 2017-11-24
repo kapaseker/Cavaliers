@@ -7,6 +7,7 @@ import android.support.multidex.MultiDexApplication;
 import com.bfdelivery.cavaliers.background.database.PreferenceRecorder;
 import com.bfdelivery.cavaliers.database.location.LocationDataService;
 import com.bfdelivery.cavaliers.database.userinfo.UserInfoDataService;
+import com.bfdelivery.cavaliers.log.CrashLogger;
 import com.bfdelivery.cavaliers.util.CavActivityLifeCallback;
 
 import cn.jpush.android.api.JPushInterface;
@@ -34,5 +35,7 @@ public class CavApplication extends MultiDexApplication {
 		UserInfoDataService.init(this);
 
 		registerActivityLifecycleCallbacks(CavActivityLifeCallback.instance());
+
+		CrashLogger.getInstance().init(getApplicationContext());
 	}
 }
