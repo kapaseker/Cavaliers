@@ -6,7 +6,7 @@ package com.bfdelivery.cavaliers.constant;
 
 public class CavConfig {
 	/**
-	 * 配送员如果和用户在1000米以内，那么就可以完成配送了。
+	 * 配送的判断范围
 	 */
 	public static final float CAV_COMPLETE_ORDER_DISTANCE = 500F;
 
