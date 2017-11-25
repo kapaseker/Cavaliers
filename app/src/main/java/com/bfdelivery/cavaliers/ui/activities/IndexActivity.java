@@ -204,7 +204,6 @@ public class IndexActivity extends BaseActivity
 				mDrawer.closeDrawer(GravityCompat.START);
 				break;
 		}
-		throw new NullPointerException("Test Crash");
 	}
 
 	@Override
