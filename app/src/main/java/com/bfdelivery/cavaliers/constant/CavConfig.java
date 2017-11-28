@@ -10,6 +10,12 @@ public class CavConfig {
 	 */
 	public static final float CAV_COMPLETE_ORDER_DISTANCE = 500F;
 
-
+	/**
+	 * 定位完成
+	 */
 	public static final String ACTION_LOCATION_OK = "com.bfdelivery.cavaliers.location";
+	/**
+	 * 信息更新广播
+	 */
+	public static final String ACTION_UPDATE_DATA = "com.bfdelivery.cavaliers.update_data";
 }

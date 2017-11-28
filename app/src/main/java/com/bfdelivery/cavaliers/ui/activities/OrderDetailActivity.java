@@ -212,7 +212,16 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 		mBtnAction.setOnClickListener(this);
 	}
 
+	/**
+	 * 通知订单更新
+	 */
+	private void notifyOrderUpdate() {
+		sendBroadcast(new Intent(CavConfig.ACTION_UPDATE_DATA));
+	}
+
 	private void requestOrderDetial() {
+
+		notifyOrderUpdate();
 
 		mWrapperWating.setVisibility(View.VISIBLE);
 		mWrapperDeatilInfo.setVisibility(View.GONE);

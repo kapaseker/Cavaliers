@@ -1,5 +1,6 @@
 package com.bfdelivery.cavaliers.ui.fragments;
 
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -63,6 +64,7 @@ public class OrderListFragment extends BaseFragment implements OnListItemListene
 	public static final String BUNDLE_KEY_ORDERTYPE = "order.type";
 
 	BroadcastReceiver mLocationReceiver = null;
+	BroadcastReceiver mUpdateDataReceiver = null;
 
 	public static OrderListFragment newIntance(int orderType) {
 		OrderListFragment fragment = new OrderListFragment();
@@ -85,12 +87,26 @@ public class OrderListFragment extends BaseFragment implements OnListItemListene
 				mOrderAdapter.notifyDataSetChanged();
 			}
 		};
+
+		mUpdateDataReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+//				mListPage = 1;
+//				requestOrderInner(mListPage, false);
+				requestOrder();
+			}
+		};
+
+		IntentFilter dataIntent = new IntentFilter();
+		dataIntent.addAction(CavConfig.ACTION_UPDATE_DATA);
+		getContext().registerReceiver(mUpdateDataReceiver, dataIntent);
 	}
 
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
 		mListOrder.removeOnScrollListener(mScrollListener);
+		getContext().unregisterReceiver(mUpdateDataReceiver);
 	}
 
 	@Override
@@ -120,6 +136,10 @@ public class OrderListFragment extends BaseFragment implements OnListItemListene
 
 	private void handleData(Bundle data) {
 		mOrderType = data.getInt(BUNDLE_KEY_ORDERTYPE, DeliveryStatus.NEW_RECEIVED);
+	}
+
+	private void notifyOrderUpdate() {
+		getContext().sendBroadcast(new Intent(CavConfig.ACTION_UPDATE_DATA));
 	}
 
 	private void requestOrder() {
@@ -211,6 +231,9 @@ public class OrderListFragment extends BaseFragment implements OnListItemListene
 
 	private void acceptOrderInner(String orderNumber) {
 		Call<Void> request = null;
+
+		final ProgressDialog waitDialog = ProgressDialog.show(this.getContext(), null, getString(R.string.receiving_order), false);
+
 		OrderNumber postParam = new OrderNumber(orderNumber);
 		request = mService.acceptOrder(postParam);
 		request.enqueue(new BaseCallback<Void>() {
@@ -219,7 +242,8 @@ public class OrderListFragment extends BaseFragment implements OnListItemListene
 				super.onResponse(call, response);
 				if (response.code() == HttpStatus.SC_OK) {
 					Toast.makeText(getContext(), R.string.receive_order_succeed, Toast.LENGTH_SHORT).show();
-					requestOrder();
+//					requestOrder();
+					notifyOrderUpdate();
 				} else {
 					onFailure(call, null);
 				}
@@ -233,7 +257,7 @@ public class OrderListFragment extends BaseFragment implements OnListItemListene
 
 			@Override
 			public void onComplete() {
-
+				waitDialog.dismiss();
 			}
 		});
 	}
