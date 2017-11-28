@@ -142,7 +142,6 @@ public class NewOrderTipActivity extends BaseActivity implements View.OnClickLis
 		mSoundPool.stop(mStreamId);
 		mSoundPool.unload(mSoundId);
 		mSoundPool.release();
-		finish();
 	}
 
 	/**

@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -52,6 +54,7 @@ public class OrderListFragment extends BaseFragment implements OnListItemListene
 	SwipeRefreshLayout mRefreshLayout = null;
 	RecyclerView mListOrder = null;
 	OrderAdapter mOrderAdapter = null;
+	Handler mPostHandler = new Handler(Looper.getMainLooper());
 
 	DistributeService mService;
 
@@ -201,7 +204,12 @@ public class OrderListFragment extends BaseFragment implements OnListItemListene
 		mScrollListener = new EndlessRecyclerViewScrollListener(layoutManger) {
 			@Override
 			public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-				requestOrderInner(++mListPage, true);
+				mPostHandler.post(new Runnable() {
+					@Override
+					public void run() {
+						requestOrderInner(++mListPage, true);
+					}
+				});
 			}
 		};
 		mListOrder.addOnScrollListener(mScrollListener);
