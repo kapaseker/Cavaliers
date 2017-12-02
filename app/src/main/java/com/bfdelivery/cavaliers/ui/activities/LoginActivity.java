@@ -116,7 +116,7 @@ public class LoginActivity extends BasePageActivity implements View.OnClickListe
 			}
 
 			@Override
-			public void onError(int erCode) {
+			public void onError(int erCode, int servCode) {
 
 				int resID = -1;
 
@@ -126,11 +126,13 @@ public class LoginActivity extends BasePageActivity implements View.OnClickListe
 						break;
 					case SignManager.ERROR_UNKOWN:
 						resID = R.string.sign_in_fail;
+						break;
 					default:
 						resID = R.string.sign_in_fail;
 				}
 
-				Toast.makeText(LoginActivity.this, resID, Toast.LENGTH_SHORT).show();
+				String errorMsg = LoginActivity.this.getResources().getString(resID) + "[" + servCode + "]";
+				Toast.makeText(LoginActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
 			}
 
 			@Override

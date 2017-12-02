@@ -37,7 +37,7 @@ public class SignManager {
 
 		void onSignEnd();
 
-		void onError(int erCode);
+		void onError(int erCode, int servCode);
 
 		void onSuccess(LoginInfo result);
 	}
@@ -66,8 +66,8 @@ public class SignManager {
 //			return;
 //		}
 
-		Intent intent = new Intent(context, IndexActivity.class);
 		PreferenceRecorder.saveAccessToken("");
+		Intent intent = new Intent(context, IndexActivity.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		context.startActivity(intent);
 	}
@@ -90,21 +90,21 @@ public class SignManager {
 						listener.onSuccess(result);
 					}
 				} else if (response.code() == HttpStatus.SC_UNAUTHORIZED) {
-					onError(ERROR_WRONG_USER);
+					onError(ERROR_WRONG_USER, response.code());
 				} else {
-					onError(ERROR_UNKOWN);
+					onError(ERROR_UNKOWN, response.code());
 				}
 			}
 
 			@Override
 			public void onFailure(Call<LoginInfo> call, Throwable t) {
 				super.onFailure(call, t);
-				onError(ERROR_UNKOWN);
+				onError(ERROR_UNKOWN, -1);
 			}
 
-			public void onError(int erCode) {
+			public void onError(int erCode, int servCode) {
 				if (listener != null) {
-					listener.onError(erCode);
+					listener.onError(erCode, servCode);
 				}
 			}
 
