@@ -604,7 +604,7 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 			TextView mTxtName;
 			TextView mTxtCount;
 			TextView mTxtPrice;
-			TextView mTxtUnit;
+//			TextView mTxtUnit;
 			TextView mTxtRemark;
 			TextView mTxtSpec;
 			DecimalFormat mFormat = new DecimalFormat("#.##");
@@ -614,7 +614,7 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 				mTxtName = rootView.findViewById(R.id.txtCommodityName);
 				mTxtCount = rootView.findViewById(R.id.txtCommodityCount);
 				mTxtPrice = rootView.findViewById(R.id.txtCommodityPrice);
-				mTxtUnit = rootView.findViewById(R.id.txtUnitPrice);
+//				mTxtUnit = rootView.findViewById(R.id.txtUnitPrice);
 				mTxtRemark = rootView.findViewById(R.id.txtRemark);
 				mTxtSpec = rootView.findViewById(R.id.txtSpec);
 
@@ -654,9 +654,9 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 				double packageFee = data.getPacking_box_num() * data.getPacking_box_price();
 				double productFee = data.getPrice() * data.getNum();
 
-				mTxtUnit.setText(resource.getString(R.string.prefix_count, mFormat.format(data.getPrice() / 100)));
-				mTxtCount.setText(mTxtCount.getResources().getString(R.string.prefix_count, data.getNum() + ""));
-				mTxtPrice.setText(mTxtPrice.getResources().getString(R.string.prefix_rmb, mFormat.format(productFee / 100F)));
+//				mTxtUnit.setText(resource.getString(R.string.prefix_rmb, mFormat.format(data.getPrice() / 100)));
+				mTxtCount.setText(resource.getString(R.string.prefix_count, data.getNum() + ""));
+				mTxtPrice.setText(resource.getString(R.string.prefix_rmb, mFormat.format(productFee / 100F)));
 			}
 		}
 

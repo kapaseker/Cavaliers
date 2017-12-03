@@ -24,7 +24,8 @@
             style="@style/DefaultText"
             android:layout_width="0px"
             android:layout_weight="1"
-            android:gravity="right"/>
+            android:gravity="right"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/txtCommodityCount"
@@ -43,16 +44,16 @@
     </LinearLayout>
 
     <TextView
-        android:visibility="gone"
         android:id="@+id/txtSpec"
         style="@style/DefaultText"
+        android:textColor="@color/colorTxtInfo"
         android:textSize="@dimen/txt_size_small"
-        android:textColor="@color/colorTxtInfo"/>
+        android:visibility="gone"/>
 
     <TextView
-        android:visibility="visible"
         android:id="@+id/txtRemark"
         style="@style/DefaultText"
+        android:textColor="@color/colorTxtInfo"
         android:textSize="@dimen/txt_size_small"
-        android:textColor="@color/colorTxtInfo"/>
+        android:visibility="visible"/>
 </LinearLayout>
