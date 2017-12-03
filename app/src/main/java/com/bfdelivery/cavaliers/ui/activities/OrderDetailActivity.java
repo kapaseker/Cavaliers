@@ -96,9 +96,20 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 	View mWrapperDiscount;
 	TextView mTxtDiscount;
 	TextView mTxtRealFee;
+
+	/**
+	 * 打包盒相关
+	 */
+	View mWrapperPackage;
 	TextView mTxtPackageFee;
+
 	TextView mTxtSubtotal;
+	/**
+	 * 服务费相关
+	 */
+	View mWrapperServe;
 	TextView mTxtServiceFee;
+
 	TextView mTxtMkOrderTime;
 	TextView mTxtOrderNum;
 
@@ -169,7 +180,11 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 		mTxtDiscount = (TextView) findViewById(R.id.txtDiscount);
 		mTxtRealFee = (TextView) findViewById(R.id.txtRealFee);
 		mTxtLabelActualFee = (TextView) findViewById(R.id.txtLabelActualFee);
+
+		mWrapperServe = findViewById(R.id.wrapperServe);
 		mTxtServiceFee = (TextView) findViewById(R.id.txtServiceFee);
+
+		mWrapperPackage = findViewById(R.id.wrapperPackaging);
 		mTxtPackageFee = (TextView) findViewById(R.id.txtPackaging);
 		mTxtSubtotal = (TextView) findViewById(R.id.txtSubTotal);
 
@@ -343,8 +358,24 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 			mTxtSubtotal.setText(getString(R.string.prefix_rmb, mDecimalFormat.format(subTotal / 100F)));
 		}
 
-		mTxtPackageFee.setText(getString(R.string.prefix_rmb, mDecimalFormat.format(ResultProcessor.extractPackageFee(mDetailInfo.getOrder_products()) / 100F)));
-		mTxtServiceFee.setText(getString(R.string.prefix_rmb, mDecimalFormat.format(mDetailInfo.getService_amount() / 100F)));
+		{// 计算打包盒费用
+			double packageFee = ResultProcessor.extractPackageFee(mDetailInfo.getOrder_products());
+			if (packageFee > 0.0) {
+				mWrapperPackage.setVisibility(View.VISIBLE);
+				mTxtPackageFee.setText(getString(R.string.prefix_rmb, mDecimalFormat.format(packageFee / 100F)));
+			} else {
+				mWrapperPackage.setVisibility(View.GONE);
+			}
+		}
+
+		{//计算服务费用
+			if (mDetailInfo.getService_amount() > 0.0) {
+				mWrapperServe.setVisibility(View.VISIBLE);
+				mTxtServiceFee.setText(getString(R.string.prefix_rmb, mDecimalFormat.format(mDetailInfo.getService_amount() / 100F)));
+			} else {
+				mWrapperServe.setVisibility(View.GONE);
+			}
+		}
 
 		int disCount = mDetailInfo.getCoupon_amount();
 		if (disCount > 0) {
@@ -621,10 +652,9 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 				}
 
 				double packageFee = data.getPacking_box_num() * data.getPacking_box_price();
-				packageFee = packageFee > 0 ? packageFee : 0;
-				double productFee = data.getPrice() - packageFee;
+				double productFee = data.getPrice() * data.getNum();
 
-				mTxtUnit.setText(resource.getString(R.string.prefix_count, mFormat.format((productFee - packageFee) / data.getNum() / 100)));
+				mTxtUnit.setText(resource.getString(R.string.prefix_count, mFormat.format(data.getPrice() / 100)));
 				mTxtCount.setText(mTxtCount.getResources().getString(R.string.prefix_count, data.getNum() + ""));
 				mTxtPrice.setText(mTxtPrice.getResources().getString(R.string.prefix_rmb, mFormat.format(productFee / 100F)));
 			}

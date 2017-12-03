@@ -318,7 +318,9 @@
                         </RelativeLayout>
 
                         <RelativeLayout
-                            style="@style/FeeDetail">
+                            android:id="@+id/wrapperServe"
+                            style="@style/FeeDetail"
+                            android:visibility="gone">
 
                             <TextView
                                 style="@style/DefaultText"
@@ -350,7 +352,9 @@
                         </RelativeLayout>
 
                         <RelativeLayout
-                            style="@style/FeeDetail">
+                            android:id="@+id/wrapperPackaging"
+                            style="@style/FeeDetail"
+                            android:visibility="gone">
 
                             <TextView
                                 style="@style/DefaultText"
