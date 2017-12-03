@@ -9,10 +9,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.app.AlertDialog;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.TextUtils;
-import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +30,6 @@ import com.bfdelivery.cavaliers.background.server.request.DistributeService;
 import com.bfdelivery.cavaliers.config.LocationErrorCode;
 import com.bfdelivery.cavaliers.constant.CavConfig;
 import com.bfdelivery.cavaliers.constant.DeliveryStatus;
-import com.bfdelivery.cavaliers.constant.PayType;
 import com.bfdelivery.cavaliers.database.location.LocationData;
 import com.bfdelivery.cavaliers.dataset.ListOutlineData;
 import com.bfdelivery.cavaliers.ui.activities.base.BasePageActivity;
@@ -71,8 +66,8 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 	OrderDetailItemView mCommodityItem = null;
 	//    OrderDetailItemView mOrderId = null;
 //    OrderDetailItemView mOrderTime = null;
-	OrderDetailItemView mOrderNote = null;
-	OrderDetailItemView mOrderPay = null;
+//	OrderDetailItemView mOrderNote = null;
+//	OrderDetailItemView mOrderPay = null;
 	ContentLoadingProgressBar mWaitingBar = null;
 
 	View mWrapperCommodity = null;
@@ -96,8 +91,9 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 	/**
 	 * 用户首单提示
 	 */
-	TextView mTxtFirstOrder = null;
+	TextView mTxtFirstOrder;
 
+	View mWrapperDiscount;
 	TextView mTxtDiscount;
 	TextView mTxtRealFee;
 	TextView mTxtPackageFee;
@@ -124,7 +120,7 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 		mDistributeService = CavV1Service.createDistributeService();
 		mDecimalFormat.setRoundingMode(RoundingMode.HALF_UP);
 
-		requestOrderDetial();
+		requestOrderDetial(false);
 
 		mLocationClient = LocationClientFactory.createOnceTimeLocationClient(this);
 		mLocationClient.setLocationListener(this);
@@ -169,6 +165,7 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 
 		mTxtOrderTimes = (TextView) findViewById(R.id.orderTimes);
 
+		mWrapperDiscount = findViewById(R.id.wrapperDiscount);
 		mTxtDiscount = (TextView) findViewById(R.id.txtDiscount);
 		mTxtRealFee = (TextView) findViewById(R.id.txtRealFee);
 		mTxtLabelActualFee = (TextView) findViewById(R.id.txtLabelActualFee);
@@ -176,8 +173,8 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 		mTxtPackageFee = (TextView) findViewById(R.id.txtPackaging);
 		mTxtSubtotal = (TextView) findViewById(R.id.txtSubTotal);
 
-		mOrderNote = (OrderDetailItemView) findViewById(R.id.orderNote);
-		mOrderPay = (OrderDetailItemView) findViewById(R.id.orderPay);
+//		mOrderNote = (OrderDetailItemView) findViewById(R.id.orderNote);
+//		mOrderPay = (OrderDetailItemView) findViewById(R.id.orderPay);
 
 		mTxtFirstOrder = (TextView) findViewById(R.id.txt_labelFirst);
 
@@ -219,9 +216,11 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 		sendBroadcast(new Intent(CavConfig.ACTION_UPDATE_DATA));
 	}
 
-	private void requestOrderDetial() {
+	private void requestOrderDetial(boolean needNotifyUpdate) {
 
-		notifyOrderUpdate();
+		if (needNotifyUpdate) {
+			notifyOrderUpdate();
+		}
 
 		mWrapperWating.setVisibility(View.VISIBLE);
 		mWrapperDeatilInfo.setVisibility(View.GONE);
@@ -250,10 +249,9 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 
 	private void refreshData(OrderDetail detailInfo) {
 		mDetailInfo = detailInfo;
-
-		SpannableString strFeeLable = new SpannableString(getString(R.string.actual_fee));
-		strFeeLable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorAccent)), 3, 6, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-		mTxtLabelActualFee.setText(strFeeLable);
+//		SpannableString strFeeLable = new SpannableString(getString(R.string.actual_fee));
+//		strFeeLable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorAccent)), 3, 6, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+		mTxtLabelActualFee.setText(R.string.actual_fee);
 
 		mListCommodity.setAdapter(new CommodityAdapter(detailInfo.getOrder_products()));
 		mTxtRstName.setText(mDetailInfo.getShop().getName());
@@ -297,22 +295,22 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 			mTxtUsrDis.setText(DistanceUtil.formatDistance(this, distance[0]));
 		}
 
-		if (TextUtils.isEmpty(mDetailInfo.getRemark())) {
-			mOrderNote.setDetail(R.string.vacant);
-		} else {
-			mOrderNote.setDetail(mDetailInfo.getRemark());
-		}
-
-		switch (mDetailInfo.getPay_type()) {
-			case PayType.OFFLINE:
-				mOrderPay.setDetail(R.string.cash_pay);
-				mOrderPay.setDetailColor(getResources().getColor(R.color.colorCash));
-				break;
-			case PayType.WECHAT:
-				mOrderPay.setDetail(R.string.wechat_pay);
-				mOrderPay.setDetailColor(getResources().getColor(R.color.colorWeixin));
-				break;
-		}
+//		if (TextUtils.isEmpty(mDetailInfo.getRemark())) {
+//			mOrderNote.setDetail(R.string.vacant);
+//		} else {
+//			mOrderNote.setDetail(mDetailInfo.getRemark());
+//		}
+//
+//		switch (mDetailInfo.getPay_type()) {
+//			case PayType.OFFLINE:
+//				mOrderPay.setDetail(R.string.cash_pay);
+//				mOrderPay.setDetailColor(getResources().getColor(R.color.colorCash));
+//				break;
+//			case PayType.WECHAT:
+//				mOrderPay.setDetail(R.string.wechat_pay);
+//				mOrderPay.setDetailColor(getResources().getColor(R.color.colorWeixin));
+//				break;
+//		}
 
 		mTxtFirstOrder.setVisibility(View.GONE);
 		mTxtOrderTimes.setVisibility(View.GONE);
@@ -347,7 +345,15 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 
 		mTxtPackageFee.setText(getString(R.string.prefix_rmb, mDecimalFormat.format(ResultProcessor.extractPackageFee(mDetailInfo.getOrder_products()) / 100F)));
 		mTxtServiceFee.setText(getString(R.string.prefix_rmb, mDecimalFormat.format(mDetailInfo.getService_amount() / 100F)));
-		mTxtDiscount.setText(getString(R.string.prefix_discount_rmb, mDecimalFormat.format(mDetailInfo.getCoupon_amount() / 100F)));
+
+		int disCount = mDetailInfo.getCoupon_amount();
+		if (disCount > 0) {
+			mWrapperDiscount.setVisibility(View.VISIBLE);
+			mTxtDiscount.setText(getString(R.string.prefix_discount_rmb, mDecimalFormat.format(mDetailInfo.getCoupon_amount() / 100F)));
+		} else {
+			mWrapperDiscount.setVisibility(View.GONE);
+		}
+
 		mTxtRealFee.setText(getString(R.string.prefix_rmb, mDecimalFormat.format(mDetailInfo.getPay_amount() / 100F)));
 	}
 
@@ -395,7 +401,7 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 				super.onResponse(call, response);
 				if (response.code() == HttpStatus.SC_OK) {
 					Toast.makeText(OrderDetailActivity.this, R.string.receive_order_succeed, Toast.LENGTH_SHORT).show();
-					requestOrderDetial();
+					requestOrderDetial(true);
 				} else {
 					onFailure(call, null);
 				}
@@ -462,7 +468,7 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 				super.onResponse(call, response);
 				if (response.code() == HttpStatus.SC_OK) {
 					Toast.makeText(OrderDetailActivity.this, R.string.take_order_succeed, Toast.LENGTH_SHORT).show();
-					requestOrderDetial();
+					requestOrderDetial(true);
 				} else {
 					onFailure(call, null);
 				}
@@ -534,7 +540,7 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 				super.onResponse(call, response);
 				if (response.code() == HttpStatus.SC_OK) {
 					Toast.makeText(OrderDetailActivity.this, R.string.complete_order_succeed, Toast.LENGTH_SHORT).show();
-					requestOrderDetial();
+					requestOrderDetial(true);
 				} else {
 					onFailure(call, null);
 				}
@@ -574,12 +580,12 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 
 
 			public CommodityViewHolder(View rootView) {
-				mTxtName = (TextView) rootView.findViewById(R.id.txtCommodityName);
-				mTxtCount = (TextView) rootView.findViewById(R.id.txtCommodityCount);
-				mTxtPrice = (TextView) rootView.findViewById(R.id.txtCommodityPrice);
-				mTxtUnit = (TextView) rootView.findViewById(R.id.txtUnitPrice);
-				mTxtRemark = (TextView) rootView.findViewById(R.id.txtRemark);
-				mTxtSpec = (TextView) rootView.findViewById(R.id.txtSpec);
+				mTxtName = rootView.findViewById(R.id.txtCommodityName);
+				mTxtCount = rootView.findViewById(R.id.txtCommodityCount);
+				mTxtPrice = rootView.findViewById(R.id.txtCommodityPrice);
+				mTxtUnit = rootView.findViewById(R.id.txtUnitPrice);
+				mTxtRemark = rootView.findViewById(R.id.txtRemark);
+				mTxtSpec = rootView.findViewById(R.id.txtSpec);
 
 				mFormat.setRoundingMode(RoundingMode.HALF_UP);
 			}

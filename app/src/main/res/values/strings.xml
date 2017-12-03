@@ -30,7 +30,7 @@
     <string name="subtotal">小计</string>
     <string name="servicefee">服务费</string>
     <string name="packaging">打包盒</string>
-    <string name="actual_fee">实付（已支付）</string>
+    <string name="actual_fee">实付</string>
     <string name="click_to_check">点击查看</string>
 
     <string name="sign_in_ing">登录中...</string>

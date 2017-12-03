@@ -146,9 +146,9 @@
                                 android:orientation="horizontal">
 
                                 <TextView
-                                    android:layout_marginRight="@dimen/txt_margin_default"
                                     android:id="@+id/orderTimes"
                                     style="@style/TipTitle"
+                                    android:layout_marginRight="@dimen/txt_margin_default"
                                     android:textColor="@color/colorPrimary"/>
 
                                 <TextView
@@ -233,23 +233,24 @@
                     android:orientation="vertical"
                     android:visibility="visible">
 
-                    <include layout="@layout/layout_horizontal_gap"></include>
+                    <!--<include layout="@layout/layout_horizontal_gap"></include>-->
 
                     <com.bfdelivery.cavaliers.ui.views.OrderDetailItemView
                         android:id="@+id/orderNote"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         app:detailColor="@color/colorTxtAlert"
                         app:tag="@string/order_remark"/>
 
-                    <include layout="@layout/layout_horizontal_gap"></include>
+                    <!--<include layout="@layout/layout_horizontal_gap"></include>-->
 
                     <LinearLayout
-
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:paddingRight="@dimen/txt_margin_default">
+                        android:paddingRight="@dimen/txt_margin_default"
+                        android:visibility="gone">
 
                         <com.bfdelivery.cavaliers.ui.views.OrderDetailItemView
                             android:id="@+id/orderPay"
@@ -331,7 +332,9 @@
                         </RelativeLayout>
 
                         <RelativeLayout
-                            style="@style/FeeDetail">
+                            android:id="@+id/wrapperDiscount"
+                            style="@style/FeeDetail"
+                            android:visibility="gone">
 
                             <TextView
                                 style="@style/DefaultText"
@@ -372,7 +375,6 @@
                                 android:id="@+id/txtRealFee"
                                 style="@style/DefaultText"
                                 android:layout_alignParentRight="true"
-                                android:textColor="@color/colorAccent"
                                 android:textSize="@dimen/txt_size_big"/>
 
                         </RelativeLayout>
