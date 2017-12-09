@@ -472,6 +472,7 @@ public class OrderDetail {
 		private String city;
 		private String area;
 		private String detail;
+		private String house_number;
 		private double longitude;
 		private double latitude;
 
@@ -545,6 +546,14 @@ public class OrderDetail {
 
 		public void setDetail(String detail) {
 			this.detail = detail;
+		}
+
+		public String getHouse_number() {
+			return house_number;
+		}
+
+		public void setHouse_number(String house_number) {
+			this.house_number = house_number;
 		}
 
 		public double getLongitude() {

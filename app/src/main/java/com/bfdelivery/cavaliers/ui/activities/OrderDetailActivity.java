@@ -274,7 +274,7 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 //        mTxtRstPhone.setText(mDetailInfo.getShop().getPhone());
 
 		mTxtUsrName.setText(mDetailInfo.getAddress().getName());
-		mTxtUsrAddr.setText(mDetailInfo.getAddress().getDetail());
+		mTxtUsrAddr.setText(mDetailInfo.getAddress().getDetail() + mDetailInfo.getAddress().getHouse_number());
 
 		int orderDistibuteStatus = mDetailInfo.getDistribute().getStatus();
 		if (orderDistibuteStatus == DeliveryStatus.NEW_RECEIVED
@@ -604,7 +604,7 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 			TextView mTxtName;
 			TextView mTxtCount;
 			TextView mTxtPrice;
-//			TextView mTxtUnit;
+			//			TextView mTxtUnit;
 			TextView mTxtRemark;
 			TextView mTxtSpec;
 			DecimalFormat mFormat = new DecimalFormat("#.##");

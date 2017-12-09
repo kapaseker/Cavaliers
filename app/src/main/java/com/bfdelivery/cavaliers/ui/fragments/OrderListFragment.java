@@ -328,6 +328,7 @@ public class OrderListFragment extends BaseFragment implements OnListItemListene
 
 			itemView.setOnClickListener(this);
 			mButtonAction.setOnClickListener(this);
+			mTxtUsrName.setVisibility(View.VISIBLE);
 		}
 
 		private void bindData(int position, OrderList.DataBean data) {
@@ -336,7 +337,7 @@ public class OrderListFragment extends BaseFragment implements OnListItemListene
 
 			mTxtIndex.setText(itemView.getContext().getString(R.string.pre_pos, position + 1));
 			mTxtUsrAddr.setText(data.getAddress().getDetail());
-			mTxtUsrName.setText(data.getAddress().getName());
+			mTxtUsrName.setText(data.getAddress().getHouse_number());
 
 			mTxtRstName.setText(data.getShop().getName());
 			mTxtRstAddr.setText(data.getShop().getAddress());

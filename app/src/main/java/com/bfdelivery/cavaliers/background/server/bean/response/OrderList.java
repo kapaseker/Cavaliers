@@ -359,7 +359,7 @@ public class OrderList {
 			private int status;
 			private int send_amount;
 			private int service_amount;
-//			private SellTimesBean sell_times;
+			//			private SellTimesBean sell_times;
 			private int average_minutes;
 
 			public int getId() {
@@ -504,6 +504,7 @@ public class OrderList {
 			private String city;
 			private String area;
 			private String detail;
+			private String house_number;
 			private double longitude;
 			private double latitude;
 			private String tag;
@@ -578,6 +579,14 @@ public class OrderList {
 
 			public void setDetail(String detail) {
 				this.detail = detail;
+			}
+
+			public String getHouse_number() {
+				return house_number;
+			}
+
+			public void setHouse_number(String house_number) {
+				this.house_number = house_number;
 			}
 
 			public double getLongitude() {
