@@ -1,6 +1,10 @@
 package com.bfdelivery.cavaliers.ui.activities;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -17,8 +21,10 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -58,11 +64,17 @@ public class IndexActivity extends BaseActivity
 
 	DistributeService mDistributeService = null;
 
+	private static final int ON_GOING_NOTIFY = 1;
+
 	private static final int REQUEST_LOGIN = 1;
 
 	private static final int REQUEST_PERMISSION = 2;
 
+	private static final int REQUEST_INDEX_ACT = 3;
+
 	private AMapLocationClient mLocationClient = null;
+
+	NotificationManager mNotifyManager = null;
 
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,6 +83,8 @@ public class IndexActivity extends BaseActivity
 		mDistributeService = CavV1Service.createDistributeService();
 		mLocationClient = LocationClientFactory.createLocationClient(this);
 		mLocationClient.setLocationListener(this);
+		mNotifyManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+		addNotify();
 
 		afterCreate();
 	}
@@ -102,8 +116,9 @@ public class IndexActivity extends BaseActivity
 
 	@Override
 	protected void onDestroy() {
-		super.onDestroy();
 		mLocationClient.onDestroy();
+		removeNotify();
+		super.onDestroy();
 	}
 
 	@Override
@@ -227,6 +242,17 @@ public class IndexActivity extends BaseActivity
 	}
 
 	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			showExitTip();
+			return true;
+		}
+
+		return super.onKeyDown(keyCode, event);
+	}
+
+	@Override
 	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
 		switch (requestCode) {
@@ -337,5 +363,37 @@ public class IndexActivity extends BaseActivity
 		return ActivityOptionsCompat.makeSceneTransitionAnimation(this, headPair, namePair, descPair);
 	}
 
+	private void showExitTip() {
+		new AlertDialog.Builder(this).setTitle(R.string.title_exit).setMessage(R.string.desc_exit)
+				.setNegativeButton(R.string.brutality_exit, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialogInterface, int i) {
+						finish();
+					}
+				})
+				.setPositiveButton(R.string.waiting_for_order, null)
+				.show();
+	}
 
+	private void addNotify() {
+		NotificationCompat.Builder notifyBuilder = new NotificationCompat.Builder(this);
+
+		Intent intent = new Intent(this, IndexActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
+
+		notifyBuilder.setSmallIcon(R.mipmap.ic_notify_mian)
+				.setContentTitle(getString(R.string.app_name))
+				.setContentIntent(PendingIntent.getActivity(this, REQUEST_INDEX_ACT, intent, PendingIntent.FLAG_UPDATE_CURRENT))
+				.setContentText(getString(R.string.desc_background_run));
+
+		Notification notify = notifyBuilder.build();
+		notify.flags |= Notification.FLAG_ONGOING_EVENT;
+
+		mNotifyManager.notify(ON_GOING_NOTIFY, notify);
+	}
+
+	private void removeNotify() {
+		mNotifyManager.cancel(ON_GOING_NOTIFY);
+	}
 }

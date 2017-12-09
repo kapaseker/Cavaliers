@@ -8,6 +8,13 @@
     <string name="transition_title">title</string>
     <string name="transition_desc">desc</string>
 
+    <string name="title_exit">确定退出应用？</string>
+    <string name="desc_exit">退出应用可能会无法接收新订单</string>
+    <string name="brutality_exit">残忍退出</string>
+    <string name="waiting_for_order">等待新订单</string>
+
+    <string name="desc_background_run">后台运行中，为您接收新订单</string>
+
     <string name="action_settings">设置</string>
     <string name="action_msg">消息</string>
 
