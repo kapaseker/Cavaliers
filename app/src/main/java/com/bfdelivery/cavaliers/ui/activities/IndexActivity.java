@@ -94,7 +94,16 @@ public class IndexActivity extends BaseActivity
 		super.onNewIntent(intent);
 
 		afterCreate();
+		notifyOrderUpdate();
 	}
+
+	/**
+	 * 通知订单更新
+	 */
+	private void notifyOrderUpdate() {
+		sendBroadcast(new Intent(CavConfig.ACTION_UPDATE_DATA));
+	}
+
 
 	@Override
 	protected void onStart() {

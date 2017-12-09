@@ -40,7 +40,7 @@ public class NewOrderTipActivity extends BaseActivity implements View.OnClickLis
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mVibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-		mSoundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
+		mSoundPool = new SoundPool(1, AudioManager.STREAM_RING, 0);
 	}
 
 	@Override
