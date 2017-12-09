@@ -83,7 +83,8 @@
 
                         <TextView
                             android:id="@+id/txtRstAddr"
-                            style="@style/OrderDetailItemDetail"/>
+                            style="@style/OrderDetailItemDetail"
+                            android:maxLines="3"/>
 
                         <!--<LinearLayout-->
                         <!--android:layout_width="match_parent"-->
@@ -138,7 +139,9 @@
 
                             <TextView
                                 android:id="@+id/txtUsrAddr"
-                                style="@style/OrderDetailItemName"/>
+                                style="@style/OrderDetailItemName"
+                                android:maxLines="3"
+                                />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
