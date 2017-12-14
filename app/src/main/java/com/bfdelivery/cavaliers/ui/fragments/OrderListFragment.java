@@ -339,14 +339,21 @@ public class OrderListFragment extends BaseFragment implements OnListItemListene
 			mTxtUsrAddr.setText(data.getAddress().getDetail());
 			mTxtUsrName.setText(data.getAddress().getHouse_number());
 
-			mTxtRstName.setText(data.getShop().getName());
-			mTxtRstAddr.setText(data.getShop().getAddress());
+			if (data.getShop() != null) {
+				mTxtRstName.setText(data.getShop().getName());
+				mTxtRstAddr.setText(data.getShop().getAddress());
+			} else {
+				mTxtRstName.setText("");
+				mTxtRstAddr.setText("");
+			}
 
 			LocationData location = LocationSaver.instance().getLocation();
 			if (location != null) {
 				float[] distance = new float[1];
-				Location.distanceBetween(location.getLatitude(), location.getLongitude(), data.getShop().getLatitude(), data.getShop().getLongitude(), distance);
-				mTxtRstDis.setText(DistanceUtil.formatDistance(itemView.getContext(), distance[0]));
+				if (data.getShop() != null) {
+					Location.distanceBetween(location.getLatitude(), location.getLongitude(), data.getShop().getLatitude(), data.getShop().getLongitude(), distance);
+					mTxtRstDis.setText(DistanceUtil.formatDistance(itemView.getContext(), distance[0]));
+				}
 				Location.distanceBetween(location.getLatitude(), location.getLongitude(), data.getAddress().getLatitude(), data.getAddress().getLongitude(), distance);
 				mTxtUsrDis.setText(DistanceUtil.formatDistance(itemView.getContext(), distance[0]));
 			}

@@ -83,8 +83,10 @@ public class NewOrderTipActivity extends BaseActivity implements View.OnClickLis
 	@Override
 	protected void processViewAndData() {
 		if (mPushMsg != null) {
-			mTxtRstName.setText(mPushMsg.getShop().getName());
-			mTxtRstAddr.setText(mPushMsg.getShop().getAddress());
+			if (mPushMsg.getShop() != null) {
+				mTxtRstName.setText(mPushMsg.getShop().getName());
+				mTxtRstAddr.setText(mPushMsg.getShop().getAddress());
+			}
 			mTxtUsrName.setText(mPushMsg.getAddress().getName());
 			mTxtUsrAddr.setText(mPushMsg.getAddress().getDetail());
 		}

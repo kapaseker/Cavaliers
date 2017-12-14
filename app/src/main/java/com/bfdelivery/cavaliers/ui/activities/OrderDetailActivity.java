@@ -269,8 +269,10 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 		mTxtLabelActualFee.setText(R.string.actual_fee);
 
 		mListCommodity.setAdapter(new CommodityAdapter(detailInfo.getOrder_products()));
-		mTxtRstName.setText(mDetailInfo.getShop().getName());
-		mTxtRstAddr.setText(mDetailInfo.getShop().getAddress());
+		if (mDetailInfo.getShop() != null) {
+			mTxtRstName.setText(mDetailInfo.getShop().getName());
+			mTxtRstAddr.setText(mDetailInfo.getShop().getAddress());
+		}
 //        mTxtRstPhone.setText(mDetailInfo.getShop().getPhone());
 
 		mTxtUsrName.setText(mDetailInfo.getAddress().getName());
@@ -304,8 +306,10 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 		LocationData location = LocationSaver.instance().getLocation();
 		if (location != null) {
 			float[] distance = new float[1];
-			Location.distanceBetween(location.getLatitude(), location.getLongitude(), mDetailInfo.getShop().getLatitude(), mDetailInfo.getShop().getLongitude(), distance);
-			mTxtRstDis.setText(DistanceUtil.formatDistance(this, distance[0]));
+			if (mDetailInfo.getShop() != null) {
+				Location.distanceBetween(location.getLatitude(), location.getLongitude(), mDetailInfo.getShop().getLatitude(), mDetailInfo.getShop().getLongitude(), distance);
+				mTxtRstDis.setText(DistanceUtil.formatDistance(this, distance[0]));
+			}
 			Location.distanceBetween(location.getLatitude(), location.getLongitude(), mDetailInfo.getAddress().getLatitude(), mDetailInfo.getAddress().getLongitude(), distance);
 			mTxtUsrDis.setText(DistanceUtil.formatDistance(this, distance[0]));
 		}
@@ -406,7 +410,9 @@ public class OrderDetailActivity extends BasePageActivity implements View.OnClic
 		} else if (v == mTxtUsrName) {
 			callPhone(mDetailInfo.getAddress().getMobile());
 		} else if (v == mTxtRstName) {
-			callPhone(mDetailInfo.getShop().getPhone());
+			if (mDetailInfo.getShop() != null) {
+				callPhone(mDetailInfo.getShop().getPhone());
+			}
 		}
 	}
 

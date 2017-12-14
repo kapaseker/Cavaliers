@@ -9,11 +9,11 @@ import android.os.Parcelable;
 
 public class ListOutlineData implements Parcelable {
 
-	private String orderId;
-	private String mRstName;
-	private String mRstAddr;
-	private String mUsrName;
-	private String mUsrAddr;
+	private String orderId = "";
+	private String mRstName = "";
+	private String mRstAddr = "";
+	private String mUsrName = "";
+	private String mUsrAddr = "";
 
 	public ListOutlineData() {
 	}
