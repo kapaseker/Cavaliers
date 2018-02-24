@@ -12,6 +12,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.bfdelivery.cavaliers.R;
+import com.bfdelivery.cavaliers.constant.BundleKeyData;
 import com.bfdelivery.cavaliers.dataset.NewOrderPushMsg;
 import com.bfdelivery.cavaliers.ui.activities.base.BaseActivity;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -153,12 +154,13 @@ public class NewOrderTipActivity extends BaseActivity implements View.OnClickLis
 		Intent intent = new Intent(this, IndexActivity.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
+		intent.putExtra(BundleKeyData.KEY_FROM, BundleKeyData.FROM_NEW_TIP);
 		startActivity(intent);
 		finish();
 	}
 
 	@Override
 	public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
-		mStreamId = soundPool.play(sampleId, 1.0F, 1.0F, 5, -1, 1);
+		mStreamId = soundPool.play(sampleId, 1.0F, 1.0F, Integer.MAX_VALUE, -1, 1);
 	}
 }

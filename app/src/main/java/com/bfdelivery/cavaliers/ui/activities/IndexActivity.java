@@ -40,6 +40,7 @@ import com.bfdelivery.cavaliers.background.server.request.CavV1Service;
 import com.bfdelivery.cavaliers.background.server.request.DistributeService;
 import com.bfdelivery.cavaliers.config.LocationErrorCode;
 import com.bfdelivery.cavaliers.config.NecessaryPermission;
+import com.bfdelivery.cavaliers.constant.BundleKeyData;
 import com.bfdelivery.cavaliers.constant.CavConfig;
 import com.bfdelivery.cavaliers.constant.DeliveryStatus;
 import com.bfdelivery.cavaliers.database.userinfo.UserInfo;
@@ -87,6 +88,7 @@ public class IndexActivity extends BaseActivity
 		addNotify();
 
 		afterCreate();
+		processNewIntent(getIntent());
 	}
 
 	@Override
@@ -95,6 +97,14 @@ public class IndexActivity extends BaseActivity
 
 		afterCreate();
 		notifyOrderUpdate();
+		processNewIntent(intent);
+	}
+
+	private void processNewIntent(Intent intent) {
+		int where = intent.getIntExtra(BundleKeyData.KEY_FROM, 0);
+		if (where == BundleKeyData.FROM_NEW_TIP) {
+			mPagers.setCurrentItem(0);
+		}
 	}
 
 	/**
