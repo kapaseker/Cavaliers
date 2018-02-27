@@ -2,9 +2,7 @@ package com.bfdelivery.cavaliers.ui.activities;
 
 import android.app.Activity;
 import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -15,13 +13,14 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.util.Pair;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -65,7 +64,7 @@ public class IndexActivity extends BaseActivity
 
 	DistributeService mDistributeService = null;
 
-	private static final int ON_GOING_NOTIFY = 1;
+	private static final int ON_GOING_NOTIFY = 2;
 
 	private static final int REQUEST_LOGIN = 1;
 
@@ -75,7 +74,7 @@ public class IndexActivity extends BaseActivity
 
 	private AMapLocationClient mLocationClient = null;
 
-	NotificationManager mNotifyManager = null;
+	NotificationManagerCompat mNotifyManager = null;
 
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -84,7 +83,7 @@ public class IndexActivity extends BaseActivity
 		mDistributeService = CavV1Service.createDistributeService();
 		mLocationClient = LocationClientFactory.createLocationClient(this);
 		mLocationClient.setLocationListener(this);
-		mNotifyManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+		mNotifyManager = NotificationManagerCompat.from(this);
 		addNotify();
 
 		afterCreate();
@@ -395,7 +394,7 @@ public class IndexActivity extends BaseActivity
 	}
 
 	private void addNotify() {
-		NotificationCompat.Builder notifyBuilder = new NotificationCompat.Builder(this);
+		NotificationCompat.Builder notifyBuilder = new NotificationCompat.Builder(this, CavConfig.CHANNEL_NOTIFY);
 
 		Intent intent = new Intent(this, IndexActivity.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -404,10 +403,12 @@ public class IndexActivity extends BaseActivity
 		notifyBuilder.setSmallIcon(R.mipmap.ic_notify_mian)
 				.setContentTitle(getString(R.string.app_name))
 				.setContentIntent(PendingIntent.getActivity(this, REQUEST_INDEX_ACT, intent, PendingIntent.FLAG_UPDATE_CURRENT))
-				.setContentText(getString(R.string.desc_background_run));
+				.setContentText(getString(R.string.desc_background_run))
+				.setPriority(NotificationCompat.PRIORITY_HIGH);
 
 		Notification notify = notifyBuilder.build();
 		notify.flags |= Notification.FLAG_ONGOING_EVENT;
+		notify.flags |= Notification.FLAG_NO_CLEAR;
 
 		mNotifyManager.notify(ON_GOING_NOTIFY, notify);
 	}

@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.bfdelivery.cavaliers.R;
 import com.bfdelivery.cavaliers.background.callbacks.BaseCallback;
-import com.bfdelivery.cavaliers.background.server.bean.response.PersonInfoBean;
+import com.bfdelivery.cavaliers.background.server.bean.response.DailyInfoBean;
 import com.bfdelivery.cavaliers.background.server.config.HttpStatus;
 import com.bfdelivery.cavaliers.background.server.request.CavV1Service;
 import com.bfdelivery.cavaliers.database.userinfo.UserInfo;
@@ -18,11 +18,15 @@ import com.bfdelivery.cavaliers.util.UserInfoManager;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class DailySettleActivity extends BasePageActivity {
+public class DailySettleActivity extends BasePageActivity implements UserInfoManager.OnUserInfoListener {
 
 	private TextView mTxtUsrName;
 	private TextView mTxtUsrPhone;
@@ -79,9 +83,11 @@ public class DailySettleActivity extends BasePageActivity {
 			mTxtUsrPhone.setText(userInfo.getUserPhone());
 		}
 
-		CavV1Service.createDistributeService().personInfo().enqueue(new BaseCallback<PersonInfoBean>() {
+		UserInfoManager.instance().fetchUserInfo(this);
+
+		CavV1Service.createDistributeService().dailyStatics().enqueue(new BaseCallback<DailyInfoBean>() {
 			@Override
-			public void onResponse(Call<PersonInfoBean> call, Response<PersonInfoBean> response) {
+			public void onResponse(Call<DailyInfoBean> call, Response<DailyInfoBean> response) {
 				super.onResponse(call, response);
 				if (response.code() == HttpStatus.SC_OK) {
 					refreshInfo(response.body());
@@ -98,12 +104,53 @@ public class DailySettleActivity extends BasePageActivity {
 		});
 	}
 
-	private void refreshInfo(PersonInfoBean result) {
-		mTxtUsrName.setText(result.getName());
-		mTxtUsrPhone.setText(result.getMobile());
-		mTxtOrderCount.setText(getString(R.string.suffix_count, result.getToday_done_orders()));
-		mTxtCashPay.setText(getString(R.string.prefix_rmb, mDecimalFormat.format(result.getToday_offline_amount() / 100F)));
-		mTxtOnlinePay.setText(getString(R.string.prefix_rmb, mDecimalFormat.format(result.getToday_wechat_amount() / 100F)));
+	private void refreshInfo(DailyInfoBean result) {
+
+		int orderCount = 0;
+		int todayOfflinePay = 0;
+		int todayOnlinePay = 0;
+
+		if (result.getData() != null && result.getData().size() > 0) {
+			DailyInfoBean.DataBean todayData = result.getData().get(0);
+
+			//匹配日期是否是今天
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(new Date());
+
+			int todayYear = calendar.get(Calendar.YEAR);
+			int todayMonth = calendar.get(Calendar.MONTH);
+			int todayDay = calendar.get(Calendar.DAY_OF_MONTH);
+
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			try {
+				Date orderDate = dateFormat.parse(todayData.getDate());
+				calendar.setTime(orderDate);
+
+				if (todayDay == calendar.get(Calendar.DAY_OF_MONTH) && todayMonth == calendar.get(Calendar.MONTH) && todayYear == calendar.get(Calendar.YEAR)) {
+					orderCount = todayData.getOrder_num();
+					todayOfflinePay = todayData.getOffline_amount();
+					todayOnlinePay = todayData.getWechat_amount();
+				}
+
+			} catch (ParseException e) {
+
+			}
+
+		}
+
+		mTxtOrderCount.setText(getString(R.string.suffix_count, orderCount));
+		mTxtCashPay.setText(getString(R.string.prefix_rmb, mDecimalFormat.format(todayOfflinePay / 100F)));
+		mTxtOnlinePay.setText(getString(R.string.prefix_rmb, mDecimalFormat.format(todayOnlinePay / 100F)));
 	}
 
+	@Override
+	public void onUserInfoReceived(UserInfo result) {
+		mTxtUsrName.setText(result.getUserName());
+		mTxtUsrPhone.setText(result.getUserPhone());
+	}
+
+	@Override
+	public void onBegin() {
+
+	}
 }

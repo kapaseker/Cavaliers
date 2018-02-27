@@ -2,6 +2,7 @@ package com.bfdelivery.cavaliers.background.server.request;
 
 import com.bfdelivery.cavaliers.background.server.bean.request.JPushParam;
 import com.bfdelivery.cavaliers.background.server.bean.request.OrderNumber;
+import com.bfdelivery.cavaliers.background.server.bean.response.DailyInfoBean;
 import com.bfdelivery.cavaliers.background.server.bean.response.OrderDetail;
 import com.bfdelivery.cavaliers.background.server.bean.response.OrderList;
 import com.bfdelivery.cavaliers.background.server.bean.response.PersonInfoBean;
@@ -27,6 +28,9 @@ public interface DistributeService {
 
 	@GET("my-infos")
 	Call<PersonInfoBean> personInfo();
+
+	@GET("distributer-statistics")
+	Call<DailyInfoBean> dailyStatics();
 
 	@POST("accepted-orders")
 	Call<Void> acceptOrder(@Body OrderNumber number);
