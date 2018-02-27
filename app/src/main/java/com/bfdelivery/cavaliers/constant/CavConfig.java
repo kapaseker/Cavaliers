@@ -16,6 +16,16 @@ public interface CavConfig {
 	String CHANNEL_NOTIFY = "CavNotifyChannel";
 
 	/**
+	 * 通道名称
+	 */
+	String CHANNEL_NAME = "CavBackService";
+
+	/**
+	 * 通道描述信息
+	 */
+	String CHANNEL_DESCRIPTION = "Cav back service to receive order";
+
+	/**
 	 * 定位完成
 	 */
 	String ACTION_LOCATION_OK = "com.bfdelivery.cavaliers.location";

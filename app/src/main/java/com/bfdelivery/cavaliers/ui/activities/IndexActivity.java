@@ -2,10 +2,14 @@ package com.bfdelivery.cavaliers.ui.activities;
 
 import android.app.Activity;
 import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,7 +18,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.util.Pair;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -74,7 +77,7 @@ public class IndexActivity extends BaseActivity
 
 	private AMapLocationClient mLocationClient = null;
 
-	NotificationManagerCompat mNotifyManager = null;
+	NotificationManager mNotifyManager = null;
 
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -83,7 +86,7 @@ public class IndexActivity extends BaseActivity
 		mDistributeService = CavV1Service.createDistributeService();
 		mLocationClient = LocationClientFactory.createLocationClient(this);
 		mLocationClient.setLocationListener(this);
-		mNotifyManager = NotificationManagerCompat.from(this);
+		mNotifyManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		addNotify();
 
 		afterCreate();
@@ -394,6 +397,13 @@ public class IndexActivity extends BaseActivity
 	}
 
 	private void addNotify() {
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+			NotificationChannel notifyChannel = new NotificationChannel(CavConfig.CHANNEL_NOTIFY, CavConfig.CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
+			notifyChannel.setDescription(CavConfig.CHANNEL_DESCRIPTION);
+			mNotifyManager.createNotificationChannel(notifyChannel);
+		}
+
 		NotificationCompat.Builder notifyBuilder = new NotificationCompat.Builder(this, CavConfig.CHANNEL_NOTIFY);
 
 		Intent intent = new Intent(this, IndexActivity.class);
