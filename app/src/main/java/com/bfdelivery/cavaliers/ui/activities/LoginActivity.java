@@ -165,6 +165,7 @@ public class LoginActivity extends BasePageActivity implements View.OnClickListe
 			if (mEditPasswd.getVisibility() != View.VISIBLE) {
 				mEditPasswd.setVisibility(View.VISIBLE);
 				mGapLine.setVisibility(View.VISIBLE);
+				mEditPasswd.setText("");
 			}
 
 		} else {
