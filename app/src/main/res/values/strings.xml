@@ -8,6 +8,9 @@
     <string name="transition_title">title</string>
     <string name="transition_desc">desc</string>
 
+    <string name="new_order_tip">您有新订单了！</string>
+    <string name="click_receive">点击接单</string>
+
     <string name="title_exit">确定退出应用？</string>
     <string name="desc_exit">退出应用可能会无法接收新订单</string>
     <string name="brutality_exit">残忍退出</string>

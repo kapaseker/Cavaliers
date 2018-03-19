@@ -14,8 +14,8 @@ import android.widget.TextView;
 import com.bfdelivery.cavaliers.R;
 import com.bfdelivery.cavaliers.constant.BundleKeyData;
 import com.bfdelivery.cavaliers.dataset.NewOrderPushMsg;
+import com.bfdelivery.cavaliers.dataset.jsons.ObjectMapperFactory;
 import com.bfdelivery.cavaliers.ui.activities.base.BaseActivity;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
@@ -71,9 +71,7 @@ public class NewOrderTipActivity extends BaseActivity implements View.OnClickLis
 	@Override
 	protected void handleData(Bundle data) {
 		String msgContent = data.getString(JPushInterface.EXTRA_MESSAGE);
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		mapper.configure(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES, false);
+		ObjectMapper mapper = ObjectMapperFactory.createIgnorePropertiesMapper();
 		try {
 			mPushMsg = mapper.readValue(msgContent, NewOrderPushMsg.class);
 		} catch (IOException e) {

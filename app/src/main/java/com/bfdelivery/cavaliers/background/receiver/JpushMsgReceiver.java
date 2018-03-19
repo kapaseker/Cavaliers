@@ -1,13 +1,17 @@
 package com.bfdelivery.cavaliers.background.receiver;
 
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.bfdelivery.cavaliers.R;
 import com.bfdelivery.cavaliers.background.database.PreferenceRecorder;
-import com.bfdelivery.cavaliers.ui.activities.NewOrderTipActivity;
+import com.bfdelivery.cavaliers.constant.BundleKeyData;
+import com.bfdelivery.cavaliers.ui.activities.IndexActivity;
+import com.bfdelivery.cavaliers.util.NotifyHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,16 +40,30 @@ public class JpushMsgReceiver extends BroadcastReceiver {
 
 		String msgContent = data.getString(JPushInterface.EXTRA_MESSAGE);
 
-		Log.d("MSG",msgContent);
+		Log.d("MSG", msgContent);
 
 		try {
 			JSONObject jsonObject = new JSONObject(msgContent);
 			String type = jsonObject.getString("type");
 			if ("neworder".equals(type)) {
-				Intent newMsgIntent = new Intent(context, NewOrderTipActivity.class);
-				newMsgIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				newMsgIntent.putExtras(data);
-				context.startActivity(newMsgIntent);
+//				Intent newMsgIntent = new Intent(context, NewOrderTipActivity.class);
+//				newMsgIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//				newMsgIntent.putExtras(data);
+//				context.startActivity(newMsgIntent);
+
+				Intent intent = new Intent(context, IndexActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
+				intent.putExtra(BundleKeyData.KEY_FROM, BundleKeyData.FROM_NEW_TIP);
+
+				PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent,
+						PendingIntent.FLAG_ONE_SHOT);
+
+				String title = context.getResources().getString(R.string.new_order_tip);
+				String content = context.getResources().getString(R.string.click_receive);
+
+				NotifyHelper.simpleNotify(context, (int) (System.currentTimeMillis() % 10000),
+						title, title, content, pendingIntent);
 			}
 		} catch (JSONException e) {
 
