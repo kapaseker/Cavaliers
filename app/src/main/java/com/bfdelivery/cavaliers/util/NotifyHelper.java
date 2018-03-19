@@ -25,7 +25,7 @@ public class NotifyHelper {
 	public static void simpleNotify(Context context, int notifyId, String ticker, String title, String message, PendingIntent intent) {
 
 		Notification notification = createNotifyCation(context, ticker, title, message, intent);
-
+		notification.flags |= Notification.FLAG_AUTO_CANCEL;
 		notify(context, notifyId, notification);
 	}
 
