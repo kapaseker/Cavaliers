@@ -22,9 +22,6 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    android:drawableLeft="@drawable/ic_username"
-    android:hint="@string/hint_username"
-
     <style name="LoginEdt" parent="@android:style/Widget.EditText">
         <item name="android:textCursorDrawable">@drawable/login_edt_cursor</item>
         <item name="android:layout_width">match_parent</item>
@@ -112,11 +109,9 @@
         <item name="android:background">@drawable/slct_btn_primary_bkg</item>
     </style>
 
-    <style name="OrderItemDistance" parent="@android:style/Widget.TextView">
+    <style name="OrderItemDistance" parent="@style/WrapperText">
         <item name="android:textColor">@color/colorTxtPrimary</item>
         <item name="android:textSize">@dimen/txt_size_big</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
     </style>
 
     <style name="OrderItemStatus" parent="@style/OrderItemDistance">
@@ -200,7 +195,7 @@
         <item name="android:textSize">@dimen/txt_size_big</item>
     </style>
 
-    <style name="OrderDetailStatus" parent="WrapperText">
+    <style name="OrderDetailStatus" parent="@style/WrapperText">
         <item name="android:textColor">@color/colorTxtPrimary</item>
         <item name="android:textSize">@dimen/txt_size_mini</item>
         <item name="android:background">@drawable/bkg_order_status</item>

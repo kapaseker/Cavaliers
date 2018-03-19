@@ -3,6 +3,8 @@ package com.bfdelivery.cavaliers.ui.adapters;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
+import com.bfdelivery.cavaliers.constant.DeliveryStatus;
+import com.bfdelivery.cavaliers.ui.fragments.NewOrderFragment;
 import com.bfdelivery.cavaliers.ui.fragments.OrderListFragment;
 
 /**
@@ -22,7 +24,11 @@ public class OrderFragmentPageAdapter extends RegisterFragmentPagerAdapter {
 
 	@Override
 	public Fragment getItem(int position) {
-		return OrderListFragment.newIntance(mOrderTypes[position]);
+		int orderType = mOrderTypes[position];
+		if (orderType == DeliveryStatus.NEW_RECEIVED) {
+			return NewOrderFragment.newIntance(orderType);
+		}
+		return OrderListFragment.newIntance(orderType);
 	}
 
 	@Override

@@ -145,13 +145,13 @@ public class OrderListFragment extends BaseFragment implements OnListItemListene
 		getContext().sendBroadcast(new Intent(CavConfig.ACTION_UPDATE_DATA));
 	}
 
-	private void requestOrder() {
+	protected void requestOrder() {
 		mRefreshLayout.setRefreshing(true);
 		mListPage = 1;
 		requestOrderInner(mListPage, false);
 	}
 
-	private void requestOrderInner(int page, final boolean append) {
+	protected void requestOrderInner(int page, final boolean append) {
 
 		if (append) {
 			mOrderAdapter.setLoading(true);
@@ -184,13 +184,17 @@ public class OrderListFragment extends BaseFragment implements OnListItemListene
 
 			@Override
 			public void onComplete() {
-				mRefreshLayout.setRefreshing(false);
-				mOrderAdapter.setLoading(false);
+				onRequestDone();
 			}
 		});
 	}
 
-	private void initView(View view) {
+	protected void onRequestDone() {
+		mRefreshLayout.setRefreshing(false);
+		mOrderAdapter.setLoading(false);
+	}
+
+	protected void initView(View view) {
 		mListOrder = (RecyclerView) view.findViewById(R.id.list_order);
 		mRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefresh);
 		LinearLayoutManager layoutManger = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);

@@ -21,6 +21,8 @@
     <string name="action_settings">设置</string>
     <string name="action_msg">消息</string>
 
+    <string name="refresh_order">刷新订单</string>
+
     <string name="hint_username">请输入用户名</string>e
     <string name="hint_password">请输入密码</string>
 
