@@ -1,5 +1,6 @@
 package com.bfdelivery.cavaliers.ui.activities.base;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,6 +18,13 @@ public abstract class BaseActivity extends AppCompatActivity {
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		onPrepareLayout();
 		initView();
+		handleData(getIntent().getExtras());
+		processViewAndData();
+	}
+
+	@Override
+	protected void onNewIntent(Intent intent) {
+		super.onNewIntent(intent);
 		handleData(getIntent().getExtras());
 		processViewAndData();
 	}

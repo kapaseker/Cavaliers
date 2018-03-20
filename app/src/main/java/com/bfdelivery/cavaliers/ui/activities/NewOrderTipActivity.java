@@ -1,8 +1,9 @@
 package com.bfdelivery.cavaliers.ui.activities;
 
 import android.content.Intent;
-import android.media.AudioManager;
-import android.media.SoundPool;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.annotation.Nullable;
@@ -22,37 +23,33 @@ import java.io.IOException;
 
 import cn.jpush.android.api.JPushInterface;
 
-public class NewOrderTipActivity extends BaseActivity implements View.OnClickListener, SoundPool.OnLoadCompleteListener {
+public class NewOrderTipActivity extends BaseActivity implements View.OnClickListener {
 
 	NewOrderPushMsg mPushMsg = null;
 
-	TextView mTxtUsrAddr = null;
-	TextView mTxtUsrName = null;
-	TextView mTxtRstName = null;
-	TextView mTxtRstAddr = null;
+	TextView mTxtNewOrderTip = null;
+	TextView mTxtTime = null;
 
 	Vibrator mVibrator = null;
-	SoundPool mSoundPool = null;
-
-	private int mSoundId;
-	private int mStreamId;
+	Ringtone mMsgRing = null;
 
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mVibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-		mSoundPool = new SoundPool(1, AudioManager.STREAM_RING, 0);
+		Uri ringToneUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+		mMsgRing = RingtoneManager.getRingtone(this,ringToneUri);
 	}
 
 	@Override
 	protected void onPrepareLayout() {
 		getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN
-				| WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
-				| WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
 				| WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
 				| WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
 		);
+		setTurnScreenOn(true);
+		setShowWhenLocked(true);
 		setContentView(R.layout.activity_new_order_tip);
 	}
 
@@ -60,12 +57,8 @@ public class NewOrderTipActivity extends BaseActivity implements View.OnClickLis
 	protected void initView() {
 		getSupportActionBar().hide();
 
-		findViewById(R.id.btnCheck).setOnClickListener(this);
+		findViewById(R.id.wrapper_tip).setOnClickListener(this);
 
-		mTxtRstName = (TextView) findViewById(R.id.txtRstrtName);
-		mTxtRstAddr = (TextView) findViewById(R.id.txtRstrtAddr);
-		mTxtUsrName = (TextView) findViewById(R.id.txtUsrName);
-		mTxtUsrAddr = (TextView) findViewById(R.id.txtUsrAddr);
 	}
 
 	@Override
@@ -83,11 +76,7 @@ public class NewOrderTipActivity extends BaseActivity implements View.OnClickLis
 	protected void processViewAndData() {
 		if (mPushMsg != null) {
 			if (mPushMsg.getShop() != null) {
-				mTxtRstName.setText(mPushMsg.getShop().getName());
-				mTxtRstAddr.setText(mPushMsg.getShop().getAddress());
 			}
-			mTxtUsrName.setText(mPushMsg.getAddress().getName());
-			mTxtUsrAddr.setText(mPushMsg.getAddress().getDetail());
 		}
 	}
 
@@ -101,7 +90,7 @@ public class NewOrderTipActivity extends BaseActivity implements View.OnClickLis
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-			case R.id.btnCheck:
+			case R.id.wrapper_tip:
 				goToDetail();
 				break;
 		}
@@ -126,8 +115,7 @@ public class NewOrderTipActivity extends BaseActivity implements View.OnClickLis
 
 	private void makeTipMedia() {
 		mVibrator.vibrate(new long[]{0, 1000, 1000}, 0);
-		mSoundPool.setOnLoadCompleteListener(this);
-		mSoundId = mSoundPool.load(this, R.raw.neworder_music, 1);
+		mMsgRing.play();
 	}
 
 	@Override
@@ -140,9 +128,6 @@ public class NewOrderTipActivity extends BaseActivity implements View.OnClickLis
 	protected void onStop() {
 		super.onStop();
 		mVibrator.cancel();
-		mSoundPool.stop(mStreamId);
-		mSoundPool.unload(mSoundId);
-		mSoundPool.release();
 	}
 
 	/**
@@ -155,10 +140,5 @@ public class NewOrderTipActivity extends BaseActivity implements View.OnClickLis
 		intent.putExtra(BundleKeyData.KEY_FROM, BundleKeyData.FROM_NEW_TIP);
 		startActivity(intent);
 		finish();
-	}
-
-	@Override
-	public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
-		mStreamId = soundPool.play(sampleId, 1.0F, 1.0F, Integer.MAX_VALUE, -1, 1);
 	}
 }

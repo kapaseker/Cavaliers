@@ -5,45 +5,54 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryLight"
     tools:context="com.bfdelivery.cavaliers.ui.activities.NewOrderTipActivity">
 
     <android.support.v4.widget.Space
         android:id="@+id/space"
         android:layout_width="match_parent"
-        app:layout_heightPercent="10%"/>
+        app:layout_heightPercent="20%"/>
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/wrapper_tip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/space"
-        android:layout_centerInParent="true"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:layout_margin="@dimen/txt_margin_default"
+        android:background="@drawable/slct_bkg_new_order_tip"
+        android:padding="@dimen/txt_margin_default">
 
         <TextView
+            android:id="@+id/txt_logo"
             style="@style/WrapperText"
-            android:text="@string/tip_new_order"
-            android:textColor="@color/white"
-            android:textSize="@dimen/txt_size_superBig"
-            />
-
-        <RelativeLayout
-            android:id="@+id/destWrapper"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/txt_margin_large"
-            android:background="@color/white">
-
-            <include
-                layout="@layout/layout_orderlistitem_dest"/>
-        </RelativeLayout>
+            android:layout_marginRight="@dimen/txt_margin_small"
+            android:background="@mipmap/ic_launcher"/>
 
         <TextView
-            android:id="@+id/btnCheck"
-            style="@style/ButtonNewOrderTipReceive"
+            android:id="@+id/txt_appname"
+            style="@style/WrapperText"
+            android:layout_toRightOf="@id/txt_logo"
+            android:text="@string/app_name"
+            android:textColor="@color/colorTxtWhite"
+            android:textSize="@dimen/txt_size_small"/>
+
+        <TextView
+            android:id="@+id/txt_ordertip"
+            style="@style/WrapperText"
+            android:layout_below="@id/txt_appname"
             android:layout_marginTop="@dimen/txt_margin_default"
-            android:text="@string/click_to_check"/>
-    </LinearLayout>
+            android:layout_toRightOf="@id/txt_logo"
+            android:text="@string/new_order_tip"
+            android:textColor="@color/colorTxtWhite"
+            android:textSize="@dimen/txt_size_big"/>
+
+        <TextView
+            android:id="@+id/txt_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/colorTxtWhite"
+            tools:text="19:90"/>
+
+    </RelativeLayout>
 
 </android.support.percent.PercentRelativeLayout>
