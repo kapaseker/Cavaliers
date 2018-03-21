@@ -14,18 +14,16 @@ import android.widget.TextView;
 
 import com.bfdelivery.cavaliers.R;
 import com.bfdelivery.cavaliers.constant.BundleKeyData;
-import com.bfdelivery.cavaliers.dataset.NewOrderPushMsg;
-import com.bfdelivery.cavaliers.dataset.jsons.ObjectMapperFactory;
 import com.bfdelivery.cavaliers.ui.activities.base.BaseActivity;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.bfdelivery.cavaliers.util.TimeUtil;
 
-import java.io.IOException;
-
-import cn.jpush.android.api.JPushInterface;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
 
 public class NewOrderTipActivity extends BaseActivity implements View.OnClickListener {
 
-	NewOrderPushMsg mPushMsg = null;
+//	NewOrderPushMsg mPushMsg = null;
 
 	TextView mTxtNewOrderTip = null;
 	TextView mTxtTime = null;
@@ -33,24 +31,33 @@ public class NewOrderTipActivity extends BaseActivity implements View.OnClickLis
 	Vibrator mVibrator = null;
 	Ringtone mMsgRing = null;
 
+	private int mOrderCount = 0;
+
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mVibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
 		Uri ringToneUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-		mMsgRing = RingtoneManager.getRingtone(this,ringToneUri);
+		mMsgRing = RingtoneManager.getRingtone(this, ringToneUri);
+		makeTipMedia();
 	}
 
 	@Override
 	protected void onPrepareLayout() {
 		getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
-		getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
+				| WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+				| WindowManager.LayoutParams.FLAG_FULLSCREEN
 				| WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
 				| WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
 		);
-		setTurnScreenOn(true);
-		setShowWhenLocked(true);
 		setContentView(R.layout.activity_new_order_tip);
+	}
+
+	@Override
+	protected void onNewIntent(Intent intent) {
+		super.onNewIntent(intent);
+		makeTipMedia();
 	}
 
 	@Override
@@ -58,33 +65,36 @@ public class NewOrderTipActivity extends BaseActivity implements View.OnClickLis
 		getSupportActionBar().hide();
 
 		findViewById(R.id.wrapper_tip).setOnClickListener(this);
-
+		mTxtNewOrderTip = findViewById(R.id.txt_ordertip);
+		mTxtTime = findViewById(R.id.txt_time);
 	}
 
 	@Override
 	protected void handleData(Bundle data) {
-		String msgContent = data.getString(JPushInterface.EXTRA_MESSAGE);
-		ObjectMapper mapper = ObjectMapperFactory.createIgnorePropertiesMapper();
-		try {
-			mPushMsg = mapper.readValue(msgContent, NewOrderPushMsg.class);
-		} catch (IOException e) {
-
-		}
+//		String msgContent = data.getString(JPushInterface.EXTRA_MESSAGE);
+//		ObjectMapper mapper = ObjectMapperFactory.createIgnorePropertiesMapper();
+//		try {
+//			mPushMsg = mapper.readValue(msgContent, NewOrderPushMsg.class);
+//		} catch (IOException e) {
+//
+//		}
 	}
 
 	@Override
 	protected void processViewAndData() {
-		if (mPushMsg != null) {
-			if (mPushMsg.getShop() != null) {
-			}
-		}
-	}
+//		if (mPushMsg != null) {
+//			if (mPushMsg.getShop() != null) {
+//			}
+//		}
 
-	@Override
-	protected void onNewIntent(Intent intent) {
-		super.onNewIntent(intent);
-		handleData(intent.getExtras());
-		processViewAndData();
+		++mOrderCount;
+
+		mTxtNewOrderTip.setText(getString(R.string.new_order_tip, mOrderCount));
+
+		Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+8"));
+		calendar.setTime(new Date());
+		mTxtTime.setText(TimeUtil.convertDoubleFormatTime(calendar.get(Calendar.HOUR_OF_DAY)) + ":"
+				+ TimeUtil.convertDoubleFormatTime(calendar.get(Calendar.MINUTE)));
 	}
 
 	@Override
@@ -114,20 +124,18 @@ public class NewOrderTipActivity extends BaseActivity implements View.OnClickLis
 	}
 
 	private void makeTipMedia() {
-		mVibrator.vibrate(new long[]{0, 1000, 1000}, 0);
+		mVibrator.vibrate(new long[]{0, 1000, 1000, 1000, 1000, 1000}, -1);
 		mMsgRing.play();
 	}
 
-	@Override
-	protected void onStart() {
-		super.onStart();
-		makeTipMedia();
+	private void cancleTipMedia() {
+		mVibrator.cancel();
 	}
 
 	@Override
 	protected void onStop() {
 		super.onStop();
-		mVibrator.cancel();
+		cancleTipMedia();
 	}
 
 	/**

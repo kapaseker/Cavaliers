@@ -42,6 +42,7 @@ public class JpushMsgReceiver extends BroadcastReceiver {
 			JSONObject jsonObject = new JSONObject(msgContent);
 			String type = jsonObject.getString("type");
 			if ("neworder".equals(type)) {
+				if (PreferenceRecorder.needLogin()) return;
 				Intent newMsgIntent = new Intent(context, NewOrderTipActivity.class);
 				newMsgIntent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
 				newMsgIntent.putExtras(data);

@@ -87,7 +87,7 @@ public class IndexActivity extends BaseActivity
 		mLocationClient = LocationClientFactory.createLocationClient(this);
 		mLocationClient.setLocationListener(this);
 		mNotifyManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-//		addNotify();
+		addNotify();
 
 		afterCreate();
 		processNewIntent(getIntent());
@@ -138,7 +138,7 @@ public class IndexActivity extends BaseActivity
 	@Override
 	protected void onDestroy() {
 		mLocationClient.onDestroy();
-//		removeNotify();
+		removeNotify();
 		super.onDestroy();
 	}
 

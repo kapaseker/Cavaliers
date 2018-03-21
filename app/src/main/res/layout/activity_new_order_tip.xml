@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bkg_new_order"
     tools:context="com.bfdelivery.cavaliers.ui.activities.NewOrderTipActivity">
 
     <android.support.v4.widget.Space
@@ -41,7 +42,6 @@
             android:layout_below="@id/txt_appname"
             android:layout_marginTop="@dimen/txt_margin_default"
             android:layout_toRightOf="@id/txt_logo"
-            android:text="@string/new_order_tip"
             android:textColor="@color/colorTxtWhite"
             android:textSize="@dimen/txt_size_big"/>
 
@@ -50,8 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:textColor="@color/colorTxtWhite"
-            tools:text="19:90"/>
+            android:textColor="@color/colorTxtWhite"/>
 
     </RelativeLayout>
 
