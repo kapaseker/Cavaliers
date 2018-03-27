@@ -16,37 +16,37 @@ import cn.jpush.android.api.JPushInterface;
 
 public class JpushMsgReceiver extends BroadcastReceiver {
 
-	@Override
-	public void onReceive(Context context, Intent intent) {
-		Bundle bundle = intent.getExtras();
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        Bundle bundle = intent.getExtras();
 
-		if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
-			String regId = bundle.getString(JPushInterface.EXTRA_REGISTRATION_ID);
-			PreferenceRecorder.saveJpushId(regId);
-		} else {
-			if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
-				processMsg(context, bundle);
-			} else if (JPushInterface.ACTION_CONNECTION_CHANGE.equals(intent.getAction())) {
+        if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
+//			String regId = bundle.getString(JPushInterface.EXTRA_REGISTRATION_ID);
+//			PreferenceRecorder.saveJpushId(regId);
+        } else {
+            if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
+                processMsg(context, bundle);
+            } else if (JPushInterface.ACTION_CONNECTION_CHANGE.equals(intent.getAction())) {
 
-			}
-		}
-	}
+            }
+        }
+    }
 
-	private void processMsg(Context context, Bundle data) {
+    private void processMsg(Context context, Bundle data) {
 
-		String msgContent = data.getString(JPushInterface.EXTRA_MESSAGE);
+        String msgContent = data.getString(JPushInterface.EXTRA_MESSAGE);
 
-		Log.d("MSG", msgContent);
+        Log.d("MSG", msgContent);
 
-		try {
-			JSONObject jsonObject = new JSONObject(msgContent);
-			String type = jsonObject.getString("type");
-			if ("neworder".equals(type)) {
-				if (PreferenceRecorder.needLogin()) return;
-				Intent newMsgIntent = new Intent(context, NewOrderTipActivity.class);
-				newMsgIntent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
-				newMsgIntent.putExtras(data);
-				context.startActivity(newMsgIntent);
+        try {
+            JSONObject jsonObject = new JSONObject(msgContent);
+            String type = jsonObject.getString("type");
+            if ("neworder".equals(type)) {
+                if (PreferenceRecorder.needLogin()) return;
+                Intent newMsgIntent = new Intent(context, NewOrderTipActivity.class);
+                newMsgIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                newMsgIntent.putExtras(data);
+                context.startActivity(newMsgIntent);
 
 //				Intent intent = new Intent(context, IndexActivity.class);
 //				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -61,10 +61,10 @@ public class JpushMsgReceiver extends BroadcastReceiver {
 //
 //				NotifyHelper.simpleNotify(context, (int) (System.currentTimeMillis() % 10000),
 //						title, title, content, pendingIntent);
-			}
-		} catch (JSONException e) {
+            }
+        } catch (JSONException e) {
 
-		}
+        }
 
-	}
+    }
 }

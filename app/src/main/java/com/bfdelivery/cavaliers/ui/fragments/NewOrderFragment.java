@@ -13,89 +13,89 @@ import com.bfdelivery.cavaliers.R;
 
 public class NewOrderFragment extends OrderListFragment implements View.OnClickListener {
 
-	private View mBtnRefresh = null;
+    private View mBtnRefresh = null;
 
-	public static NewOrderFragment newIntance(int orderType) {
-		NewOrderFragment fragment = new NewOrderFragment();
+    public static NewOrderFragment newIntance(int orderType) {
+        NewOrderFragment fragment = new NewOrderFragment();
 
-		Bundle data = new Bundle();
-		data.putInt(BUNDLE_KEY_ORDERTYPE, orderType);
-		fragment.setArguments(data);
+        Bundle data = new Bundle();
+        data.putInt(BUNDLE_KEY_ORDERTYPE, orderType);
+        fragment.setArguments(data);
 
-		return fragment;
-	}
+        return fragment;
+    }
 
-	@Override
-	public int getLayoutResource() {
-		return R.layout.fragment_new_order;
-	}
+    @Override
+    public int getLayoutResource() {
+        return R.layout.fragment_new_order;
+    }
 
-	@Override
-	protected void initView(View view) {
-		super.initView(view);
+    @Override
+    protected void initView(View view) {
+        super.initView(view);
 
-		mBtnRefresh = view.findViewById(R.id.warpper_refresh);
-		mBtnRefresh.setOnClickListener(this);
-	}
+        mBtnRefresh = view.findViewById(R.id.warpper_refresh);
+        mBtnRefresh.setOnClickListener(this);
+    }
 
-	@Override
-	protected void onRequestDone() {
-		super.onRequestDone();
+    @Override
+    protected void onRequestDone() {
+        super.onRequestDone();
 
-		Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.btn_refresh_enter);
-		mBtnRefresh.setAnimation(animation);
-		animation.setAnimationListener(new Animation.AnimationListener() {
-			@Override
-			public void onAnimationStart(Animation animation) {
-				mBtnRefresh.setVisibility(View.VISIBLE);
-			}
+        Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.btn_refresh_enter);
+        mBtnRefresh.setAnimation(animation);
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                mBtnRefresh.setVisibility(View.VISIBLE);
+            }
 
-			@Override
-			public void onAnimationEnd(Animation animation) {
+            @Override
+            public void onAnimationEnd(Animation animation) {
 
-			}
+            }
 
-			@Override
-			public void onAnimationRepeat(Animation animation) {
+            @Override
+            public void onAnimationRepeat(Animation animation) {
 
-			}
-		});
+            }
+        });
 
-		animation.start();
-	}
+        animation.start();
+    }
 
-	@Override
-	public void onClick(View v) {
-		switch (v.getId()) {
-			case R.id.warpper_refresh:
-				requestOrder();
-				break;
-		}
-	}
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.warpper_refresh:
+                requestOrder();
+                break;
+        }
+    }
 
-	@Override
-	protected void requestOrder() {
-		super.requestOrder();
+    @Override
+    protected void requestOrderInner(int page, final boolean append) {
+        super.requestOrderInner(page, append);
 
-		Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.btn_refresh_leave);
-		mBtnRefresh.setAnimation(animation);
-		animation.setAnimationListener(new Animation.AnimationListener() {
-			@Override
-			public void onAnimationStart(Animation animation) {
+        Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.btn_refresh_leave);
+        mBtnRefresh.setAnimation(animation);
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
 
-			}
+            }
 
-			@Override
-			public void onAnimationEnd(Animation animation) {
-				mBtnRefresh.setVisibility(View.GONE);
-			}
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                mBtnRefresh.setVisibility(View.GONE);
+            }
 
-			@Override
-			public void onAnimationRepeat(Animation animation) {
+            @Override
+            public void onAnimationRepeat(Animation animation) {
 
-			}
-		});
+            }
+        });
 
-		animation.start();
-	}
+        animation.start();
+    }
 }
